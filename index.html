@@ -1231,22 +1231,31 @@ function buildMsgs(type){
     role:m.role==='ai'?'assistant':'user', content:m.content
   }));
 }
+const API_PROXY_URL = 'https://YOUR_WORKER_SUBDOMAIN.workers.dev/api/claude';
 async function callClaude(type, userMsg){
   const msgs=buildMsgs(type);
   msgs.push({role:'user',content:userMsg});
-  const res=await fetch('https://api.anthropic.com/v1/messages',{
+  const res=await fetch(API_PROXY_URL,{
     method:'POST',
-    headers:{'Content-Type':'application/json','x-api-key':'REPLACE_WITH_ANTHROPIC_API_KEY','anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+    headers:{'Content-Type':'application/json'},
     body:JSON.stringify({
+      type,
       model:'claude-haiku-4-5-20251001',
       max_tokens:1024,
       system:buildSys(type),
       messages:msgs
     })
   });
-  if(!res.ok) throw new Error('API '+res.status);
+  if(!res.ok){
+    let reason='API '+res.status;
+    try{
+      const e=await res.json();
+      if(e && e.error) reason=e.error;
+    }catch(_){}
+    throw new Error(reason);
+  }
   const data=await res.json();
-  return data.content?.[0]?.text||'…';
+  return data.reply||data.content?.[0]?.text||'…';
 }
 function parseActions(text){
   const acts=[];
