@@ -593,7 +593,8 @@ code,pre{font-family:'JetBrains Mono',monospace}
   <div class="comm-layout">
     <div class="conv-list">
       <div class="conv-search">
-        <input type="text" class="fi" id="convSearch" placeholder="🔍 Rechercher..." oninput="searchConv(this.value)" style="padding:9px 13px;font-size:13px">
+        <input type="text" class="fi" id="convSearch" placeholder="🔍 Rechercher ou email..." oninput="searchConv(this.value)" onkeydown="onConvSearchKey(event)" style="padding:9px 13px;font-size:13px;margin-bottom:8px">
+        <button class="btn btn-sm" style="width:100%" onclick="inviteFromSearch()">✉️ Inviter par email</button>
       </div>
       <div id="convItems" style="overflow-y:auto;flex:1"></div>
     </div>
@@ -1432,7 +1433,49 @@ function renderContacts(){
 }
 function searchConv(q){
   const items=document.querySelectorAll('#convItems .conv-item');
-  items.forEach((el,i)=>{el.style.display=(S.contacts[i]&&S.contacts[i].name.toLowerCase().includes(q.toLowerCase()))?'flex':'none';});
+  items.forEach((el,i)=>{
+    const c=S.contacts[i];
+    if(!c){el.style.display='none';return;}
+    const k=q.toLowerCase();
+    el.style.display=(c.name.toLowerCase().includes(k)||c.email.toLowerCase().includes(k))?'flex':'none';
+  });
+}
+function onConvSearchKey(e){
+  if(e.key!=='Enter') return;
+  const q=(e.target.value||'').trim();
+  if(isEmail(q)){e.preventDefault();inviteFromSearch();}
+}
+function inviteFromSearch(){
+  const input=document.getElementById('convSearch');
+  const email=(input?.value||'').trim().toLowerCase();
+  if(!email){toast('Entre un email dans la barre de recherche','warn');return;}
+  if(!isEmail(email)){toast('Format email invalide','err');return;}
+  const existingContact=S.contacts.find(c=>c.email.toLowerCase()===email);
+  if(existingContact){
+    selectContact(existingContact.id);
+    toast('Contact trouvé ✓','ok');
+    return;
+  }
+  const existingUser=S.users.find(u=>u.email.toLowerCase()===email);
+  if(existingUser){
+    const c={id:'c'+Date.now(),name:(existingUser.firstName+' '+existingUser.lastName).trim(),email:existingUser.email,status:'offline',photo:existingUser.photo||('https://ui-avatars.com/api/?name='+encodeURIComponent(existingUser.firstName+' '+existingUser.lastName)+'&background=1A3CFF&color=fff'),msgs:[]};
+    S.contacts.push(c);
+    saveData();
+    renderContacts();
+    selectContact(c.id);
+    toast('Utilisateur ajouté dans Messages ✓','ok');
+    return;
+  }
+  const inviteLink='https://moncef-ia.pages.dev';
+  const subject=encodeURIComponent('Invitation Moncef IA');
+  const body=encodeURIComponent(
+    'Bonjour,\n\nTu es invité(e) à rejoindre Moncef IA.\nClique ici pour créer ton compte : '+inviteLink+'\n\nA bientôt !'
+  );
+  try{
+    window.location.href='mailto:'+encodeURIComponent(email)+'?subject='+subject+'&body='+body;
+  }catch(_){}
+  addNotif('✉️ Invitation préparée pour '+email,'✉️');
+  toast('Invitation prête avec lien d\'inscription','ok');
 }
 function selectContact(id){
   S.activeContact=S.contacts.find(c=>c.id===id);
