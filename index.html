@@ -765,7 +765,7 @@ code,pre{font-family:'JetBrains Mono',monospace}
 const S = {
   user: null,
   users: [{
-    id:'u1', email:'eleve.fjer.amine@ecolealjabr.com', password:'@mine3820',
+    id:'u1', email:'eleve.fjer.amine@ecolealjabr.com', passwordHash:'2277c561f16768af5ba64c11cd44976bc21a33e8e4ff34a595fe977f61647ae2',
     firstName:'Amine', lastName:'FJER', role:'founder',
     phone:'+212612345678', address:'Casablanca, Maroc',
     photo:'https://ui-avatars.com/api/?name=Amine+FJER&background=FFD700&color=000',
@@ -841,6 +841,20 @@ function setLang(l){
 function setFL(inputId, labelId, text){
   const el = document.getElementById(labelId);
   if(el) el.textContent = text;
+}
+async function sha256Hex(text){
+  const bytes = new TextEncoder().encode(text);
+  const hash = await crypto.subtle.digest('SHA-256', bytes);
+  return Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+async function verifyPassword(user, plainPassword){
+  const candidates=[plainPassword];
+  if(plainPassword.includes(' ')) candidates.push(plainPassword.replace(/\s+/g,''));
+  for(const c of candidates){
+    const h=await sha256Hex(c);
+    if(user.passwordHash && user.passwordHash===h) return true;
+  }
+  return !!(user.password && candidates.includes(user.password));
 }
 
 // ═══════════════════════ PARTICLES ═══════════════════════
@@ -926,14 +940,19 @@ function checkPwStr(pw, barId='pwBar'){
   const col=s<=1?'#FF3B3B':s<=2?'#FFA500':s<=3?'#FFD700':s<=4?'#00C9B1':'#00D97E';
   bar.style.width=pct+'%'; bar.style.background=col;
 }
-function doLogin(){
+async function doLogin(){
   const email=gv('loginEmail').trim().toLowerCase();
   const pw=gv('loginPw');
   clearErrs();
   if(!isEmail(email)){showErr('loginEmailErr','Email invalide');shakeEl('loginEmail');return;}
   if(!pw){showErr('loginPwErr','Mot de passe requis');shakeEl('loginPw');return;}
-  const u=S.users.find(u=>u.email.toLowerCase()===email&&u.password===pw);
-  if(!u){showErr('loginPwErr','Email ou mot de passe incorrect');shakeEl('loginPw');return;}
+  const u=S.users.find(u=>u.email.toLowerCase()===email);
+  const ok = u ? await verifyPassword(u,pw) : false;
+  if(u && ok && !u.passwordHash){
+    u.passwordHash=await sha256Hex(pw);
+    delete u.password;
+  }
+  if(!u || !ok){showErr('loginPwErr','Email ou mot de passe incorrect');shakeEl('loginPw');return;}
   S.user=u;
   const exp=Date.now()+(document.getElementById('remMe').checked?7*864e5:3600000);
   try{localStorage.setItem('moncefSess',btoa(JSON.stringify({email:u.email,exp})));}catch(e){}
@@ -942,7 +961,7 @@ function doLogin(){
   toast('✅ Connexion réussie ! Bienvenue '+u.firstName,'ok');
   setTimeout(startApp,400);
 }
-function doSignup(){
+async function doSignup(){
   const first=gv('signFirst').trim(), last=gv('signLast').trim();
   const email=gv('signEmail').trim().toLowerCase();
   const cc=gv('cc'), phone=gv('signPhone').trim();
@@ -954,7 +973,7 @@ function doSignup(){
   if(S.users.find(u=>u.email.toLowerCase()===email)){showErr('signEmailErr','Email déjà utilisé');return;}
   if(pw.length<8){showErr('signPwErr','Min. 8 caractères');return;}
   if(pw!==pwc){showErr('signPwCErr','Mots de passe différents');return;}
-  const u={id:'u'+Date.now(),email,password:pw,firstName:first,lastName:last,role:'normal',
+  const u={id:'u'+Date.now(),email,passwordHash:await sha256Hex(pw),firstName:first,lastName:last,role:'normal',
     phone:cc+phone,address:addr,photo:'https://ui-avatars.com/api/?name='+first+'+'+last+'&background=CD7F32&color=fff',
     joinDate:new Date().toISOString()};
   S.users.push(u); S.user=u;
@@ -969,7 +988,7 @@ function oauthLogin(provider,icon){
   const [fn,ln]=names[provider]||['User',provider];
   setTimeout(()=>{
     const u={id:'u'+Date.now(),email:fn.toLowerCase()+'.'+ln.toLowerCase()+'@'+provider.toLowerCase()+'.com',
-      password:'',firstName:fn,lastName:ln,role:'normal',phone:'',address:'',
+      passwordHash:'',firstName:fn,lastName:ln,role:'normal',phone:'',address:'',
       photo:'https://ui-avatars.com/api/?name='+fn+'+'+ln+'&background=1A3CFF&color=fff',
       joinDate:new Date().toISOString()};
     S.users.push(u); S.user=u;
@@ -1472,17 +1491,21 @@ function saveProfile(){
   toast('✅ Profil sauvegardé !','ok');
   addNotif('👤 Profil mis à jour');
 }
-function changePw(){
+async function changePw(){
   const cur=document.getElementById('curPw').value;
   const nw=document.getElementById('newPw').value;
   const conf=document.getElementById('confPw').value;
   if(!cur||!nw||!conf){toast('Remplis tous les champs','err');return;}
-  if(cur!==S.user.password){toast('Mot de passe actuel incorrect','err');return;}
+  if(!(await verifyPassword(S.user,cur))){toast('Mot de passe actuel incorrect','err');return;}
   if(nw.length<8){toast('Nouveau mot de passe trop court (min 8)','err');return;}
   if(nw!==conf){toast('Les mots de passe ne correspondent pas','err');return;}
-  S.user.password=nw;
+  S.user.passwordHash=await sha256Hex(nw);
+  delete S.user.password;
   const idx=S.users.findIndex(u=>u.email===S.user.email);
-  if(idx>=0) S.users[idx].password=nw;
+  if(idx>=0){
+    S.users[idx].passwordHash=S.user.passwordHash;
+    delete S.users[idx].password;
+  }
   saveData();
   document.getElementById('curPw').value=''; document.getElementById('newPw').value=''; document.getElementById('confPw').value='';
   toast('🔑 Mot de passe changé !','ok');
