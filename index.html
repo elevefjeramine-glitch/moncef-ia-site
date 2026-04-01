@@ -1231,7 +1231,7 @@ function buildMsgs(type){
     role:m.role==='ai'?'assistant':'user', content:m.content
   }));
 }
-const API_PROXY_URL = 'https://YOUR_WORKER_SUBDOMAIN.workers.dev/api/claude';
+const API_PROXY_URL = 'https://moncef-ia-proxy.eleve-fjer-amine.workers.dev/api/claude';
 async function callClaude(type, userMsg){
   const msgs=buildMsgs(type);
   msgs.push({role:'user',content:userMsg});
