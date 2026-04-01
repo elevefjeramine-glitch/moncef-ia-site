@@ -1,9 +1,19 @@
+const ALLOWED_ORIGINS = new Set([
+  "https://elevefjeramine-glitch.github.io",
+]);
+const RATE_LIMIT_WINDOW_MS = 60 * 1000;
+const RATE_LIMIT_MAX_REQUESTS = 12;
+const ipBuckets = new Map();
+
 export default {
   async fetch(request, env) {
+    const origin = request.headers.get("Origin") || "";
+    const allowOrigin = ALLOWED_ORIGINS.has(origin) ? origin : "null";
     const corsHeaders = {
-      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Origin": allowOrigin,
       "Access-Control-Allow-Methods": "POST, OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type",
+      Vary: "Origin",
     };
 
     if (request.method === "OPTIONS") {
@@ -13,6 +23,9 @@ export default {
     const url = new URL(request.url);
     if (url.pathname !== "/api/claude" || request.method !== "POST") {
       return json({ error: "Not found" }, 404, corsHeaders);
+    }
+    if (!ALLOWED_ORIGINS.has(origin)) {
+      return json({ error: "Origin not allowed" }, 403, corsHeaders);
     }
 
     let payload;
@@ -28,6 +41,10 @@ export default {
     }
     if (!env.ANTHROPIC_API_KEY) {
       return json({ error: "Server not configured: missing API key" }, 500, corsHeaders);
+    }
+    const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+    if (!checkRateLimit(ip)) {
+      return json({ error: "Too many requests. Please retry in one minute." }, 429, corsHeaders);
     }
 
     try {
@@ -59,6 +76,20 @@ export default {
     }
   },
 };
+
+function checkRateLimit(ip) {
+  const now = Date.now();
+  const existing = ipBuckets.get(ip);
+  if (!existing || now >= existing.resetAt) {
+    ipBuckets.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+    return true;
+  }
+  if (existing.count >= RATE_LIMIT_MAX_REQUESTS) {
+    return false;
+  }
+  existing.count += 1;
+  return true;
+}
 
 function json(body, status, headers) {
   return new Response(JSON.stringify(body), {
