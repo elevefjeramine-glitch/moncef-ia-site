@@ -36,3 +36,20 @@ git push
 ```
 
 After this, your live GitHub Pages website can call Claude securely.
+
+## Automatic invite emails (optional)
+
+This worker also supports automatic invitation emails via Resend.
+
+Set these secrets:
+
+```powershell
+wrangler secret put RESEND_API_KEY
+wrangler secret put INVITE_FROM_EMAIL
+wrangler deploy
+```
+
+- `RESEND_API_KEY`: your Resend API key.
+- `INVITE_FROM_EMAIL`: a verified sender like `Moncef IA <noreply@yourdomain.com>`.
+
+If these secrets are missing, the frontend automatically falls back to opening a prefilled `mailto:` invite.

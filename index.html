@@ -1252,6 +1252,7 @@ function buildMsgs(type){
   }));
 }
 const API_PROXY_URL = 'https://moncef-ia-proxy.eleve-fjer-amine.workers.dev/api/claude';
+const INVITE_API_URL = 'https://moncef-ia-proxy.eleve-fjer-amine.workers.dev/api/invite';
 async function callClaude(type, userMsg){
   const msgs=buildMsgs(type);
   msgs.push({role:'user',content:userMsg});
@@ -1466,16 +1467,30 @@ function inviteFromSearch(){
     toast('Utilisateur ajouté dans Messages ✓','ok');
     return;
   }
-  const inviteLink='https://moncef-ia.pages.dev';
-  const subject=encodeURIComponent('Invitation Moncef IA');
-  const body=encodeURIComponent(
-    'Bonjour,\n\nTu es invité(e) à rejoindre Moncef IA.\nClique ici pour créer ton compte : '+inviteLink+'\n\nA bientôt !'
-  );
+  sendInviteEmail(email);
+}
+async function sendInviteEmail(email){
   try{
-    window.location.href='mailto:'+encodeURIComponent(email)+'?subject='+subject+'&body='+body;
-  }catch(_){}
-  addNotif('✉️ Invitation préparée pour '+email,'✉️');
-  toast('Invitation prête avec lien d\'inscription','ok');
+    const r=await fetch(INVITE_API_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email})
+    });
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok) throw new Error(d.error||('API '+r.status));
+    addNotif('✉️ Invitation envoyée à '+email,'✉️');
+    toast('Invitation envoyée ✓','ok');
+  }catch(err){
+    const inviteLink='https://moncef-ia.pages.dev';
+    const subject=encodeURIComponent('Invitation Moncef IA');
+    const body=encodeURIComponent(
+      'Bonjour,\n\nTu es invité(e) à rejoindre Moncef IA.\nClique ici pour créer ton compte : '+inviteLink+'\n\nA bientôt !'
+    );
+    try{window.location.href='mailto:'+encodeURIComponent(email)+'?subject='+subject+'&body='+body;}catch(_){}
+    addNotif('✉️ Invitation préparée (fallback) pour '+email,'✉️');
+    toast('Service email indisponible: email prérempli ouvert','warn');
+    console.error('Invite API:',err);
+  }
 }
 function selectContact(id){
   S.activeContact=S.contacts.find(c=>c.id===id);

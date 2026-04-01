@@ -21,6 +21,12 @@ export default {
     }
 
     const url = new URL(request.url);
+    if (url.pathname === "/api/invite" && request.method === "POST") {
+      if (!ALLOWED_ORIGINS.has(origin)) {
+        return json({ error: "Origin not allowed" }, 403, corsHeaders);
+      }
+      return handleInvite(request, env, corsHeaders);
+    }
     if (url.pathname !== "/api/claude" || request.method !== "POST") {
       return json({ error: "Not found" }, 404, corsHeaders);
     }
@@ -76,6 +82,65 @@ export default {
     }
   },
 };
+
+async function handleInvite(request, env, corsHeaders) {
+  let payload;
+  try {
+    payload = await request.json();
+  } catch {
+    return json({ error: "Invalid JSON body" }, 400, corsHeaders);
+  }
+  const email = String(payload?.email || "").trim().toLowerCase();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return json({ error: "Invalid email format" }, 400, corsHeaders);
+  }
+  if (!env.RESEND_API_KEY || !env.INVITE_FROM_EMAIL) {
+    return json(
+      { error: "Invite email service is not configured on server" },
+      503,
+      corsHeaders,
+    );
+  }
+
+  const inviteLink = "https://moncef-ia.pages.dev";
+  const html = `
+    <div style="font-family:Arial,sans-serif;line-height:1.6;color:#111">
+      <h2 style="margin:0 0 12px">Invitation Moncef IA</h2>
+      <p>Bonjour,</p>
+      <p>Vous etes invite(e) a rejoindre Moncef IA.</p>
+      <p>
+        <a href="${inviteLink}" style="display:inline-block;padding:10px 16px;background:#1A3CFF;color:#fff;text-decoration:none;border-radius:8px">
+          Rejoindre Moncef IA
+        </a>
+      </p>
+      <p>Ou utilisez ce lien : ${inviteLink}</p>
+    </div>
+  `;
+
+  try {
+    const resendRes = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${env.RESEND_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: env.INVITE_FROM_EMAIL,
+        to: [email],
+        subject: "Invitation Moncef IA",
+        html,
+      }),
+    });
+    const resendData = await resendRes.json();
+    if (!resendRes.ok) {
+      const msg = resendData?.message || "Email provider error";
+      return json({ error: msg }, resendRes.status, corsHeaders);
+    }
+    return json({ ok: true, id: resendData?.id || null }, 200, corsHeaders);
+  } catch {
+    return json({ error: "Failed to send invite email" }, 502, corsHeaders);
+  }
+}
 
 function checkRateLimit(ip) {
   const now = Date.now();
