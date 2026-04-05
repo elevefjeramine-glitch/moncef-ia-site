@@ -1360,7 +1360,8 @@ function confirmLogout(){
 
 // ═══════════════════════ APP START ═══════════════════════
 function startApp(){
-  document.getElementById('authPage').classList.add('hidden');
+  const lp = document.getElementById('landingPage'); if(lp) lp.classList.remove('active');
+  const ap = document.getElementById('authPage'); if(ap) ap.classList.remove('active');
   ['mainHdr','mainSB','mainContent','floatAI'].forEach(id=>document.getElementById(id).classList.remove('hidden'));
   const u=S.user;
   document.getElementById('hdrAv').src=u.photo;
