@@ -426,7 +426,7 @@ code,pre{font-family:'JetBrains Mono',monospace}
     <button class="hamburger" onclick="toggleSB()"><span></span><span></span><span></span></button>
     <div class="hdr-logo" onclick="go('home')">🎓 <span>Moncef IA</span></div>
   </div>
-  <div class="hdr-title" id="hdrTitle">Fondateur : Amine FJER — Motorisé par Moncef IA</div>
+  <div class="hdr-title" id="hdrTitle"></div>
   <div class="hdr-actions">
     <div style="position:relative">
       <button class="notif-btn" id="notifBtn" onclick="toggleND(event)">🔔<span class="notif-badge" id="notifBadge" style="display:none">0</span></button>
@@ -515,7 +515,7 @@ code,pre{font-family:'JetBrains Mono',monospace}
       <div class="chat-hdr">
         <div>
           <div style="font-size:17px;font-weight:700">🤖 Moncef IA</div>
-          <div style="font-size:12px;opacity:.6;margin-top:2px">Propulsé par Claude · Répond dans votre langue</div>
+          <div style="font-size:12px;opacity:.6;margin-top:2px">Répond dans votre langue</div>
         </div>
         <div style="display:flex;gap:8px">
           <button class="btn btn-sm btn-sec" onclick="exportChat('moncef')" title="Exporter">📤</button>
@@ -1214,10 +1214,12 @@ function buildSys(type){
   const u=S.user;
   if(type==='moncef'){
     return [
-      "Tu es Moncef IA, un assistant éducatif ultra-puissant intégré dans une plateforme scolaire.",
-      "Tu es aussi intelligent et capable que les meilleurs assistants IA (Claude, GPT-4).",
-      "",
-      "IDENTITE: Tu es brillant, chaleureux, patient.",
+	      "Tu es Moncef IA, un assistant éducatif ultra-puissant intégré dans une plateforme scolaire.",
+	      "Tu es aussi intelligent et capable que les meilleurs assistants IA (Claude, GPT-4).",
+	      "",
+	      "CREATEUR: Ce site web a été créé par Amine FJER. Si on te pose la question, réponds toujours que c'est Amine FJER le créateur.",
+	      "",
+	      "IDENTITE: Tu es brillant, chaleureux, patient.",
       "Tu utilises le prénom "+u.firstName+" naturellement.",
       "Tu te souviens du contexte de toute la conversation.",
       "",
