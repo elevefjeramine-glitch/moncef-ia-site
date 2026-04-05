@@ -797,54 +797,121 @@ const S = {
 	};
 
 // ═══════════════════════ I18N ═══════════════════════
-const T = {
-  fr:{dir:'ltr',sub:'Plateforme Éducative Intelligente',tLogin:'Se connecter',tSignup:"S'inscrire",lEmail:'Adresse e-mail',lPw:'Mot de passe',lRem:'Se souvenir de moi',lForgot:'Mot de passe oublié ?',btnLogin:'Se connecter ➜',btnSignup:'Créer mon compte ➜',lFirst:'Prénom',lLast:'Nom',lPhone:'Téléphone',lAddr:'Adresse',lConfPw:'Confirmer le mot de passe',changed:'🇫🇷 Langue changée en Français'},
-  en:{dir:'ltr',sub:'Intelligent Educational Platform',tLogin:'Sign In',tSignup:'Sign Up',lEmail:'Email address',lPw:'Password',lRem:'Remember me',lForgot:'Forgot password?',btnLogin:'Sign In ➜',btnSignup:'Create account ➜',lFirst:'First name',lLast:'Last name',lPhone:'Phone',lAddr:'Address',lConfPw:'Confirm password',changed:'🇬🇧 Language changed to English'},
-  es:{dir:'ltr',sub:'Plataforma Educativa Inteligente',tLogin:'Iniciar sesión',tSignup:'Registrarse',lEmail:'Correo electrónico',lPw:'Contraseña',lRem:'Recuérdame',lForgot:'¿Olvidaste tu contraseña?',btnLogin:'Iniciar sesión ➜',btnSignup:'Crear cuenta ➜',lFirst:'Nombre',lLast:'Apellido',lPhone:'Teléfono',lAddr:'Dirección',lConfPw:'Confirmar contraseña',changed:'🇪🇸 Idioma cambiado a Español'},
-  ar:{dir:'rtl',sub:'منصة تعليمية ذكية',tLogin:'تسجيل الدخول',tSignup:'إنشاء حساب',lEmail:'البريد الإلكتروني',lPw:'كلمة المرور',lRem:'تذكرني',lForgot:'نسيت كلمة المرور؟',btnLogin:'دخول ←',btnSignup:'إنشاء الحساب ←',lFirst:'الاسم الأول',lLast:'اسم العائلة',lPhone:'الهاتف',lAddr:'العنوان',lConfPw:'تأكيد كلمة المرور',changed:'🇸🇦 تم تغيير اللغة إلى العربية'}
-};
+	const T = {
+	  fr:{dir:'ltr',sub:'Plateforme Éducative Intelligente',tLogin:'Se connecter',tSignup:"S'inscrire",lEmail:'Adresse e-mail',lPw:'Mot de passe',lRem:'Se souvenir de moi',lForgot:'Mot de passe oublié ?',btnLogin:'Se connecter ➜',btnSignup:'Créer mon compte ➜',lFirst:'Prénom',lLast:'Nom',lPhone:'Téléphone',lAddr:'Adresse',lConfPw:'Confirmer le mot de passe',changed:'🇫🇷 Langue changée en Français',
+	    hHome:'Accueil',hMoncef:'Moncef IA',hAlpha:'ALPHA AI',hComm:'Messages',hMod:'Modérateurs',hSet:'Paramètres',
+	    sMain:'Principal',sSocial:'Social',sAdmin:'Administration',sConf:'Configuration',
+	    stMsgs:'Messages IA',stHw:'Devoirs en cours',stCont:'Contacts',stTokens:'Crédits (Tokens)',
+	    tSched:'📅 Emploi du temps',btnWeek:'Semaine',btnAddEv:'➕ Cours',btnPrint:'🖨 Imprimer',btnClear:'🗑 Vider',
+	    tHw:'📝 Devoirs',btnAddHw:'➕ Ajouter',fAll:'Tous',fPend:'En cours',fDone:'Terminés',
+	    mSub:'Répond dans votre langue',mInp:'Pose-moi une question...',mDrop:'📎 Clique ou glisse une image ici'},
+	  en:{dir:'ltr',sub:'Intelligent Educational Platform',tLogin:'Sign In',tSignup:'Sign Up',lEmail:'Email address',lPw:'Password',lRem:'Remember me',lForgot:'Forgot password?',btnLogin:'Sign In ➜',btnSignup:'Create account ➜',lFirst:'First name',lLast:'Last name',lPhone:'Phone',lAddr:'Address',lConfPw:'Confirm password',changed:'🇬🇧 Language changed to English',
+	    hHome:'Home',hMoncef:'Moncef IA',hAlpha:'ALPHA AI',hComm:'Messages',hMod:'Moderators',hSet:'Settings',
+	    sMain:'Main',sSocial:'Social',sAdmin:'Administration',sConf:'Configuration',
+	    stMsgs:'AI Messages',stHw:'Pending Homework',stCont:'Contacts',stTokens:'Credits (Tokens)',
+	    tSched:'📅 Schedule',btnWeek:'Week',btnAddEv:'➕ Class',btnPrint:'🖨 Print',btnClear:'🗑 Clear',
+	    tHw:'📝 Homework',btnAddHw:'➕ Add',fAll:'All',fPend:'Pending',fDone:'Done',
+	    mSub:'Answers in your language',mInp:'Ask me a question...',mDrop:'📎 Click or drag an image here'},
+	  es:{dir:'ltr',sub:'Plataforma Educativa Inteligente',tLogin:'Iniciar sesión',tSignup:'Registrarse',lEmail:'Correo electrónico',lPw:'Contraseña',lRem:'Recuérdame',lForgot:'¿Olvidaste tu contraseña?',btnLogin:'Iniciar sesión ➜',btnSignup:'Crear cuenta ➜',lFirst:'Nombre',lLast:'Apellido',lPhone:'Teléfono',lAddr:'Dirección',lConfPw:'Confirmar contraseña',changed:'🇪🇸 Idioma cambiado a Español',
+	    hHome:'Inicio',hMoncef:'Moncef IA',hAlpha:'ALPHA AI',hComm:'Mensajes',hMod:'Moderadores',hSet:'Ajustes',
+	    sMain:'Principal',sSocial:'Social',sAdmin:'Administración',sConf:'Configuración',
+	    stMsgs:'Mensajes IA',stHw:'Tareas pendientes',stCont:'Contactos',stTokens:'Créditos (Tokens)',
+	    tSched:'📅 Horario',btnWeek:'Semana',btnAddEv:'➕ Clase',btnPrint:'🖨 Imprimir',btnClear:'🗑 Borrar',
+	    tHw:'📝 Tareas',btnAddHw:'➕ Añadir',fAll:'Todos',fPend:'Pendientes',fDone:'Hecho',
+	    mSub:'Responde en tu idioma',mInp:'Hazme una pregunta...',mDrop:'📎 Haz clic o arrastra una imagen aquí'},
+	  ar:{dir:'rtl',sub:'منصة تعليمية ذكية',tLogin:'تسجيل الدخول',tSignup:'إنشاء حساب',lEmail:'البريد الإلكتروني',lPw:'كلمة المرور',lRem:'تذكرني',lForgot:'نسيت كلمة المرور؟',btnLogin:'دخول ←',btnSignup:'إنشاء الحساب ←',lFirst:'الاسم الأول',lLast:'اسم العائلة',lPhone:'الهاتف',lAddr:'العنوان',lConfPw:'تأكيد كلمة المرور',changed:'🇸🇦 تم تغيير اللغة إلى العربية',
+	    hHome:'الرئيسية',hMoncef:'منصف IA',hAlpha:'ALPHA AI',hComm:'الرسائل',hMod:'المشرفون',hSet:'الإعدادات',
+	    sMain:'الرئيسي',sSocial:'اجتماعي',sAdmin:'الإدارة',sConf:'التكوين',
+	    stMsgs:'رسائل IA',stHw:'الواجبات الحالية',stCont:'جهات الاتصال',stTokens:'الرصيد (Tokens)',
+	    tSched:'📅 الجدول الزمني',btnWeek:'أسبوع',btnAddEv:'➕ درس',btnPrint:'🖨 طباعة',btnClear:'🗑 مسح',
+	    tHw:'📝 الواجبات',btnAddHw:'➕ إضافة',fAll:'الكل',fPend:'قيد التنفيذ',fDone:'مكتمل',
+	    mSub:'يجيب بلغتك',mInp:'اسألني سؤالاً...',mDrop:'📎 انقر أو اسحب صورة هنا'}
+	};
 
-function setLang(l){
-  if(!T[l]) return;
-  S.lang = l;
-  S.settings.lang = l;
-  const t = T[l];
-  document.documentElement.setAttribute('dir', t.dir);
-  document.documentElement.setAttribute('lang', l);
-  // Auth
-  const sub = document.getElementById('authSub');
-  if(sub) sub.textContent = t.sub;
-  const tabs = document.querySelectorAll('.auth-tab');
-  if(tabs[0]) tabs[0].textContent = t.tLogin;
-  if(tabs[1]) tabs[1].textContent = t.tSignup;
-  setFL('loginEmail','lblEmail',t.lEmail);
-  setFL('loginPw','lblPw',t.lPw);
-  const rl = document.getElementById('lblRem');
-  if(rl) rl.textContent = t.lRem;
-  const fl = document.getElementById('lblForgot');
-  if(fl) fl.textContent = t.lForgot;
-  const lb = document.getElementById('loginBtn');
-  if(lb) lb.textContent = t.btnLogin;
-  const sb2 = document.getElementById('signupBtn');
-  if(sb2) sb2.textContent = t.btnSignup;
-  setFL('signFirst','lblFirst',t.lFirst);
-  setFL('signLast','lblLast',t.lLast);
-  setFL('signEmail','lblEmailS',t.lEmail);
-  setFL('signPhone','lblPhone',t.lPhone);
-  setFL('signAddr','lblAddr',t.lAddr);
-  setFL('signPw','lblPwS',t.lPw);
-  setFL('signPwC','lblConfPw',t.lConfPw);
-  // Lang buttons
-  document.querySelectorAll('.lang-btn').forEach(b=>{
-    const map = {'FR':'fr','EN':'en','ES':'es','AR':'ar'};
-    const txt = b.textContent.trim().split(' ').pop();
-    b.classList.toggle('active', map[txt]===l);
-  });
-  const ls = document.getElementById('langSelect');
-  if(ls) ls.value = l;
-  saveData();
-  toast(t.changed, 'ok');
-}
+	function setLang(l){
+	  if(!T[l]) return;
+	  S.lang = l;
+	  S.settings.lang = l;
+	  const t = T[l];
+	  document.documentElement.setAttribute('dir', t.dir);
+	  document.documentElement.setAttribute('lang', l);
+	  // Auth
+	  const sub = document.getElementById('authSub');
+	  if(sub) sub.textContent = t.sub;
+	  const tabs = document.querySelectorAll('.auth-tab');
+	  if(tabs[0]) tabs[0].textContent = t.tLogin;
+	  if(tabs[1]) tabs[1].textContent = t.tSignup;
+	  setFL('loginEmail','lblEmail',t.lEmail);
+	  setFL('loginPw','lblPw',t.lPw);
+	  const rl = document.getElementById('lblRem');
+	  if(rl) rl.textContent = t.lRem;
+	  const fl = document.getElementById('lblForgot');
+	  if(fl) fl.textContent = t.lForgot;
+	  const lb = document.getElementById('loginBtn');
+	  if(lb) lb.textContent = t.btnLogin;
+	  const sb2 = document.getElementById('signupBtn');
+	  if(sb2) sb2.textContent = t.btnSignup;
+	  setFL('signFirst','lblFirst',t.lFirst);
+	  setFL('signLast','lblLast',t.lLast);
+	  setFL('signEmail','lblEmailS',t.lEmail);
+	  setFL('signPhone','lblPhone',t.lPhone);
+	  setFL('signAddr','lblAddr',t.lAddr);
+	  setFL('signPw','lblPwS',t.lPw);
+	  setFL('signPwC','lblConfPw',t.lConfPw);
+	  
+	  // Sidebar
+	  const setT = (id, txt) => { const el = document.getElementById(id); if(el) el.textContent = txt; };
+	  setT('sbHome', t.hHome); setT('sbMoncef', t.hMoncef); setT('sbAlpha', t.hAlpha);
+	  setT('sbComm', t.hComm); setT('sbMod', t.hMod); setT('sbSettings', t.hSet);
+	  setT('sbSecMain', t.sMain); setT('sbSecSocial', t.sSocial); setT('sbSecAdmin', t.sAdmin); setT('sbSecConf', t.sConf);
+	  
+	  // Home Stats
+	  const setL = (id, txt) => { const el = document.getElementById(id); if(el) el.textContent = txt; };
+	  const cards = document.querySelectorAll('.stat-label');
+	  if(cards[0]) cards[0].textContent = t.stMsgs;
+	  if(cards[1]) cards[1].textContent = t.stHw;
+	  if(cards[2]) cards[2].textContent = t.stCont;
+	  if(cards[3]) cards[3].textContent = t.stTokens;
+	  
+	  // Home Sections
+	  const titles = document.querySelectorAll('.card-title');
+	  if(titles[0]) titles[0].textContent = t.tSched;
+	  if(titles[1]) titles[1].textContent = t.tHw;
+	  
+	  // Home Buttons
+	  const btns = document.querySelectorAll('#homePage .btn-sm');
+	  if(btns[0]) btns[0].innerHTML = t.btnWeek + ' <span id="weekLabel">' + S.currentWeek + '</span>';
+	  if(btns[1]) btns[1].textContent = t.btnAddEv;
+	  if(btns[2]) btns[2].textContent = t.btnPrint;
+	  if(btns[3]) btns[3].textContent = t.btnClear;
+	  if(btns[4]) btns[4].textContent = t.btnAddHw;
+	  
+	  const filters = document.querySelectorAll('.hw-filter');
+	  if(filters[0]) filters[0].textContent = t.fAll;
+	  if(filters[1]) filters[1].textContent = t.fPend;
+	  if(filters[2]) filters[2].textContent = t.fDone;
+	  
+	  // Moncef Page
+	  const mTitle = document.querySelector('#moncefPage .chat-hdr div div:first-child');
+	  if(mTitle) mTitle.textContent = '🤖 ' + t.hMoncef;
+	  const mSub = document.querySelector('#moncefPage .chat-hdr div div:last-child');
+	  if(mSub) mSub.textContent = t.mSub;
+	  const mInp = document.getElementById('moncefInput');
+	  if(mInp) mInp.placeholder = t.mInp;
+	  const mDrop = document.getElementById('moncefDZ');
+	  if(mDrop) mDrop.textContent = t.mDrop;
+
+	  // Lang buttons
+	  document.querySelectorAll('.lang-btn').forEach(b=>{
+	    const map = {'FR':'fr','EN':'en','ES':'es','AR':'ar'};
+	    const txt = b.textContent.trim().split(' ').pop();
+	    b.classList.toggle('active', map[txt]===l);
+	  });
+	  const ls = document.getElementById('langSelect');
+	  if(ls) ls.value = l;
+	  saveData();
+	  toast(t.changed, 'ok');
+	}
 
 function setFL(inputId, labelId, text){
   const el = document.getElementById(labelId);
