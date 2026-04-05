@@ -6,14 +6,14 @@
 <title>Moncef IA — Plateforme Éducative Intelligente</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Raleway:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{
-  --p:#1A3CFF;--a:#00C9B1;--bg:#060B1A;--sb:#0A1A6E;
-  --gold:#FFD700;--silver:#C0C0C0;--bronze:#CD7F32;
-  --err:#FF3B3B;--ok:#00D97E;--warn:#FFA500;
-  --sur:rgba(26,60,255,.08);--sur2:rgba(26,60,255,.15);
-  --glass:blur(20px);--r:16px;--tr:all .25s cubic-bezier(.4,0,.2,1);
-  --hh:56px;--sw:260px;
-}
+	:root{
+	  --p:#1A3CFF;--a:#00C9B1;--bg:#020408;--sb:#050A1A;
+	  --gold:#FFD700;--silver:#C0C0C0;--bronze:#CD7F32;
+	  --err:#FF3B3B;--ok:#00D97E;--warn:#FFA500;
+	  --sur:rgba(255,255,255,.03);--sur2:rgba(255,255,255,.06);
+	  --glass:blur(30px);--r:12px;--tr:all .3s cubic-bezier(.4,0,.2,1);
+	  --hh:64px;--sw:260px;
+	}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:#F0F4FF;overflow-x:hidden;min-height:100vh}
@@ -32,8 +32,8 @@ code,pre{font-family:'JetBrains Mono',monospace}
 #pc{position:fixed;inset:0;z-index:-1;pointer-events:none}
 
 /* BUTTONS */
-.btn{min-height:44px;padding:10px 20px;background:var(--p);color:#fff;border-radius:12px;border:1px solid rgba(255,255,255,.15);box-shadow:0 4px 20px rgba(26,60,255,.4);cursor:pointer;transition:var(--tr);font-weight:600;font-size:15px;display:inline-flex;align-items:center;justify-content:center;gap:8px;position:relative;overflow:hidden;font-family:'DM Sans',sans-serif;white-space:nowrap}
-.btn:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 8px 28px rgba(0,201,177,.5)}
+	.btn{min-height:48px;padding:12px 24px;background:#fff;color:#000;border-radius:8px;border:none;cursor:pointer;transition:var(--tr);font-weight:600;font-size:15px;display:inline-flex;align-items:center;justify-content:center;gap:8px;position:relative;overflow:hidden;font-family:'DM Sans',sans-serif;white-space:nowrap}
+	.btn:hover{background:rgba(255,255,255,.9);transform:translateY(-1px)}
 .btn:active{transform:scale(.96)}
 .btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
 .btn-sec{background:transparent;border:2px solid var(--p);color:#A0B0FF}
@@ -75,7 +75,8 @@ code,pre{font-family:'JetBrains Mono',monospace}
 
 /* AUTH */
 .auth-wrap{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:10000;overflow-y:auto;padding:20px}
-.auth-box{background:rgba(10,26,110,.7);backdrop-filter:var(--glass);border-radius:24px;border:1px solid rgba(26,60,255,.35);padding:38px;width:100%;max-width:440px;box-shadow:0 24px 64px rgba(0,0,0,.55);animation:authIn .5s cubic-bezier(.4,0,.2,1)}
+	.auth-box{background:rgba(2,4,8,.8);backdrop-filter:var(--glass);border-radius:16px;border:1px solid rgba(255,255,255,.1);padding:48px;width:100%;max-width:420px;box-shadow:0 0 80px rgba(0,0,0,.8);animation:authIn .6s cubic-bezier(.2,0,.2,1);position:relative;overflow:hidden}
+	.auth-box::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at center,rgba(26,60,255,.05) 0%,transparent 70%);pointer-events:none}
 @keyframes authIn{from{opacity:0;transform:scale(.94) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
 .auth-logo{text-align:center;margin-bottom:28px}
 .auth-logo h1{font-size:30px;color:var(--a);margin-bottom:6px;animation:glow 3s ease-in-out infinite}
@@ -92,8 +93,8 @@ code,pre{font-family:'JetBrains Mono',monospace}
 .auth-form.active{display:block}
 .fg{margin-bottom:16px}
 .fl{display:block;margin-bottom:7px;font-size:13px;font-weight:500;color:rgba(240,244,255,.75)}
-.fi{width:100%;padding:11px 15px;background:rgba(6,11,26,.7);border:1.5px solid rgba(26,60,255,.3);border-radius:10px;color:#fff;font-size:14px;transition:var(--tr);font-family:'DM Sans',sans-serif}
-.fi:focus{outline:none;border-color:var(--a);box-shadow:0 0 16px rgba(0,201,177,.25)}
+	.fi{width:100%;padding:14px 18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:15px;transition:var(--tr);font-family:'DM Sans',sans-serif}
+	.fi:focus{outline:none;border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.05)}
 .fi.err{border-color:var(--err);animation:shake .4s}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
 .fi-sel{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2300C9B1' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;cursor:pointer}
@@ -479,16 +480,18 @@ code,pre{font-family:'JetBrains Mono',monospace}
   <div class="stats-row">
     <div class="stat-card"><div class="stat-num" id="stMsgs">0</div><div class="stat-label">Messages IA</div></div>
     <div class="stat-card"><div class="stat-num" id="stHw">0</div><div class="stat-label">Devoirs en cours</div></div>
-    <div class="stat-card"><div class="stat-num" id="stCont">0</div><div class="stat-label">Contacts</div></div>
-    <div class="stat-card"><div class="stat-num" id="stDays">1</div><div class="stat-label">Jours connectés</div></div>
-  </div>
+	    <div class="stat-card"><div class="stat-num" id="stCont">0</div><div class="stat-label">Contacts</div></div>
+	    <div class="stat-card"><div class="stat-num" id="stTokens">700</div><div class="stat-label">Crédits (Tokens)</div></div>
+	  </div>
   <div class="card mb16">
     <div class="card-hdr">
       <div class="card-title">📅 Emploi du temps</div>
-      <div style="display:flex;gap:8px">
-        <button class="btn btn-sm btn-sec" onclick="addEventModal(0)">➕ Cours</button>
-        <button class="btn btn-sm btn-err" onclick="clearSchedule()" style="font-size:12px">🗑 Vider</button>
-      </div>
+	      <div style="display:flex;gap:8px">
+	        <button class="btn btn-sm btn-sec" onclick="switchWeek()">Semaine <span id="weekLabel">A</span></button>
+	        <button class="btn btn-sm btn-sec" onclick="addEventModal(0)">➕ Cours</button>
+	        <button class="btn btn-sm" onclick="window.print()" style="background:var(--a);color:#000">🖨 Imprimer</button>
+	        <button class="btn btn-sm btn-err" onclick="clearSchedule()" style="font-size:12px">🗑 Vider</button>
+	      </div>
     </div>
     <div class="sched-grid" id="schedGrid"></div>
   </div>
@@ -772,7 +775,7 @@ const S = {
     photo:'https://ui-avatars.com/api/?name=Amine+FJER&background=FFD700&color=000',
     joinDate: new Date().toISOString()
   }],
-  hw: [], schedule: [],
+	  hw: [], schedule: {weekA: [], weekB: []}, currentWeek: 'A', lastWeekSwitch: null,
   contacts: [
     {id:'c1',name:'Sara Martin',email:'sara@ex.com',status:'online',photo:'https://ui-avatars.com/api/?name=Sara+M&background=8B5CF6&color=fff',msgs:[]},
     {id:'c2',name:'Youssef Ben Ali',email:'youssef@ex.com',status:'away',photo:'https://ui-avatars.com/api/?name=Youssef+B&background=EC4899&color=fff',msgs:[]},
@@ -786,8 +789,9 @@ const S = {
     {id:'n2',text:'Moncef IA est prêt à t\'aider',time:'Il y a 1min',read:false,icon:'🤖'}
   ],
   settings: {lang:'fr', notifPush:true, notifSound:true, notifHw:true},
-  hwFilter: 'all', lang: 'fr'
-};
+	  hwFilter: 'all', lang: 'fr',
+	  tokens: 700, lastTokenRegen: Date.now()
+	};
 
 // ═══════════════════════ I18N ═══════════════════════
 const T = {
@@ -1090,35 +1094,63 @@ function addNotif(text,icon='📢'){S.notifs.unshift({id:'n'+Date.now(),text,tim
 
 // ═══════════════════════ SCHEDULE ═══════════════════════
 const DAYS=['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
-function renderSched(){
-  const grid=document.getElementById('schedGrid');
-  const td=new Date().getDay();
-  const ti=td===0?6:td-1;
-  grid.innerHTML=DAYS.map((d,i)=>{
-    const evs=S.schedule.filter(e=>e.dayIdx===i);
-    return '<div class="day-col'+(i===ti?' today':'')+'"><div class="day-hdr">'+d+'</div>'+
-      evs.map(ev=>'<div class="ev-chip" onclick="editEv(\''+ev.id+'\')" title="'+ev.subject+'"><div style="font-size:10px;color:rgba(240,244,255,.5)">'+ev.time+'</div><div style="font-weight:600">'+ev.subject+'</div></div>').join('')+
-      '<div class="ev-add" onclick="addEventModal('+i+')">+ Ajouter</div></div>';
-  }).join('');
-}
+	function checkWeekSwitch(){
+	  const now = new Date();
+	  const day = now.getDay(); // 0 = Dimanche
+	  const last = S.lastWeekSwitch ? new Date(S.lastWeekSwitch) : null;
+	  const todayStr = now.toDateString();
+	  if(day === 0 && (!last || last.toDateString() !== todayStr)){
+	    S.currentWeek = S.currentWeek === 'A' ? 'B' : 'A';
+	    S.lastWeekSwitch = now.toISOString();
+	    saveData();
+	    addNotif('📅 Passage automatique en Semaine ' + S.currentWeek, '🔄');
+	  }
+	}
+	function switchWeek(){
+	  S.currentWeek = S.currentWeek === 'A' ? 'B' : 'A';
+	  renderSched();
+	  saveData();
+	}
+	function renderSched(){
+	  checkWeekSwitch();
+	  const grid=document.getElementById('schedGrid');
+	  const label=document.getElementById('weekLabel');
+	  if(label) label.textContent = S.currentWeek;
+	  const td=new Date().getDay();
+	  const ti=td===0?6:td-1;
+	  const currentSched = S.schedule['week' + S.currentWeek] || [];
+	  grid.innerHTML=DAYS.map((d,i)=>{
+	    const evs=currentSched.filter(e=>e.dayIdx===i);
+	    return '<div class="day-col'+(i===ti?' today':'')+'"><div class="day-hdr">'+d+'</div>'+
+	      evs.map(ev=>'<div class="ev-chip" onclick="editEv(\''+ev.id+'\')" title="'+ev.subject+'"><div style="font-size:10px;color:rgba(240,244,255,.5)">'+ev.time+'</div><div style="font-weight:600">'+ev.subject+'</div></div>').join('')+
+	      '<div class="ev-add" onclick="addEventModal('+i+')">+ Ajouter</div></div>';
+	  }).join('');
+	}
 function addEventModal(di=0){
   showModal('📅 Ajouter un cours','<div class="fg"><label class="fl">Matière</label><input type="text" class="fi" id="evSubj" placeholder="ex: Mathématiques" autofocus></div><div class="fg"><label class="fl">Jour</label><select class="fi fi-sel" id="evDay">'+DAYS.map((d,i)=>'<option value="'+i+'"'+(i===di?' selected':'')+'>'+d+'</option>').join('')+'</select></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div class="fg"><label class="fl">Début</label><input type="time" class="fi" id="evStart" value="08:00"></div><div class="fg"><label class="fl">Fin</label><input type="time" class="fi" id="evEnd" value="10:00"></div></div><div class="fg"><label class="fl">Salle (optionnel)</label><input type="text" class="fi" id="evRoom" placeholder="Salle B204"></div><button class="btn" style="width:100%" onclick="addEv()">✅ Ajouter</button>');
 }
-function addEv(){
-  const subj=gv('evSubj').trim();
-  if(!subj){toast('Matière requise','err');return;}
-  S.schedule.push({id:'ev'+Date.now(),subject:subj,dayIdx:+gv('evDay'),time:gv('evStart')+'-'+gv('evEnd'),room:gv('evRoom')});
-  saveData(); renderSched(); closeModal(); toast('Cours ajouté ✓','ok');
-}
-function editEv(id){
-  const ev=S.schedule.find(e=>e.id===id);
-  if(!ev) return;
-  showModal('✏️ '+ev.subject,'<p style="margin-bottom:16px;color:rgba(240,244,255,.6)">'+DAYS[ev.dayIdx]+' '+ev.time+(ev.room?' — '+ev.room:'')+'</p><div style="display:flex;gap:10px"><button class="btn btn-err" onclick="removeEv(\''+id+'\')">🗑 Supprimer</button><button class="btn btn-sec" onclick="closeModal()">Annuler</button></div>');
-}
-function removeEv(id){S.schedule=S.schedule.filter(e=>e.id!==id);saveData();renderSched();closeModal();toast('Cours supprimé','info');}
-function clearSchedule(){
-  showModal('⚠️ Effacer tout ?','<p style="margin-bottom:16px;color:rgba(240,244,255,.6)">Supprimer tous les cours ?</p><div style="display:flex;gap:10px"><button class="btn btn-err" onclick="S.schedule=[];saveData();renderSched();closeModal();toast(\'Emploi du temps vidé\',\'info\')">Effacer</button><button class="btn btn-sec" onclick="closeModal()">Annuler</button></div>');
-}
+	function addEv(){
+	  const subj=gv('evSubj').trim();
+	  if(!subj){toast('Matière requise','err');return;}
+	  const weekKey = 'week' + S.currentWeek;
+	  if(!S.schedule[weekKey]) S.schedule[weekKey] = [];
+	  S.schedule[weekKey].push({id:'ev'+Date.now(),subject:subj,dayIdx:+gv('evDay'),time:gv('evStart')+'-'+gv('evEnd'),room:gv('evRoom')});
+	  saveData(); renderSched(); closeModal(); toast('Cours ajouté ✓','ok');
+	}
+	function editEv(id){
+	  const weekKey = 'week' + S.currentWeek;
+	  const ev=S.schedule[weekKey].find(e=>e.id===id);
+	  if(!ev) return;
+	  showModal('✏️ '+ev.subject,'<p style="margin-bottom:16px;color:rgba(240,244,255,.6)">'+DAYS[ev.dayIdx]+' '+ev.time+(ev.room?' — '+ev.room:'')+'</p><div style="display:flex;gap:10px"><button class="btn btn-err" onclick="removeEv(\''+id+'\')">🗑 Supprimer</button><button class="btn btn-sec" onclick="closeModal()">Annuler</button></div>');
+	}
+	function removeEv(id){
+	  const weekKey = 'week' + S.currentWeek;
+	  S.schedule[weekKey]=S.schedule[weekKey].filter(e=>e.id!==id);
+	  saveData();renderSched();closeModal();toast('Cours supprimé','info');
+	}
+	function clearSchedule(){
+	  showModal('⚠️ Effacer tout ?','<p style="margin-bottom:16px;color:rgba(240,244,255,.6)">Supprimer tous les cours de la Semaine '+S.currentWeek+' ?</p><div style="display:flex;gap:10px"><button class="btn btn-err" onclick="S.schedule[\'week\'+S.currentWeek]=[];saveData();renderSched();closeModal();toast(\'Emploi du temps vidé\',\'info\')">Effacer</button><button class="btn btn-sec" onclick="closeModal()">Annuler</button></div>');
+	}
 
 // ═══════════════════════ HOMEWORK ═══════════════════════
 function openAddHw(){
@@ -1161,12 +1193,38 @@ function renderHwTracker(){
   if(!p.length){t.innerHTML='<p style="color:rgba(240,244,255,.3);font-size:13px;text-align:center;padding:10px">Aucun devoir en cours 🎉</p>';return;}
   t.innerHTML=p.slice(0,5).map(h=>'<div class="hw-item" style="padding:8px 10px;margin-bottom:6px"><input type="checkbox" onchange="toggleHw(\''+h.id+'\',this.checked)" style="cursor:pointer;width:14px;height:14px;accent-color:var(--ok);flex-shrink:0"><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h.subject+'</div>'+(h.due?'<div style="font-size:11px;color:rgba(240,244,255,.35)">'+new Date(h.due).toLocaleDateString('fr-FR')+'</div>':'')+'</div></div>').join('');
 }
-function updateStats(){
-  document.getElementById('stMsgs').textContent=S.stats.msgs||0;
-  document.getElementById('stHw').textContent=S.hw.filter(h=>!h.done).length;
-  document.getElementById('stCont').textContent=S.contacts.length;
-  document.getElementById('stDays').textContent=S.stats.days||1;
-}
+	function updateStats(){
+	  const m=document.getElementById('stMsgs'); if(m) m.textContent=S.stats.msgs||0;
+	  const h=document.getElementById('stHw'); if(h) h.textContent=S.hw.filter(x=>!x.done).length;
+	  const c=document.getElementById('stCont'); if(c) c.textContent=S.contacts.length;
+	  const d=document.getElementById('stDays'); if(d) d.textContent=S.stats.days||1;
+	  const t=document.getElementById('stTokens'); if(t) t.textContent=S.tokens;
+	}
+	function checkTokens(){
+	  const now = Date.now();
+	  const diff = now - S.lastTokenRegen;
+	  const intervals = Math.floor(diff / (2 * 3600 * 1000)); // 2 heures
+	  if(intervals > 0 && S.user && S.user.role === 'normal'){
+	    S.tokens = Math.min(900, S.tokens + (intervals * 700));
+	    S.lastTokenRegen = now;
+	    saveData();
+	    updateStats();
+	  }
+	}
+	function useToken(){
+	  if(['founder','co-founder','moderator'].includes(S.user.role)) return true;
+	  if(S.tokens <= 0){
+	    showPaywall();
+	    return false;
+	  }
+	  S.tokens--;
+	  saveData();
+	  updateStats();
+	  return true;
+	}
+	function showPaywall(){
+	  showModal('💎 Passer au Premium','<div style="text-align:center;padding:20px"><div style="font-size:40px;margin-bottom:20px">🚀</div><p style="font-size:16px;margin-bottom:24px">Vous avez épuisé vos crédits journaliers.</p><div style="background:rgba(255,215,0,.1);border:1px solid var(--gold);border-radius:12px;padding:20px;margin-bottom:24px"><h3 style="color:var(--gold);margin-bottom:10px">Offre Premium</h3><p style="font-size:24px;font-weight:700">70$/an</p><p style="font-size:13px;opacity:.7;margin-top:8px">Crédits illimités • IA Prioritaire • Support 24/7</p></div><button class="btn" style="width:100%;background:var(--gold);color:#000" onclick="toast(\'Redirection vers le paiement...\',\'info\')">Devenir Premium</button></div>');
+	}
 
 // ═══════════════════════ MARKDOWN ═══════════════════════
 function mdRender(text){
@@ -1233,8 +1291,16 @@ function buildSys(type){
       "- Si c'est un devoir: guide avec indices, ne donne pas la réponse directe",
       "- Termine les longues explications par un résumé en points clés",
       "",
-      "CONTEXTE: Prénom:"+u.firstName+", Devoirs en cours:"+S.hw.filter(h=>!h.done).length+", Date:"+new Date().toLocaleDateString('fr-FR')
-    ].join("\n");
+	      "CONTEXTE: Prénom:"+u.firstName+", Devoirs en cours:"+S.hw.filter(h=>!h.done).length+", Semaine actuelle:"+S.currentWeek+", Date:"+new Date().toLocaleDateString('fr-FR'),
+	      "",
+	      "GESTION EDT: Tu peux lire un emploi du temps et proposer des modifications.",
+	      "Pour modifier l'EDT, utilise l'action JSON suivante à la fin de ta réponse:",
+	      '{"action":"schedule","week":"A","dayIdx":0,"subject":"Maths","time":"08:00-10:00","room":"B204"}',
+	      "",
+	      "ANALYSE DEVOIRS: Si l'utilisateur envoie une image de devoirs, extrais les infos et pose des questions de confirmation.",
+	      "Pour ajouter un devoir extrait, utilise l'action JSON suivante:",
+	      '{"action":"homework","subject":"Maths","desc":"Ex 1 p 20","due":"2026-04-10","priority":"urgent"}'
+	    ].join("\n");
   }
   return [
     "Tu es ALPHA AI, l'IA exclusive du Fondateur Amine FJER de Moncef IA.",
@@ -1295,11 +1361,22 @@ function execActions(acts){
     } else if(a.action==='notif'&&a.message){
       addNotif(a.message);
       logAlpha('📢 Notif: '+a.message);
-    } else if(a.action==='toast'&&a.message){
-      toast(a.message, a.type||'info');
-    }
-  });
-}
+	    } else if(a.action==='toast'&&a.message){
+	      toast(a.message, a.type||'info');
+	    } else if(a.action==='schedule'&&a.subject){
+	      const wk = 'week' + (a.week || S.currentWeek);
+	      if(!S.schedule[wk]) S.schedule[wk] = [];
+	      S.schedule[wk].push({id:'ev'+Date.now(),subject:a.subject,dayIdx:a.dayIdx||0,time:a.time||'08:00-10:00',room:a.room||''});
+	      saveData(); renderSched();
+	      toast('EDT mis à jour par Moncef IA', 'ok');
+	    } else if(a.action==='homework'&&a.subject){
+	      S.hw.push({id:'hw'+Date.now(),subject:a.subject,desc:a.desc||'',due:a.due||'',priority:a.priority||'normal',done:false});
+	      saveData(); renderHw(); renderHwTracker(); updateStats();
+	      addNotif('📝 Devoir ajouté par Moncef IA : '+a.subject);
+	      toast('Devoir ajouté ✓', 'ok');
+	    }
+	  });
+	}
 function stripActions(text){
   return text.replace(/\{"action":"[^"]+?"[^}]*\}/g,'').trim();
 }
@@ -1338,9 +1415,10 @@ function addAIMsg(type, content){
   if(c) appendMsg(c,'ai',content);
   saveData();
 }
-async function sendMsg(type){
-  if(type==='comm'){sendCommMsg();return;}
-  const inputId=type+'Input';
+	async function sendMsg(type){
+	  if(!useToken()) return;
+	  if(type==='comm'){sendCommMsg();return;}
+	  const inputId=type+'Input';
   const inp=document.getElementById(inputId);
   const txt=inp.value.trim();
   if(!txt) return;
@@ -1431,9 +1509,46 @@ function processFile(file,type){
 }
 
 // ═══════════════════════ COMMUNICATION ═══════════════════════
-function renderContacts(){
-  document.getElementById('convItems').innerHTML=S.contacts.map(c=>'<div class="conv-item" onclick="selectContact(\''+c.id+'\')"><img src="'+c.photo+'" class="conv-av"><div style="flex:1;min-width:0"><div class="conv-name">'+c.name+'</div><div class="conv-last">'+(c.msgs&&c.msgs.length?c.msgs[c.msgs.length-1].content.slice(0,30)+'...':'Pas encore de message')+'</div></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px"><div class="status-dot '+c.status+'"></div></div></div>').join('');
-}
+	function renderContacts(){
+	  const list = document.getElementById('convItems');
+	  if(!list) return;
+	  list.innerHTML = S.contacts.map(c=>`
+	    <div class="conv-item" onclick="showUserProfile('${c.email}')">
+	      <img src="${c.photo}" class="conv-av">
+	      <div style="flex:1;min-width:0">
+	        <div class="conv-name">${c.name}</div>
+	        <div class="conv-last">${c.email}</div>
+	      </div>
+	    </div>`).join('');
+	}
+	function showUserProfile(email){
+	  const u = S.users.find(x=>x.email.toLowerCase()===email.toLowerCase()) || S.contacts.find(x=>x.email.toLowerCase()===email.toLowerCase());
+	  if(!u){
+	    showModal('👤 Profil non trouvé', '<p style="text-align:center;padding:20px">Cet utilisateur n\'est pas encore inscrit.</p><button class="btn" style="width:100%" onclick="inviteUser(\''+email+'\')">✉️ Inviter à rejoindre</button>');
+	    return;
+	  }
+	  const isMember = S.users.some(x=>x.email.toLowerCase()===email.toLowerCase());
+	  showModal('👤 Profil Utilisateur', `
+	    <div style="text-align:center;padding:10px">
+	      <img src="${u.photo || 'https://ui-avatars.com/api/?name='+email}" style="width:80px;height:80px;border-radius:50%;margin-bottom:15px;border:2px solid var(--a)">
+	      <h3 style="margin-bottom:5px">${u.firstName || u.name || 'Utilisateur'}</h3>
+	      <p style="font-size:13px;opacity:.6;margin-bottom:20px">${email}</p>
+	      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+	        <button class="btn btn-sm" onclick="toast('Fonctionnalité email bientôt disponible','info')">📧 Envoyer un mail</button>
+	        ${!isMember ? '<button class="btn btn-sm btn-sec" onclick="inviteUser(\''+email+'\')">✉️ Inviter</button>' : '<span class="chip gold">Membre Actif</span>'}
+	      </div>
+	    </div>
+	  `);
+	}
+	function inviteUser(email){
+	  toast('Invitation envoyée à ' + email, 'ok');
+	  addNotif('Invitation envoyée à ' + email, '✉️');
+	  // Bonus Parrainage (Simulation)
+	  S.tokens = Math.min(900, S.tokens + 200);
+	  saveData(); updateStats();
+	  toast('Bonus Parrainage : +200 tokens !', 'ok');
+	  closeModal();
+	}
 function searchConv(q){
   const items=document.querySelectorAll('#convItems .conv-item');
   items.forEach((el,i)=>{
@@ -1594,16 +1709,15 @@ function clearAllData(){
 }
 
 // ═══════════════════════ MODS ═══════════════════════
-function searchMod(){
-  const email=document.getElementById('modEmail').value.trim();
-  const res=document.getElementById('modResult');
-  if(!isEmail(email)){res.innerHTML='<p style="color:var(--err)">❌ Email invalide</p>';return;}
-  const u=S.users.find(u=>u.email===email);
-  if(!u){res.innerHTML='<p style="color:var(--err)">❌ Aucun compte avec cet email</p>';return;}
-  if(u.role==='founder'){res.innerHTML='<p style="color:var(--err)">❌ Action impossible sur le fondateur</p>';return;}
-  if(u.role==='moderator'){res.innerHTML='<p style="color:var(--warn)">⚠️ Déjà modérateur</p>';return;}
-  res.innerHTML='<div class="card"><div style="display:flex;align-items:center;gap:14px;margin-bottom:14px"><img src="'+u.photo+'" style="width:56px;height:56px;border-radius:50%;border:2px solid var(--a)"><div><div style="font-weight:700">'+u.firstName+' '+u.lastName+'</div><div style="font-size:13px;color:rgba(240,244,255,.5)">'+u.email+'</div></div></div><button class="btn btn-ok" onclick="designateMod(\''+u.id+'\')">🛡️ Désigner comme modérateur</button></div>';
-}
+	function searchMod(){
+	  const email=document.getElementById('modEmail').value.trim();
+	  const res=document.getElementById('modResult');
+	  if(!isEmail(email)){res.innerHTML='<p style="color:var(--err)">❌ Email invalide</p>';return;}
+	  const u=S.users.find(u=>u.email.toLowerCase()===email.toLowerCase());
+	  if(!u){res.innerHTML='<p style="color:var(--err)">❌ Aucun compte avec cet email</p>';return;}
+	  if(u.role==='founder'){res.innerHTML='<p style="color:var(--err)">❌ Action impossible sur le fondateur</p>';return;}
+	  res.innerHTML='<div class="card"><div style="display:flex;align-items:center;gap:14px;margin-bottom:14px"><img src="'+u.photo+'" style="width:56px;height:56px;border-radius:50%;border:2px solid var(--a)"><div><div style="font-weight:700">'+u.firstName+' '+u.lastName+'</div><div style="font-size:13px;color:rgba(240,244,255,.5)">'+u.email+'</div></div></div><button class="btn btn-ok" onclick="editUserRole(\''+u.id+'\')">🛡️ Gérer le rôle</button></div>';
+	}
 function designateMod(id){
   const u=S.users.find(u=>u.id===id);
   if(!u) return;
@@ -1623,11 +1737,46 @@ function confirmRevoke(id){
   if(u) u.role='normal';
   saveData(); closeModal(); renderModTable(); toast('✅ Révoqué','ok');
 }
-function renderModTable(){
-  const mods=S.users.filter(u=>u.role==='moderator');
-  document.getElementById('modCount').textContent=mods.length;
-  document.getElementById('modBody').innerHTML=mods.length?mods.map(m=>'<tr><td><img src="'+m.photo+'" style="width:36px;height:36px;border-radius:50%;border:2px solid var(--a)"></td><td><strong>'+m.firstName+' '+m.lastName+'</strong></td><td style="font-size:13px;color:rgba(240,244,255,.6)">'+m.email+'</td><td><span class="chip">🛡️ Modérateur</span></td><td style="font-size:12px;color:rgba(240,244,255,.4)">'+new Date().toLocaleDateString('fr-FR')+'</td><td><button class="btn btn-sm btn-err" onclick="revokeMod(\''+m.id+'\')">Révoquer</button></td></tr>').join(''):'<tr><td colspan="6" style="text-align:center;color:rgba(240,244,255,.35);padding:28px">Aucun modérateur</td></tr>';
-}
+	function renderModTable(){
+	  const staff=S.users.filter(u=>['moderator','co-founder'].includes(u.role));
+	  document.getElementById('modCount').textContent=staff.length;
+	  document.getElementById('modBody').innerHTML=staff.length?staff.map(m=>`
+	    <tr>
+	      <td><img src="${m.photo}" style="width:36px;height:36px;border-radius:50%;border:2px solid var(--a)"></td>
+	      <td><strong>${m.firstName} ${m.lastName}</strong></td>
+	      <td style="font-size:13px;color:rgba(240,244,255,.6)">${m.email}</td>
+	      <td><span class="chip ${m.role==='co-founder'?'gold':'blue'}">${m.role==='co-founder'?'👑 Co-fondateur':'🛡️ Modérateur'}</span></td>
+	      <td style="font-size:12px;color:rgba(240,244,255,.4)">${new Date(m.joinDate || Date.now()).toLocaleDateString('fr-FR')}</td>
+	      <td>
+	        ${S.user.role==='founder' ? `<button class="btn btn-sm btn-sec" onclick="editUserRole('${m.id}')">⚙️ Gérer</button>` : ''}
+	      </td>
+	    </tr>`).join(''):'<tr><td colspan="6" style="text-align:center;color:rgba(240,244,255,.35);padding:28px">Aucun membre du staff</td></tr>';
+	}
+	function editUserRole(id){
+	  const u = S.users.find(x=>x.id===id);
+	  if(!u || u.role==='founder') return;
+	  const coFondaCount = S.users.filter(x=>x.role==='co-founder').length;
+	  showModal('🛡️ Gérer le rôle', `
+	    <div class="fg">
+	      <label class="fl">Choisir un rôle pour ${u.firstName}</label>
+	      <select class="fi fi-sel" id="newRole">
+	        <option value="normal" ${u.role==='normal'?'selected':''}>Utilisateur Bronze</option>
+	        <option value="moderator" ${u.role==='moderator'?'selected':''}>Modérateur</option>
+	        <option value="co-founder" ${u.role==='co-founder'?'selected':''} ${coFondaCount>=2 && u.role!=='co-founder' ? 'disabled' : ''}>Co-fondateur ${coFondaCount>=2 && u.role!=='co-founder' ? '(Max 2 atteint)' : ''}</option>
+	      </select>
+	    </div>
+	    <button class="btn" style="width:100%" onclick="updateUserRole('${id}')">Mettre à jour</button>
+	  `);
+	}
+	function updateUserRole(id){
+	  const nr = gv('newRole');
+	  const idx = S.users.findIndex(x=>x.id===id);
+	  if(idx!==-1){
+	    S.users[idx].role = nr;
+	    saveData(); renderModTable(); closeModal();
+	    toast('Rôle mis à jour ✓', 'ok');
+	  }
+	}
 
 // ═══════════════════════ UTILS ═══════════════════════
 function gv(id){return(document.getElementById(id)||{}).value||'';}
