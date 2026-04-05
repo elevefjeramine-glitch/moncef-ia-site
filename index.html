@@ -1196,13 +1196,21 @@ function renderHwTracker(){
   if(!p.length){t.innerHTML='<p style="color:rgba(240,244,255,.3);font-size:13px;text-align:center;padding:10px">Aucun devoir en cours 🎉</p>';return;}
   t.innerHTML=p.slice(0,5).map(h=>'<div class="hw-item" style="padding:8px 10px;margin-bottom:6px"><input type="checkbox" onchange="toggleHw(\''+h.id+'\',this.checked)" style="cursor:pointer;width:14px;height:14px;accent-color:var(--ok);flex-shrink:0"><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h.subject+'</div>'+(h.due?'<div style="font-size:11px;color:rgba(240,244,255,.35)">'+new Date(h.due).toLocaleDateString('fr-FR')+'</div>':'')+'</div></div>').join('');
 }
-	function updateStats(){
-	  const m=document.getElementById('stMsgs'); if(m) m.textContent=S.stats.msgs||0;
-	  const h=document.getElementById('stHw'); if(h) h.textContent=S.hw.filter(x=>!x.done).length;
-	  const c=document.getElementById('stCont'); if(c) c.textContent=S.contacts.length;
-	  const d=document.getElementById('stDays'); if(d) d.textContent=S.stats.days||1;
-	  const t=document.getElementById('stTokens'); if(t) t.textContent=S.tokens;
-	}
+		function updateStats(){
+		  const m=document.getElementById('stMsgs'); if(m) m.textContent=S.stats.msgs||0;
+		  const h=document.getElementById('stHw'); if(h) h.textContent=S.hw.filter(x=>!x.done).length;
+		  const c=document.getElementById('stCont'); if(c) c.textContent=S.contacts.length;
+		  const d=document.getElementById('stDays'); if(d) d.textContent=S.stats.days||1;
+		  const t=document.getElementById('stTokens');
+		  if(t){
+		    const isStaff = ['founder','co-founder','moderator'].includes(S.user?.role);
+		    t.textContent = isStaff ? '∞' : S.tokens;
+		    const card = t.closest('.stat-card');
+		    if(card) card.style.display = isStaff ? 'none' : 'block';
+		    const statsRow = document.querySelector('.stats-row');
+		    if(statsRow) statsRow.style.gridTemplateColumns = isStaff ? 'repeat(3,1fr)' : 'repeat(4,1fr)';
+		  }
+		}
 	function checkTokens(){
 	  const now = Date.now();
 	  const diff = now - S.lastTokenRegen;
