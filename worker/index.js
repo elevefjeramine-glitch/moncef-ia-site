@@ -21,6 +21,7 @@ export default {
     }
 
     const url = new URL(request.url);
+    console.log("Pathname:", url.pathname);
 
     // Endpoint pour les invitations (existant mais amélioré)
     if (url.pathname === "/api/invite" && request.method === "POST") {
