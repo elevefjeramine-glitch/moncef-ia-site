@@ -38,62 +38,66 @@ export default {
       return handleEmailAction(request, env, corsHeaders, "verify");
     }
 
-    if (url.pathname !== "/api/claude" || request.method !== "POST") {
-      return json({ error: "Not found" }, 404, corsHeaders);
-    }
-
-    if (!ALLOWED_ORIGINS.has(origin)) {
-      return json({ error: "Origin not allowed" }, 403, corsHeaders);
-    }
-
-    let payload;
-    try {
-      payload = await request.json();
-    } catch {
-      return json({ error: "Invalid JSON body" }, 400, corsHeaders);
-    }
-
-    const { model, max_tokens, system, messages } = payload || {};
-    if (!model || !Array.isArray(messages)) {
-      return json({ error: "Missing required fields" }, 400, corsHeaders);
-    }
-    if (!env.ANTHROPIC_API_KEY) {
-      return json({ error: "Server not configured: missing API key" }, 500, corsHeaders);
-    }
-    const ip = request.headers.get("CF-Connecting-IP") || "unknown";
-    if (!checkRateLimit(ip)) {
-      return json({ error: "Too many requests. Please retry in one minute." }, 429, corsHeaders);
-    }
-
-    try {
-      const anthropicRes = await fetch("https://api.anthropic.com/v1/messages", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": env.ANTHROPIC_API_KEY,
-          "anthropic-version": "2023-06-01",
-        },
-        body: JSON.stringify({
-          model,
-          max_tokens: max_tokens || 1024,
-          system: system || "",
-          messages,
-        }),
-      });
-
-      const data = await anthropicRes.json();
-      if (!anthropicRes.ok) {
-        const msg = data?.error?.message || "Upstream Anthropic error";
-        return json({ error: msg }, anthropicRes.status, corsHeaders);
+    // Claude API
+    if (url.pathname === "/api/claude" && request.method === "POST") {
+      if (!ALLOWED_ORIGINS.has(origin)) {
+        return json({ error: "Origin not allowed" }, 403, corsHeaders);
       }
-
-      const reply = data?.content?.[0]?.text || "...";
-      return json({ reply, raw: data }, 200, corsHeaders);
-    } catch {
-      return json({ error: "Proxy request failed" }, 502, corsHeaders);
+      return handleClaude(request, env, corsHeaders);
     }
+
+    return json({ error: "Not found", path: url.pathname }, 404, corsHeaders);
   },
 };
+
+async function handleClaude(request, env, corsHeaders) {
+  let payload;
+  try {
+    payload = await request.json();
+  } catch {
+    return json({ error: "Invalid JSON body" }, 400, corsHeaders);
+  }
+
+  const { model, max_tokens, system, messages } = payload || {};
+  if (!model || !Array.isArray(messages)) {
+    return json({ error: "Missing required fields" }, 400, corsHeaders);
+  }
+  if (!env.ANTHROPIC_API_KEY) {
+    return json({ error: "Server not configured: missing API key" }, 500, corsHeaders);
+  }
+  const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+  if (!checkRateLimit(ip)) {
+    return json({ error: "Too many requests. Please retry in one minute." }, 429, corsHeaders);
+  }
+
+  try {
+    const anthropicRes = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": env.ANTHROPIC_API_KEY,
+        "anthropic-version": "2023-06-01",
+      },
+      body: JSON.stringify({
+        model,
+        max_tokens: max_tokens || 1024,
+        system: system || "",
+        messages,
+      }),
+    });
+
+    const data = await anthropicRes.json();
+    if (!anthropicRes.ok) {
+      const msg = data?.error?.message || "Upstream Anthropic error";
+      return json({ error: msg }, anthropicRes.status, corsHeaders);
+    }
+
+    const reply = data?.content?.[0]?.text || "...";
+    return json({ reply, raw: data }, 200, corsHeaders);
+  } catch {
+    return json({ error: "Proxy request failed" }, 502, corsHeaders);
+  }
+}
 
 async function handleEmailAction(request, env, corsHeaders, type) {
   let payload;
@@ -110,7 +114,7 @@ async function handleEmailAction(request, env, corsHeaders, type) {
 
   if (!env.RESEND_API_KEY || !env.INVITE_FROM_EMAIL) {
     return json(
-      { error: "Email service is not configured on server" },
+      { error: "Email service is not configured on server (Missing RESEND_API_KEY or INVITE_FROM_EMAIL)" },
       503,
       corsHeaders,
     );
