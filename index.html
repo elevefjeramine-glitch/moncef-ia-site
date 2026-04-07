@@ -1294,17 +1294,45 @@ function switchTab(tab,btn){
   document.getElementById(formId).classList.add('active');
 }
 function showForgot(){ switchTab('forgot'); }
+const FORGOT_API_URL = 'https://moncef-ia-proxy.eleve-fjer-amine.workers.dev/api/forgot-password';
+const VERIFY_API_URL = 'https://moncef-ia-proxy.eleve-fjer-amine.workers.dev/api/verify-account';
+
 async function doForgot(){
   const email = document.getElementById('forgotEmail').value.trim();
   if(!isEmail(email)){ toast('Email invalide','err'); return; }
-  toast('E-mail de récupération envoyé à ' + email, 'ok');
-  // Logique d'envoi via Worker à implémenter
+  try {
+    const r = await fetch(FORGOT_API_URL, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ email })
+    });
+    if(!r.ok) throw new Error('Erreur API');
+    toast('E-mail de récupération envoyé à ' + email, 'ok');
+    switchTab('login');
+  } catch(err) {
+    toast('Erreur lors de l\'envoi de l\'e-mail', 'err');
+    console.error(err);
+  }
 }
 async function doInvite(){
   const email = document.getElementById('inviteEmail').value.trim();
   if(!isEmail(email)){ toast('Email invalide','err'); return; }
-  toast('Invitation envoyée à ' + email, 'ok');
-  // Logique d'envoi via Worker à implémenter
+  try {
+    const r = await fetch(INVITE_API_URL, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ email })
+    });
+    if(!r.ok) throw new Error('Erreur API');
+    toast('Invitation envoyée à ' + email, 'ok');
+    addNotif('Invitation envoyée à ' + email, '✉️');
+    S.tokens = Math.min(900, S.tokens + 200);
+    saveData(); updateStats();
+    toast('Bonus Parrainage : +200 tokens !', 'ok');
+  } catch(err) {
+    toast('Erreur lors de l\'envoi de l\'invitation', 'err');
+    console.error(err);
+  }
 }
 function togglePw(id,btn){
   const i=document.getElementById(id);
@@ -1363,6 +1391,13 @@ async function doSignup(){
   try{localStorage.setItem('moncefSess',btoa(JSON.stringify({email:u.email,exp:Date.now()+7*864e5})));}catch(e){}
   saveData();
   toast('🎉 Compte créé ! Bienvenue '+first,'ok');
+  // Envoyer e-mail de vérification
+  fetch(VERIFY_API_URL, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ email: u.email })
+  }).catch(err => console.error('Verify Email Error:', err));
+  
   setTimeout(startApp,400);
 }
 function oauthLogin(provider,icon){
@@ -1927,15 +1962,26 @@ function processFile(file,type){
 	    </div>
 	  `);
 	}
-	function inviteUser(email){
-	  toast('Invitation envoyée à ' + email, 'ok');
-	  addNotif('Invitation envoyée à ' + email, '✉️');
-	  // Bonus Parrainage (Simulation)
-	  S.tokens = Math.min(900, S.tokens + 200);
-	  saveData(); updateStats();
-	  toast('Bonus Parrainage : +200 tokens !', 'ok');
-	  closeModal();
-	}
+		async function inviteUser(email){
+		  try {
+		    const r = await fetch(INVITE_API_URL, {
+		      method: 'POST',
+		      headers: {'Content-Type': 'application/json'},
+		      body: JSON.stringify({ email })
+		    });
+		    if(!r.ok) throw new Error('Erreur API');
+		    toast('Invitation envoyée à ' + email, 'ok');
+		    addNotif('Invitation envoyée à ' + email, '✉️');
+		    // Bonus Parrainage
+		    S.tokens = Math.min(900, S.tokens + 200);
+		    saveData(); updateStats();
+		    toast('Bonus Parrainage : +200 tokens !', 'ok');
+		    closeModal();
+		  } catch(err) {
+		    toast('Erreur lors de l\'envoi de l\'invitation', 'err');
+		    console.error(err);
+		  }
+		}
 function searchConv(q){
   const items=document.querySelectorAll('#convItems .conv-item');
   items.forEach((el,i)=>{
