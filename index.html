@@ -631,6 +631,16 @@ code,pre{font-family:'JetBrains Mono',monospace}
         <button class="oauth-btn" onclick="oauthLogin('GitHub','🐙')">🐙 GitHub</button>
       </div>
     </div>
+    <!-- FORGOT PW -->
+    <div id="forgotForm" class="auth-form">
+      <div class="fg">
+        <label class="fl">Adresse e-mail de récupération</label>
+        <input type="email" class="fi" id="forgotEmail" placeholder="votre@email.com">
+        <div class="err-msg" id="forgotEmailErr"></div>
+      </div>
+      <button class="btn" style="width:100%" onclick="doForgot()">Envoyer le lien ➜</button>
+      <div class="forgot-row"><a onclick="switchTab('login')">Retour à la connexion</a></div>
+    </div>
     <!-- SIGNUP -->
     <div id="signupForm" class="auth-form">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">
@@ -988,6 +998,17 @@ code,pre{font-family:'JetBrains Mono',monospace}
     </div>
   </div>
   <div class="set-sec">
+    <h3>🤝 Communauté</h3>
+    <p style="font-size:13px;color:rgba(240,244,255,.6);margin-bottom:12px">Invitez vos amis à rejoindre Moncef IA et gagnez un bonus permanent de +200 tokens !</p>
+    <div style="display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap">
+      <div class="fg" style="flex:1;min-width:240px;margin:0">
+        <label class="fl">Adresse e-mail de l'ami</label>
+        <input type="email" class="fi" id="inviteEmail" placeholder="ami@example.com">
+      </div>
+      <button class="btn" onclick="doInvite()">🚀 Inviter</button>
+    </div>
+  </div>
+  <div class="set-sec">
     <h3 style="color:var(--err)">⚠️ Zone de danger</h3>
     <div style="display:flex;gap:10px;flex-wrap:wrap">
       <button class="btn btn-err" onclick="clearAllData()">🗑 Effacer toutes les données</button>
@@ -1269,7 +1290,21 @@ function switchTab(tab,btn){
     if(tab==='login' && tabs[0]) tabs[0].classList.add('active');
     if(tab==='signup' && tabs[1]) tabs[1].classList.add('active');
   }
-  document.getElementById(tab==='login'?'loginForm':'signupForm').classList.add('active');
+  const formId = tab==='login'?'loginForm':(tab==='signup'?'signupForm':'forgotForm');
+  document.getElementById(formId).classList.add('active');
+}
+function showForgot(){ switchTab('forgot'); }
+async function doForgot(){
+  const email = document.getElementById('forgotEmail').value.trim();
+  if(!isEmail(email)){ toast('Email invalide','err'); return; }
+  toast('E-mail de récupération envoyé à ' + email, 'ok');
+  // Logique d'envoi via Worker à implémenter
+}
+async function doInvite(){
+  const email = document.getElementById('inviteEmail').value.trim();
+  if(!isEmail(email)){ toast('Email invalide','err'); return; }
+  toast('Invitation envoyée à ' + email, 'ok');
+  // Logique d'envoi via Worker à implémenter
 }
 function togglePw(id,btn){
   const i=document.getElementById(id);
