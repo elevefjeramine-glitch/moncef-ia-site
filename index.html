@@ -260,28 +260,44 @@ input:checked + .sw-sl:before{transform:translateX(20px)}
 .floating-ai{position:fixed;bottom:28px;right:28px;width:60px;height:60px;background:var(--p);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;cursor:pointer;box-shadow:0 8px 32px rgba(26,60,255,.5);animation:pulse 2s ease-in-out infinite;z-index:998;border:3px solid var(--a)}
 @keyframes pulse{0%,100%{transform:scale(1);box-shadow:0 8px 32px rgba(26,60,255,.5)}50%{transform:scale(1.06);box-shadow:0 12px 40px rgba(0,201,177,.6)}}
 .floating-ai:hover{transform:scale(1.1)!important}
-.sb-ov{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:998;display:none}
-
-/* RESPONSIVE */
-@media(max-width:1100px){
-  .chat-layout{grid-template-columns:1fr}
-  .chat-layout .chat-sidebar{display:none}
-  .comm-layout{grid-template-columns:240px 1fr}
-  .comm-layout .prof-panel{display:none}
-}
-@media(max-width:768px){
-  .sb{transform:translateX(-100%)}
-  .sb.open{transform:translateX(0)}
-  .main{margin-left:0}
-  .hdr-title{display:none}
-  .oauth-grid{grid-template-columns:1fr}
-  .stats-row{grid-template-columns:repeat(2,1fr)}
-  .sched-grid{grid-template-columns:repeat(3,1fr)}
-  .comm-layout{grid-template-columns:1fr}
-}
-
-/* TOAST */
-.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);padding:14px 28px;border-radius:12px;color:#fff;font-weight:600;z-index:3000;transition:transform .4s cubic-bezier(.175,.885,.32,1.275);box-shadow:0 10px 30px rgba(0,0,0,.3);display:flex;align-items:center;gap:10px}
+.sb-ov{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:998;display:	/* RESPONSIVE */
+	@media(max-width:1100px){
+	  .chat-layout{grid-template-columns:1fr}
+	  .chat-layout .chat-sidebar{display:none}
+	  .comm-layout{grid-template-columns:240px 1fr}
+	  .comm-layout .prof-panel{display:none}
+	}
+	@media(max-width:768px){
+	  :root{--sw:100%}
+	  .sb{transform:translateX(-100%); width:280px; box-shadow: 20px 0 50px rgba(0,0,0,0.8)}
+	  .sb.open{transform:translateX(0)}
+	  .sb-ov.show{display:block}
+	  .main{margin-left:0; padding:15px}
+	  .hdr-title{display:none}
+	  .hdr-logo span{display:none}
+	  .oauth-grid{grid-template-columns:1fr}
+	  .stats-row{grid-template-columns:repeat(2,1fr); gap:10px}
+	  .stat-num{font-size:24px}
+	  .sched-grid{grid-template-columns:1fr; gap:15px}
+	  .day-col{margin-bottom:10px}
+	  .comm-layout{grid-template-columns:1fr}
+	  .comm-layout .conv-list{display:none}
+	  .hamburger{display:flex}
+	  .landing-container{flex-direction:column; padding:10px}
+	  .landing-nav{display:none}
+	  .features-grid, .steps-grid, .pricing-grid{grid-template-columns:1fr}
+	  .auth-box{padding:24px; margin:10px}
+	  .modal-box{padding:20px; margin:10px; max-height:90vh; overflow-y:auto}
+	  .set-sec{padding:15px}
+	  .ph-wrap{flex-direction:column; text-align:center}
+	  .chat-input-area{padding:10px}
+	  .msg{max-width:90%}
+	}
+	@media(max-width:480px){
+	  .stats-row{grid-template-columns:1fr}
+	  .hdr-actions{gap:8px}
+	  .btn{padding:10px 16px; font-size:14px}
+	}50%) translateY(100px);padding:14px 28px;border-radius:12px;color:#fff;font-weight:600;z-index:3000;transition:transform .4s cubic-bezier(.175,.885,.32,1.275);box-shadow:0 10px 30px rgba(0,0,0,.3);display:flex;align-items:center;gap:10px}
 .toast.show{transform:translateX(-50%) translateY(0)}
 .toast.ok{background:linear-gradient(135deg,#008a6e,var(--ok))}
 .toast.err{background:linear-gradient(135deg,#b32424,var(--err))}
@@ -1196,12 +1212,12 @@ function startApp(){
 
 // ═══════════════════════ UI HELPERS ═══════════════════════
 function toggleSB(){
-  const sb=document.getElementById('mainSB'), ov=document.getElementById('sbOv');
-  sb.classList.toggle('open'); ov.style.display=sb.classList.contains('open')?'block':'none';
+  document.getElementById('mainSB').classList.toggle('open');
+  document.getElementById('sbOv').classList.toggle('show');
 }
 function closeSB(){
   document.getElementById('mainSB').classList.remove('open');
-  document.getElementById('sbOv').style.display='none';
+  document.getElementById('sbOv').classList.remove('show');
 }
 function updateStats(){
   document.getElementById('stMsgs').textContent=S.stats.msgs;
