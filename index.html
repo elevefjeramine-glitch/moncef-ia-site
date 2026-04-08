@@ -561,7 +561,7 @@ input:checked + .sw-sl:before{transform:translateX(20px)}
     <div id="loginForm" class="auth-form active">
       <div class="fg">
         <label class="fl" id="lblEmail">Adresse e-mail</label>
-        <input type="email" class="fi" id="loginEmail" placeholder="votre@email.com" autocomplete="email">
+        <input type="email" class="fi" id="loginEmail" placeholder="votre@email.com" autocomplete="email" aria-required="true">
         <div class="err-msg" id="loginEmailErr"></div>
       </div>
       <div class="fg">
@@ -731,7 +731,7 @@ input:checked + .sw-sl:before{transform:translateX(20px)}
         <div class="chat-msgs" id="moncefMsgs"></div>
         <div class="chat-input-wrap">
           <div class="chat-input-box">
-            <textarea class="chat-input" id="moncefIn" placeholder="Posez votre question..." rows="1"></textarea>
+            <textarea class="chat-input" id="moncefIn" placeholder="Posez votre question..." rows="1" aria-label="Posez votre question à Moncef IA"></textarea>
             <button class="chat-btn" onclick="triggerUpload('moncef')">📎</button>
             <button class="chat-btn send" onclick="sendMsg('moncef')">➜</button>
           </div>
@@ -757,7 +757,7 @@ input:checked + .sw-sl:before{transform:translateX(20px)}
         <div class="chat-msgs" id="alphaMsgs"></div>
         <div class="chat-input-wrap">
           <div class="chat-input-box">
-            <textarea class="chat-input" id="alphaIn" placeholder="Commande administrateur..." rows="1"></textarea>
+            <textarea class="chat-input" id="alphaIn" placeholder="Commande administrateur..." rows="1" aria-label="Commande pour Alpha AI"></textarea>
             <button class="chat-btn" onclick="triggerUpload('alpha')">📎</button>
             <button class="chat-btn send" onclick="sendMsg('alpha')">➜</button>
           </div>
@@ -1017,14 +1017,31 @@ function toast(m,t='info'){
   setTimeout(()=>el.classList.remove('show'),3000);
 }
 function go(pageId){
+  // SPA Navigation without 404
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.sb-item').forEach(i=>i.classList.remove('active'));
-  document.getElementById(pageId+'Page').classList.add('active');
+  
+  const targetPage = document.getElementById(pageId+'Page');
+  if (targetPage) {
+    targetPage.classList.add('active');
+    // Update URL hash for SPA behavior
+    window.location.hash = pageId;
+  } else {
+    console.error('Page not found:', pageId);
+    document.getElementById('homePage').classList.add('active');
+  }
+
   const items = {home:0, moncef:1, alpha:2, comm:3, mod:4, settings:5};
   const sbItems = document.querySelectorAll('.sb-item');
   if(sbItems[items[pageId]]) sbItems[items[pageId]].classList.add('active');
   if(window.innerWidth<=768) closeSB();
 }
+
+// Handle hash changes for SPA
+window.addEventListener('hashchange', () => {
+  const pageId = window.location.hash.substring(1) || 'home';
+  if (S.user) go(pageId);
+});
 
 // ═══════════════════════ DATA ═══════════════════════
 function loadData(){
@@ -1077,6 +1094,7 @@ function showForgot(){ switchTab('forgot'); }
 
 const FORGOT_API_URL = 'https://moncef-ia-proxy.eleve-fjer-amine.workers.dev/api/forgot-password';
 const INVITE_API_URL = 'https://moncef-ia-proxy.eleve-fjer-amine.workers.dev/api/invite';
+const CLAUDE_API_URL = 'https://moncef-ia-proxy.eleve-fjer-amine.workers.dev/api/claude';
 
 async function doForgot(){
   const email = document.getElementById('forgotEmail').value.trim();
@@ -1114,6 +1132,99 @@ async function doInvite(){
     toast('Bonus Parrainage : +200 tokens !', 'ok');
   } catch(err) {
     toast('Erreur lors de l\'envoi de l\'invitation', 'err');
+    console.error(err);
+  }
+}
+
+// ═══════════════════════ CHAT & AI ═══════════════════════
+function addMsg(type, content, chatType = 'moncef') {
+  const container = document.getElementById(chatType + 'Msgs');
+  if (!container) return;
+  const div = document.createElement('div');
+  div.className = 'msg ' + type;
+  div.innerHTML = `<div class="msg-bubble">${content}</div>`;
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+  // Save to history
+  S.chatHist[chatType].push({ type, content, time: new Date().toISOString() });
+  saveData();
+}
+
+function showTyping(show, chatType = 'moncef') {
+  const container = document.getElementById(chatType + 'Msgs');
+  if (!container) return;
+  const existing = document.getElementById(chatType + 'Typing');
+  if (show) {
+    if (existing) return;
+    const div = document.createElement('div');
+    div.id = chatType + 'Typing';
+    div.className = 'msg ai typing';
+    div.innerHTML = '<div class="msg-bubble">...</div>';
+    container.appendChild(div);
+    container.scrollTop = container.scrollHeight;
+  } else if (existing) {
+    existing.remove();
+  }
+}
+
+async function sendMsg(type) {
+  const input = document.getElementById(type + 'In');
+  const msg = input.value.trim();
+  if (!msg) return;
+  
+  if (type === 'moncef') {
+    await askAI(msg);
+  } else if (type === 'alpha') {
+    addMsg('user', msg, 'alpha');
+    input.value = '';
+    showTyping(true, 'alpha');
+    setTimeout(() => {
+      showTyping(false, 'alpha');
+      addMsg('ai', 'Mode ALPHA activé. Commande reçue : ' + msg, 'alpha');
+    }, 1000);
+  }
+}
+
+async function askAI(msg) {
+  const currentTokens = S.stats.tokens + (S.user.bonusTokens || 0);
+  if (currentTokens <= 0 && S.user.role === 'normal') {
+    toast('Plus de tokens ! Invitez des amis pour en gagner.', 'err');
+    return;
+  }
+  
+  addMsg('user', msg, 'moncef');
+  document.getElementById('moncefIn').value = '';
+  showTyping(true, 'moncef');
+
+  try {
+    const res = await fetch(CLAUDE_API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-3-haiku-20240307',
+        messages: [{ role: 'user', content: msg }],
+        system: 'Tu es Moncef IA, un assistant éducatif intelligent, bienveillant et expert en pédagogie. Réponds de manière concise et structurée.'
+      })
+    });
+    
+    const data = await res.json();
+    showTyping(false, 'moncef');
+    
+    if (data.reply) {
+      addMsg('ai', data.reply, 'moncef');
+      if (S.user.role === 'normal') {
+        S.stats.tokens = Math.max(0, S.stats.tokens - 10);
+        S.stats.msgs += 1;
+        saveData(); 
+        updateStats();
+      }
+    } else {
+      throw new Error(data.error || 'Erreur IA');
+    }
+  } catch (err) {
+    showTyping(false, 'moncef');
+    addMsg('ai', 'Désolé, je rencontre une petite difficulté technique. Réessayez dans un instant !', 'moncef');
+    toast('Erreur IA: ' + err.message, 'err');
     console.error(err);
   }
 }
