@@ -139,198 +139,117 @@ code,pre{font-family:'JetBrains Mono',monospace}
 .lang-btn:hover,.lang-btn.active{background:var(--p);border-color:var(--a);color:#fff}
 .auth-tabs{display:flex;gap:8px;margin-bottom:22px;background:rgba(6,11,26,.4);border-radius:10px;padding:4px}
 .auth-tab{flex:1;padding:10px;background:transparent;border:none;border-radius:8px;text-align:center;cursor:pointer;transition:var(--tr);font-weight:600;font-size:14px;color:rgba(240,244,255,.6);font-family:'DM Sans',sans-serif}
-.auth-tab:hover{color:#fff}
-.auth-tab.active{background:var(--p);color:#fff;box-shadow:0 4px 14px rgba(26,60,255,.4)}
-.auth-form{display:none}
+.auth-tab.active{background:var(--p);color:#fff;box-shadow:0 4px 12px rgba(26,60,255,.3)}
+.auth-form{display:none;animation:authIn .4s ease-out}
 .auth-form.active{display:block}
-.fg{margin-bottom:16px}
-.fl{display:block;margin-bottom:7px;font-size:13px;font-weight:500;color:rgba(240,244,255,.75)}
-		.fi{width:100%;padding:14px 18px;background:rgba(6,11,26,.6);border:1px solid rgba(26,60,255,.2);border-radius:12px;color:#fff;font-size:15px;transition:var(--tr);font-family:'DM Sans',sans-serif}
-		.fi:focus{outline:none;border-color:var(--a);background:rgba(26,60,255,.1);box-shadow:0 0 15px rgba(0,201,177,.2)}
-.fi.err{border-color:var(--err);animation:shake .4s}
-@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
-.fi-sel{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2300C9B1' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;cursor:pointer}
-.err-msg{color:var(--err);font-size:12px;margin-top:5px;display:none}
-.err-msg.show{display:block;animation:fadeIn .25s}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.fg{margin-bottom:18px;position:relative}
+.fl{display:block;font-size:12px;font-weight:600;color:rgba(240,244,255,.5);margin-bottom:7px;margin-left:4px;text-transform:uppercase;letter-spacing:.05em}
+.fi{width:100%;height:46px;background:rgba(6,11,26,.6);border:1px solid rgba(26,60,255,.25);border-radius:12px;padding:0 16px;color:#fff;font-size:14.5px;transition:var(--tr);font-family:'DM Sans',sans-serif}
+.fi:focus{outline:none;border-color:var(--a);background:rgba(26,60,255,.1);box-shadow:0 0 15px rgba(0,201,177,.15)}
+.fi-sel{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgba(240,244,255,0.5)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;background-size:16px}
 .pw-wrap{position:relative}
-.pw-tog{position:absolute;right:11px;top:50%;transform:translateY(-50%);cursor:pointer;font-size:17px;color:rgba(240,244,255,.4);background:none;border:none;padding:2px;transition:var(--tr)}
+.pw-tog{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(240,244,255,.4);cursor:pointer;font-size:18px;padding:4px;transition:var(--tr)}
 .pw-tog:hover{color:var(--a)}
-.phone-row{display:flex;gap:8px}
-.rem-row{display:flex;align-items:center;gap:8px;margin:14px 0}
-.rem-row input{width:16px;height:16px;accent-color:var(--p);cursor:pointer}
-.oauth-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:20px}
-.oauth-btn{padding:11px;background:rgba(26,60,255,.1);border:1px solid rgba(26,60,255,.3);border-radius:10px;color:#fff;cursor:pointer;transition:var(--tr);display:flex;align-items:center;justify-content:center;gap:7px;font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif}
-.oauth-btn:hover{background:var(--p);transform:translateY(-2px)}
-.oauth-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
-.forgot-row{text-align:center;margin-top:12px}
-.forgot-row a{color:var(--a);text-decoration:none;font-size:13px;cursor:pointer}
-.forgot-row a:hover{text-decoration:underline}
-.pw-str{height:4px;border-radius:2px;margin-top:6px;background:rgba(255,255,255,.1);overflow:hidden}
-.pw-str-bar{height:100%;border-radius:2px;transition:width .3s,background .3s;width:0}
+.err-msg{color:var(--err);font-size:11.5px;margin-top:5px;margin-left:4px;min-height:14px;font-weight:500}
+.rem-row{display:flex;align-items:center;gap:9px;margin-bottom:22px;user-select:none}
+.forgot-row{text-align:center;margin-top:18px}
+.forgot-row a{color:rgba(240,244,255,.5);font-size:13px;text-decoration:none;cursor:pointer;transition:var(--tr)}
+.forgot-row a:hover{color:var(--a);text-decoration:underline}
+.oauth-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:24px;padding-top:24px;border-top:1px solid rgba(26,60,255,.15)}
+.oauth-btn{height:42px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:10px;color:rgba(240,244,255,.8);font-size:13px;font-weight:600;cursor:pointer;transition:var(--tr);display:flex;align-items:center;justify-content:center;gap:8px}
+.oauth-btn:hover{background:rgba(255,255,255,.07);border-color:rgba(240,244,255,.2);transform:translateY(-1px)}
 
-/* CARDS */
-.card{background:var(--sur);border:1px solid rgba(26,60,255,.25);border-radius:var(--r);padding:24px}
+/* APP LAYOUT */
+.mesh-app{position:fixed;inset:0;z-index:-2;background:radial-gradient(circle at 50% 50%,#060b1a 0%,#020408 100%)}
+.chat-layout{display:grid;grid-template-columns:280px 1fr;height:calc(100vh - var(--hh));gap:0}
+.chat-sidebar{background:rgba(6,11,26,.4);border-right:1px solid rgba(26,60,255,.15);display:flex;flex-direction:column}
+.chat-list{flex:1;overflow-y:auto;padding:12px}
+.chat-item{padding:12px;margin-bottom:8px;border-radius:12px;cursor:pointer;transition:var(--tr);display:flex;align-items:center;gap:12px;border:1px solid transparent}
+.chat-item:hover{background:rgba(26,60,255,.1);border-color:rgba(26,60,255,.1)}
+.chat-item.active{background:rgba(26,60,255,.15);border-color:rgba(26,60,255,.25)}
+.chat-av{width:40px;height:40px;border-radius:50%;background:var(--p);display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:14px;flex-shrink:0}
+.chat-info{flex:1;min-width:0}
+.chat-name{font-weight:600;font-size:14px;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-last{font-size:12px;color:rgba(240,244,255,.4);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.chat-main{display:flex;flex-direction:column;height:100%;position:relative;background:rgba(2,4,8,.3)}
+.chat-hdr{padding:16px 24px;border-bottom:1px solid rgba(26,60,255,.15);display:flex;align-items:center;justify-content:space-between;background:rgba(6,11,26,.2)}
+.chat-msgs{flex:1;overflow-y:auto;padding:24px;display:flex;flex-direction:column;gap:20px;scroll-behavior:smooth}
+.msg{max-width:80%;display:flex;flex-direction:column;gap:6px;animation:msgIn .3s ease-out}
+@keyframes msgIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.msg.user{align-self:flex-end;align-items:flex-end}
+.msg.ai{align-self:flex-start;align-items:flex-start}
+.msg-bubble{padding:14px 18px;border-radius:18px;font-size:14.5px;line-height:1.5;position:relative;box-shadow:0 4px 15px rgba(0,0,0,.2)}
+.msg.user .msg-bubble{background:var(--p);color:#fff;border-bottom-right-radius:4px}
+.msg.ai .msg-bubble{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#F0F4FF;border-bottom-left-radius:4px}
+.msg-time{font-size:10px;color:rgba(240,244,255,.3);margin:0 4px}
+
+.chat-input-wrap{padding:20px 24px;background:rgba(6,11,26,.4);border-top:1px solid rgba(26,60,255,.15)}
+.chat-input-box{display:flex;gap:12px;align-items:flex-end;background:rgba(2,4,8,.5);border:1px solid rgba(26,60,255,.2);border-radius:16px;padding:8px 12px;transition:var(--tr)}
+.chat-input-box:focus-within{border-color:var(--a);box-shadow:0 0 20px rgba(0,201,177,.1)}
+.chat-input{flex:1;background:none;border:none;color:#fff;padding:8px 4px;font-size:14.5px;resize:none;max-height:150px;min-height:24px;outline:none;font-family:inherit}
+.chat-btn{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:var(--tr);border:none;background:none;color:rgba(240,244,255,.5)}
+.chat-btn:hover{background:rgba(255,255,255,.05);color:var(--a)}
+.chat-btn.send{background:var(--p);color:#fff}
+.chat-btn.send:hover{transform:scale(1.05);box-shadow:0 0 15px var(--p)}
+
+/* CARDS & GRIDS */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:28px}
+.stat-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:20px;text-align:center;transition:var(--tr)}
+.stat-card:hover{background:rgba(255,255,255,.05);border-color:rgba(26,60,255,.3);transform:translateY(-3px)}
+.stat-val{font-size:28px;font-weight:700;color:var(--a);margin-bottom:4px;font-family:'Cinzel',serif}
+.stat-label{font-size:12px;color:rgba(240,244,255,.4);text-transform:uppercase;letter-spacing:.05em}
+
+.card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:24px;position:relative;overflow:hidden}
 .card-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
-.card-title{font-size:18px;font-weight:600;font-family:'Raleway',sans-serif;color:var(--a);display:flex;align-items:center;gap:8px}
+.card-title{font-size:17px;font-weight:700;display:flex;align-items:center;gap:10px;color:#fff}
+.card-title .ei{color:var(--a);font-size:20px}
 
-/* STATS */
-.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
-.stat-card{background:var(--sur2);border:1px solid rgba(26,60,255,.3);border-radius:var(--r);padding:20px;text-align:center}
-.stat-num{font-size:32px;font-weight:700;color:var(--a);font-family:'Cinzel',serif}
-.stat-label{font-size:12px;color:rgba(240,244,255,.5);margin-top:4px}
+.sched-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:12px}
+.day-col{display:flex;flex-direction:column;gap:10px}
+.day-hdr{text-align:center;font-size:11px;font-weight:700;color:rgba(240,244,255,.3);text-transform:uppercase;padding-bottom:4px}
+.sched-item{background:rgba(26,60,255,.1);border:1px solid rgba(26,60,255,.15);border-radius:10px;padding:10px;font-size:12px;cursor:pointer;transition:var(--tr);min-height:60px;display:flex;flex-direction:column;justify-content:center}
+.sched-item:hover{border-color:var(--a);background:rgba(26,60,255,.15);transform:scale(1.02)}
+.sched-subj{font-weight:700;color:var(--a);margin-bottom:3px}
+.sched-time{font-size:10px;color:rgba(240,244,255,.4)}
 
-/* SCHEDULE */
-.sched-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
-.day-col{background:rgba(26,60,255,.06);border-radius:10px;overflow:hidden;border:1px solid rgba(26,60,255,.15)}
-.day-col.today{border-color:var(--a);box-shadow:0 0 12px rgba(0,201,177,.2)}
-.day-hdr{padding:8px;text-align:center;font-size:11px;font-weight:700;letter-spacing:.08em;color:rgba(240,244,255,.5);background:rgba(26,60,255,.15);text-transform:uppercase}
-.day-col.today .day-hdr{color:var(--a)}
-.ev-chip{padding:6px 8px;margin:4px;border-radius:7px;background:rgba(26,60,255,.35);font-size:11px;cursor:pointer;transition:var(--tr);border-left:3px solid var(--p)}
-.ev-chip:hover{background:rgba(26,60,255,.55)}
-.ev-add{padding:5px 8px;margin:4px;border-radius:7px;background:rgba(255,255,255,.04);font-size:11px;cursor:pointer;color:rgba(240,244,255,.3);text-align:center;transition:var(--tr)}
-.ev-add:hover{background:rgba(26,60,255,.2);color:rgba(240,244,255,.7)}
+.hw-list{display:flex;flex-direction:column;gap:12px}
+.hw-item{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:16px;display:flex;align-items:center;gap:16px;transition:var(--tr)}
+.hw-item:hover{border-color:rgba(26,60,255,.3);background:rgba(255,255,255,.05)}
+.hw-check{width:22px;height:22px;border-radius:6px;border:2px solid rgba(26,60,255,.4);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:var(--tr)}
+.hw-check.done{background:var(--ok);border-color:var(--ok);color:#fff}
+.hw-info{flex:1}
+.hw-subj{font-size:12px;font-weight:700;color:var(--a);text-transform:uppercase;margin-bottom:2px}
+.hw-task{font-size:14.5px;color:#fff;margin-bottom:4px}
+.hw-meta{display:flex;gap:12px;font-size:11px;color:rgba(240,244,255,.4)}
 
-/* HOMEWORK */
-.hw-item{background:rgba(6,11,26,.5);border:1px solid rgba(26,60,255,.2);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:10px;margin-bottom:8px;transition:var(--tr)}
-.hw-item:hover{border-color:rgba(26,60,255,.4)}
-.hw-item.done{opacity:.5}
-.hw-item.done .hw-title{text-decoration:line-through}
-.hw-badge{padding:3px 9px;border-radius:6px;font-size:11px;font-weight:600;background:rgba(0,217,126,.15);color:var(--ok)}
-.hw-badge.urgent{background:rgba(255,59,59,.15);color:var(--err)}
-.hw-filters{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
-.hw-filter{padding:6px 14px;border-radius:20px;border:1px solid rgba(26,60,255,.3);background:transparent;color:rgba(240,244,255,.6);cursor:pointer;font-size:13px;transition:var(--tr);font-family:'DM Sans',sans-serif}
-.hw-filter.active,.hw-filter:hover{background:var(--p);border-color:var(--p);color:#fff}
-
-/* CHAT */
-.chat-layout{display:grid;grid-template-columns:1fr 300px;gap:20px;height:calc(100vh - var(--hh) - 56px)}
-.chat-main{background:var(--sur);border:1px solid rgba(26,60,255,.25);border-radius:var(--r);display:flex;flex-direction:column;overflow:hidden}
-.chat-hdr{padding:16px 20px;border-bottom:1px solid rgba(26,60,255,.2);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
-.chat-hdr.alpha{background:linear-gradient(135deg,rgba(255,215,0,.15),rgba(255,180,0,.08))}
-.chat-msgs{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:12px}
-.msg{max-width:78%;padding:12px 16px;border-radius:16px;font-size:14px;line-height:1.6;word-break:break-word}
-.msg.user{align-self:flex-end;background:var(--p);border-bottom-right-radius:4px}
-.msg.ai{align-self:flex-start;background:rgba(0,201,177,.12);border:1px solid rgba(0,201,177,.25);border-bottom-left-radius:4px}
-.msg-time{font-size:10px;opacity:.45;margin-top:6px;text-align:right}
-.msg.ai .msg-time{text-align:left}
-.typing{display:none;align-items:center;gap:5px;padding:10px 16px;background:rgba(0,201,177,.12);border:1px solid rgba(0,201,177,.25);border-radius:16px;width:fit-content;border-bottom-left-radius:4px}
-.typing.show{display:flex}
-.td{width:7px;height:7px;background:var(--a);border-radius:50%;animation:td 1.4s infinite}
-.td:nth-child(2){animation-delay:.2s}
-.td:nth-child(3){animation-delay:.4s}
-@keyframes td{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-8px)}}
-.chat-input-area{padding:16px 20px;border-top:1px solid rgba(26,60,255,.2);display:flex;gap:10px;align-items:flex-end;flex-shrink:0}
-.chat-input-wrap{flex:1;position:relative}
-.chat-input{width:100%;min-height:44px;max-height:130px;padding:11px 44px 11px 15px;background:rgba(6,11,26,.6);border:1.5px solid rgba(26,60,255,.3);border-radius:12px;color:#fff;font-size:14px;resize:none;font-family:'DM Sans',sans-serif;transition:var(--tr);line-height:1.5}
-.chat-input:focus{outline:none;border-color:var(--a);box-shadow:0 0 16px rgba(0,201,177,.2)}
-.attach-btn{position:absolute;right:10px;bottom:10px;background:none;border:none;color:var(--a);font-size:20px;cursor:pointer;transition:var(--tr);padding:2px}
-.attach-btn:hover{transform:scale(1.2) rotate(15deg)}
-.drop-zone{border:2px dashed rgba(0,201,177,.3);border-radius:10px;padding:14px;text-align:center;margin:0 20px 8px;font-size:12px;color:rgba(240,244,255,.4);cursor:pointer;transition:var(--tr)}
-.drop-zone:hover,.drop-zone.over{border-color:var(--a);background:rgba(0,201,177,.05);color:rgba(240,244,255,.7)}
-.chat-sidebar{background:var(--sur);border:1px solid rgba(26,60,255,.25);border-radius:var(--r);padding:20px;overflow-y:auto}
-.quick-btns{display:flex;flex-direction:column;gap:6px;margin-top:12px}
-.quick-btn{padding:8px 12px;background:rgba(26,60,255,.1);border:1px solid rgba(26,60,255,.2);border-radius:8px;color:rgba(240,244,255,.7);cursor:pointer;font-size:12px;text-align:left;transition:var(--tr);font-family:'DM Sans',sans-serif}
-.quick-btn:hover{background:rgba(26,60,255,.25);color:#fff;border-color:var(--p)}
-
-/* MARKDOWN rendered */
-.msg.ai strong{color:#fff}
-.msg.ai em{color:rgba(240,244,255,.8)}
-.msg.ai ul,.msg.ai ol{padding-left:18px;margin:6px 0}
-.msg.ai li{margin:3px 0}
-.msg.ai h2,.msg.ai h3{color:var(--a);margin:10px 0 4px}
-.msg.ai h2{font-size:16px}
-.msg.ai h3{font-size:14px}
-.msg.ai blockquote{border-left:3px solid var(--a);padding-left:10px;margin:6px 0;color:rgba(240,244,255,.7)}
-.msg.ai pre{background:rgba(0,0,0,.5);border:1px solid rgba(26,60,255,.3);border-radius:8px;padding:12px;overflow-x:auto;margin:8px 0;font-size:12px}
-.msg.ai code:not(pre code){background:rgba(0,0,0,.4);padding:2px 5px;border-radius:4px;font-size:12px}
-.msg.ai hr{border:none;border-top:1px solid rgba(26,60,255,.3);margin:10px 0}
-.md-table{width:100%;border-collapse:collapse;margin:8px 0;font-size:12px}
-.md-table th{background:rgba(26,60,255,.3);padding:6px 10px;text-align:left}
-.md-table td{padding:5px 10px;border-bottom:1px solid rgba(26,60,255,.15)}
-.msg.ai img{max-width:100%;border-radius:8px;margin:4px 0}
-
-/* COMM */
-.comm-layout{display:grid;grid-template-columns:260px 1fr 260px;gap:20px;height:calc(100vh - var(--hh) - 56px)}
-.conv-list{background:var(--sur);border:1px solid rgba(26,60,255,.25);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
-.conv-search{padding:14px;border-bottom:1px solid rgba(26,60,255,.2)}
-.conv-item{padding:13px 16px;border-bottom:1px solid rgba(26,60,255,.1);cursor:pointer;display:flex;align-items:center;gap:11px;transition:var(--tr)}
-.conv-item:hover{background:rgba(26,60,255,.15)}
-.conv-item.active{background:rgba(26,60,255,.25);border-left:3px solid var(--a)}
-.conv-av{width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid rgba(26,60,255,.4)}
-.conv-name{font-size:14px;font-weight:600}
-.conv-last{font-size:12px;color:rgba(240,244,255,.4);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:140px}
-.status-dot{width:9px;height:9px;border-radius:50%;border:2px solid var(--sb);flex-shrink:0}
-.status-dot.online{background:var(--ok)}
-.status-dot.away{background:var(--warn)}
-.status-dot.offline{background:#555}
-.prof-panel{background:var(--sur);border:1px solid rgba(26,60,255,.25);border-radius:var(--r);padding:20px;overflow-y:auto}
+/* COMMUNICATION */
+.comm-layout{display:grid;grid-template-columns:280px 1fr 300px;height:calc(100vh - var(--hh));gap:0}
+.prof-panel{background:rgba(6,11,26,.4);border-left:1px solid rgba(26,60,255,.15);padding:24px;overflow-y:auto}
+.prof-hdr{text-align:center;margin-bottom:24px}
+.prof-av{width:100px;height:100px;border-radius:50%;border:3px solid var(--a);margin:0 auto 16px;object-fit:cover}
+.prof-name{font-size:20px;font-weight:700;margin-bottom:4px}
+.prof-role{font-size:12px;color:var(--a);text-transform:uppercase;letter-spacing:.1em;font-weight:700}
 
 /* SETTINGS */
-.set-sec{background:var(--sur);border:1px solid rgba(26,60,255,.2);border-radius:var(--r);padding:22px;margin-bottom:18px}
-.set-sec h3{color:var(--a);margin-bottom:18px;font-size:18px;display:flex;align-items:center;gap:8px}
-.ph-wrap{display:flex;align-items:center;gap:18px;margin-bottom:20px}
-.ph{width:90px;height:90px;border-radius:50%;border:3px solid var(--a);object-fit:cover;cursor:pointer;transition:var(--tr)}
-.ph:hover{transform:scale(1.06);box-shadow:0 0 20px rgba(0,201,177,.5)}
-.tog-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(26,60,255,.12)}
-.tog-row:last-child{border-bottom:none;padding-bottom:0}
-.switch{position:relative;width:44px;height:24px;flex-shrink:0}
-.switch input{opacity:0;width:0;height:0;position:absolute}
-.sw-sl{position:absolute;inset:0;background:rgba(255,255,255,.15);border-radius:12px;cursor:pointer;transition:.3s}
-.sw-sl::before{content:'';position:absolute;width:18px;height:18px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:.3s}
-.switch input:checked + .sw-sl{background:var(--p)}
-.switch input:checked + .sw-sl::before{transform:translateX(20px)}
+.set-wrap{max-width:800px;margin:0 auto}
+.set-sec{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:28px;margin-bottom:24px}
+.set-sec h3{font-size:18px;margin-bottom:20px;display:flex;align-items:center;gap:10px;color:var(--a)}
+.tog-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.tog-row:last-child{border:none}
+.switch{position:relative;display:inline-block;width:44px;height:24px}
+.switch input{opacity:0;width:0;height:0}
+.sw-sl{position:absolute;cursor:pointer;inset:0;background:rgba(255,255,255,.1);transition:.4s;border-radius:24px}
+.sw-sl:before{position:absolute;content:"";height:18px;width:18px;left:3px;bottom:3px;background:#fff;transition:.4s;border-radius:50%}
+input:checked + .sw-sl{background:var(--ok)}
+input:checked + .sw-sl:before{transform:translateX(20px)}
 
-/* MODS */
-.mod-table{width:100%;border-collapse:collapse}
-.mod-table th{background:rgba(26,60,255,.3);padding:12px 16px;text-align:left;font-size:13px;font-weight:600}
-.mod-table td{padding:12px 16px;border-bottom:1px solid rgba(26,60,255,.12);font-size:14px}
-.mod-table tr:hover td{background:rgba(26,60,255,.08)}
-
-/* NOTIF DROPDOWN */
-.nd{position:absolute;top:calc(100% + 10px);right:0;width:320px;background:rgba(10,26,110,.97);backdrop-filter:var(--glass);border:1px solid rgba(26,60,255,.35);border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.5);z-index:2000;overflow:hidden;animation:dropIn .2s cubic-bezier(.4,0,.2,1)}
-@keyframes dropIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
-.nd-hdr{padding:14px 18px;border-bottom:1px solid rgba(26,60,255,.2);display:flex;justify-content:space-between;align-items:center}
-.notif-item{padding:12px 18px;border-bottom:1px solid rgba(26,60,255,.1);cursor:pointer;transition:var(--tr);display:flex;gap:10px}
-.notif-item:hover{background:rgba(26,60,255,.2)}
-.notif-item.unread{background:rgba(26,60,255,.1)}
-.nd-dot{width:8px;height:8px;border-radius:50%;background:var(--a);flex-shrink:0;margin-top:4px}
-
-/* USER DROPDOWN */
-.ud{position:absolute;top:calc(100% + 10px);right:0;width:210px;background:rgba(10,26,110,.97);backdrop-filter:var(--glass);border:1px solid rgba(26,60,255,.35);border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.5);z-index:2000;overflow:hidden;animation:dropIn .2s cubic-bezier(.4,0,.2,1)}
-.ud-item{padding:12px 18px;cursor:pointer;transition:var(--tr);display:flex;align-items:center;gap:10px;font-size:14px;border-bottom:1px solid rgba(26,60,255,.1)}
-.ud-item:last-child{border-bottom:none}
-.ud-item:hover{background:rgba(26,60,255,.2)}
-.ud-item.danger{color:var(--err)}
-.ud-item.danger:hover{background:rgba(255,59,59,.15)}
-
-/* MODAL */
-.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.65);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;z-index:10002;padding:20px}
-.modal-ov.show{display:flex}
-.modal-box{background:var(--sb);border:1px solid rgba(26,60,255,.35);border-radius:20px;padding:28px;max-width:500px;width:100%;box-shadow:0 24px 64px rgba(0,0,0,.5);animation:modalPop .3s cubic-bezier(.4,0,.2,1)}
-@keyframes modalPop{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
-.modal-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
-.modal-close{cursor:pointer;font-size:22px;color:rgba(240,244,255,.5);background:none;border:none;padding:4px;transition:var(--tr);line-height:1}
-.modal-close:hover{color:var(--err);transform:rotate(90deg)}
-
-/* TOAST */
-.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);padding:13px 22px;background:var(--p);color:#fff;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.35);z-index:10003;transition:transform .3s cubic-bezier(.4,0,.2,1),opacity .3s;opacity:0;pointer-events:none;font-size:14px;font-weight:500;display:flex;align-items:center;gap:8px;white-space:nowrap;max-width:90vw}
-.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
-.toast.ok{background:linear-gradient(135deg,#00875a,var(--ok))}
-.toast.err{background:linear-gradient(135deg,#c0392b,var(--err))}
-.toast.warn{background:linear-gradient(135deg,#d35400,var(--warn))}
-.toast.info{background:linear-gradient(135deg,#0c44a0,var(--p))}
-
-/* CHIPS */
-.chip{padding:3px 9px;border-radius:6px;font-size:12px;font-weight:600;background:rgba(26,60,255,.25);color:#A0B8FF;display:inline-flex;align-items:center;gap:4px}
-.chip.gold{background:rgba(255,215,0,.15);color:var(--gold)}
-.chip.ok{background:rgba(0,217,126,.15);color:var(--ok)}
-.chip.err{background:rgba(255,59,59,.15);color:#FF8080}
-
-/* SCROLLBAR */
-::-webkit-scrollbar{width:7px;height:7px}
-::-webkit-scrollbar-track{background:rgba(6,11,26,.4)}
-::-webkit-scrollbar-thumb{background:rgba(26,60,255,.5);border-radius:4px}
-::-webkit-scrollbar-thumb:hover{background:var(--a)}
+/* MODALS */
+.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);z-index:2000;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-box{background:var(--sb);border:1px solid rgba(26,60,255,.3);border-radius:24px;width:100%;max-width:500px;padding:32px;animation:authIn .3s ease-out}
+.modal-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+.modal-close{background:none;border:none;color:rgba(240,244,255,.4);font-size:20px;cursor:pointer;transition:var(--tr)}
+.modal-close:hover{color:#fff;transform:rotate(90deg)}
 
 /* UTILS */
 .hidden{display:none!important}
@@ -359,9 +278,28 @@ code,pre{font-family:'JetBrains Mono',monospace}
   .stats-row{grid-template-columns:repeat(2,1fr)}
   .sched-grid{grid-template-columns:repeat(3,1fr)}
   .comm-layout{grid-template-columns:1fr}
-  .comm-layout .conv-list{display:none}
-  .hamburger{display:flex}
 }
+
+/* TOAST */
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);padding:14px 28px;border-radius:12px;color:#fff;font-weight:600;z-index:3000;transition:transform .4s cubic-bezier(.175,.885,.32,1.275);box-shadow:0 10px 30px rgba(0,0,0,.3);display:flex;align-items:center;gap:10px}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast.ok{background:linear-gradient(135deg,#008a6e,var(--ok))}
+.toast.err{background:linear-gradient(135deg,#b32424,var(--err))}
+.toast.warn{background:linear-gradient(135deg,#d35400,var(--warn))}
+.toast.info{background:linear-gradient(135deg,#0c44a0,var(--p))}
+
+/* CHIPS */
+.chip{padding:3px 9px;border-radius:6px;font-size:12px;font-weight:600;background:rgba(26,60,255,.25);color:#A0B8FF;display:inline-flex;align-items:center;gap:4px}
+.chip.gold{background:rgba(255,215,0,.15);color:var(--gold)}
+.chip.ok{background:rgba(0,217,126,.15);color:var(--ok)}
+.chip.err{background:rgba(255,59,59,.15);color:#FF8080}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:7px;height:7px}
+::-webkit-scrollbar-track{background:rgba(6,11,26,.4)}
+::-webkit-scrollbar-thumb{background:rgba(26,60,255,.3);border-radius:10px}
+::-webkit-scrollbar-thumb:hover{background:rgba(0,201,177,.4)}
+
 </style>
 </head>
 <body>
@@ -660,18 +598,13 @@ code,pre{font-family:'JetBrains Mono',monospace}
       </div>
       <div class="fg">
         <label class="fl" id="lblPhone">Téléphone</label>
-        <div class="phone-row">
-          <select class="fi fi-sel" id="cc" style="width:130px;flex-shrink:0">
+        <div style="display:flex;gap:8px">
+          <select class="fi" id="cc" style="width:90px;padding:0 8px">
             <option value="+212">🇲🇦 +212</option>
             <option value="+33">🇫🇷 +33</option>
             <option value="+1">🇺🇸 +1</option>
-            <option value="+44">🇬🇧 +44</option>
-            <option value="+34">🇪🇸 +34</option>
-            <option value="+213">🇩🇿 +213</option>
-            <option value="+216">🇹🇳 +216</option>
-            <option value="+966">🇸🇦 +966</option>
           </select>
-          <input type="tel" class="fi" id="signPhone" placeholder="6XXXXXXXX" style="flex:1">
+          <input type="tel" class="fi" id="signPhone" placeholder="612345678" style="flex:1">
         </div>
       </div>
       <div class="fg">
@@ -684,15 +617,12 @@ code,pre{font-family:'JetBrains Mono',monospace}
           <input type="password" class="fi" id="signPw" placeholder="Min. 8 caractères" oninput="checkPwStr(this.value)">
           <button type="button" class="pw-tog" onclick="togglePw('signPw',this)">👁️</button>
         </div>
-        <div class="pw-str"><div class="pw-str-bar" id="pwBar"></div></div>
+        <div id="pwBar" style="height:4px;background:#333;margin-top:6px;border-radius:2px;width:0;transition:all .3s"></div>
         <div class="err-msg" id="signPwErr"></div>
       </div>
       <div class="fg">
         <label class="fl" id="lblConfPw">Confirmer le mot de passe</label>
-        <div class="pw-wrap">
-          <input type="password" class="fi" id="signPwC" placeholder="••••••••">
-          <button type="button" class="pw-tog" onclick="togglePw('signPwC',this)">👁️</button>
-        </div>
+        <input type="password" class="fi" id="signPwC" placeholder="••••••••">
         <div class="err-msg" id="signPwCErr"></div>
       </div>
       <button class="btn" style="width:100%" id="signupBtn" onclick="doSignup()">Créer mon compte ➜</button>
@@ -700,347 +630,300 @@ code,pre{font-family:'JetBrains Mono',monospace}
   </div>
 </div>
 
-<!-- ═══ HEADER ═══ -->
-<header id="mainHdr" class="hdr hidden">
-  <div style="display:flex;align-items:center;gap:12px">
-    <button class="hamburger" onclick="toggleSB()"><span></span><span></span><span></span></button>
-    <div class="hdr-logo" onclick="go('home')">🎓 <span>Moncef IA</span></div>
-  </div>
-  <div class="hdr-title" id="hdrTitle"></div>
+<!-- ═══ APP ═══ -->
+<header class="hdr hidden" id="mainHdr">
+  <div class="hdr-logo" onclick="go('home')">🎓 MONCEF IA</div>
+  <div class="hdr-title">Plateforme Éducative Intelligente</div>
   <div class="hdr-actions">
-    <div style="position:relative">
-      <button class="notif-btn" id="notifBtn" onclick="toggleND(event)">🔔<span class="notif-badge" id="notifBadge" style="display:none">0</span></button>
-      <div class="nd hidden" id="nd">
-        <div class="nd-hdr">
-          <span style="font-weight:600;font-size:14px" id="ndTitle">Notifications</span>
-          <button class="btn btn-sm" style="font-size:11px;padding:4px 10px" onclick="markAllRead()" id="ndReadAll">Tout lire</button>
-        </div>
-        <div id="ndList"></div>
-      </div>
+    <button class="notif-btn" id="notifBtn" onclick="toggleNotifs()">🔔 <span class="notif-badge">3</span></button>
+    <div class="av-wrap" onclick="go('settings')">
+      <img src="" class="av" id="hdrAv">
+      <span class="rank" id="hdrRank"></span>
     </div>
-    <div style="position:relative">
-      <div class="av-wrap" onclick="toggleUD(event)">
-        <img src="https://ui-avatars.com/api/?name=M+IA&background=1A3CFF&color=fff" class="av" id="hdrAv">
-        <span class="rank" id="hdrRank"></span>
-      </div>
-      <div class="ud hidden" id="ud">
-        <div style="padding:14px 18px;border-bottom:1px solid rgba(26,60,255,.2)">
-          <div id="udName" style="font-weight:700;font-size:14px"></div>
-          <div id="udEmail" style="font-size:12px;color:rgba(240,244,255,.4);margin-top:2px"></div>
-          <span class="chip gold mt16" id="udRole" style="margin-top:8px"></span>
-        </div>
-        <div class="ud-item" onclick="go('settings');closeDD()">⚙️ Paramètres</div>
-        <div class="ud-item" onclick="go('settings');closeDD()">👤 Mon profil</div>
-        <div class="ud-item danger" onclick="doLogout()">🚪 Déconnexion</div>
-      </div>
-    </div>
+    <button class="hamburger" onclick="toggleSB()"><span></span><span></span><span></span></button>
   </div>
 </header>
 
-<!-- ═══ SIDEBAR ═══ -->
-<aside id="mainSB" class="sb hidden">
+<aside class="sb hidden" id="mainSB">
   <div class="sb-sec" id="sbSecMain">Principal</div>
-  <div class="sb-item active" onclick="go('home')"><span class="sb-icon">🏠</span><span id="sbHome">Accueil</span></div>
-  <div class="sb-item" onclick="go('moncef')"><span class="sb-icon">🤖</span><span id="sbMoncef">Moncef IA</span></div>
-  <div class="sb-item hidden" id="sbAlphaItem" onclick="go('alpha')"><span class="sb-icon">👑</span><span id="sbAlpha">ALPHA AI</span><span class="chip gold" style="margin-left:auto;font-size:10px">PRO</span></div>
+  <div class="sb-item active" onclick="go('home')" id="sbHome"><span class="sb-icon">🏠</span> Accueil</div>
+  <div class="sb-item" onclick="go('moncef')" id="sbMoncef"><span class="sb-icon">🤖</span> Moncef IA</div>
+  <div class="sb-item hidden" onclick="go('alpha')" id="sbAlphaItem"><span class="sb-icon">👑</span> ALPHA AI <span class="chip gold" style="margin-left:5px">PRO</span></div>
+  
   <div class="sb-sec" id="sbSecSocial">Social</div>
-  <div class="sb-item" onclick="go('comm')"><span class="sb-icon">💬</span><span id="sbComm">Messages</span></div>
+  <div class="sb-item" onclick="go('comm')" id="sbComm"><span class="sb-icon">💬</span> Messages</div>
+  
   <div class="sb-sec hidden" id="sbSecAdmin">Administration</div>
-  <div class="sb-item hidden" id="sbModItem" onclick="go('mod')"><span class="sb-icon">🛡️</span><span id="sbMod">Modérateurs</span></div>
+  <div class="sb-item hidden" onclick="go('mod')" id="sbModItem"><span class="sb-icon">🛡️</span> Modérateurs</div>
+  
   <div class="sb-sec" id="sbSecConf">Configuration</div>
-  <div class="sb-item" onclick="go('settings')"><span class="sb-icon">⚙️</span><span id="sbSettings">Paramètres</span></div>
+  <div class="sb-item" onclick="go('settings')" id="sbSettings"><span class="sb-icon">⚙️</span> Paramètres</div>
 </aside>
 
-<!-- ═══ MAIN CONTENT ═══ -->
-<main id="mainContent" class="main hidden">
+<main class="main hidden" id="mainContent">
+  <!-- HOME -->
+  <div id="homePage" class="page active">
+    <div class="stats-row">
+      <div class="stat-card"><div class="stat-val" id="stMsgs">0</div><div class="stat-label">Messages IA</div></div>
+      <div class="stat-card"><div class="stat-val" id="stHw">0</div><div class="stat-label">Devoirs en cours</div></div>
+      <div class="stat-card"><div class="stat-val" id="stCont">3</div><div class="stat-label">Contacts</div></div>
+      <div class="stat-card" id="tokenCard"><div class="stat-val" id="stTokens">700</div><div class="stat-label">Crédits (Tokens)</div></div>
+    </div>
 
-<!-- HOME -->
-<div id="homePage" class="page">
-  <div class="stats-row">
-    <div class="stat-card"><div class="stat-num" id="stMsgs">0</div><div class="stat-label">Messages IA</div></div>
-    <div class="stat-card"><div class="stat-num" id="stHw">0</div><div class="stat-label">Devoirs en cours</div></div>
-	    <div class="stat-card"><div class="stat-num" id="stCont">0</div><div class="stat-label">Contacts</div></div>
-	    <div class="stat-card"><div class="stat-num" id="stTokens">700</div><div class="stat-label">Crédits (Tokens)</div></div>
-	  </div>
-  <div class="card mb16">
-    <div class="card-hdr">
-      <div class="card-title">📅 Emploi du temps</div>
-	      <div style="display:flex;gap:8px">
-	        <button class="btn btn-sm btn-sec" onclick="switchWeek()">Semaine <span id="weekLabel">A</span></button>
-	        <button class="btn btn-sm btn-sec" onclick="addEventModal(0)">➕ Cours</button>
-	        <button class="btn btn-sm" onclick="window.print()" style="background:var(--a);color:#000">🖨 Imprimer</button>
-	        <button class="btn btn-sm btn-err" onclick="clearSchedule()" style="font-size:12px">🗑 Vider</button>
-	      </div>
-    </div>
-    <div class="sched-grid" id="schedGrid"></div>
-  </div>
-  <div class="card">
-    <div class="card-hdr">
-      <div class="card-title">📝 Devoirs</div>
-      <div style="display:flex;gap:8px">
-        <button class="btn btn-sm btn-sec" onclick="openAddHw()">➕ Ajouter</button>
-      </div>
-    </div>
-    <div class="hw-filters">
-      <button class="hw-filter active" onclick="filterHw('all',this)">Tous</button>
-      <button class="hw-filter" onclick="filterHw('pending',this)">En cours</button>
-      <button class="hw-filter" onclick="filterHw('done',this)">Terminés</button>
-    </div>
-    <div id="hwList"></div>
-  </div>
-</div>
-
-<!-- MONCEF IA -->
-<div id="moncefPage" class="page">
-  <div class="chat-layout">
-    <div class="chat-main">
-      <div class="chat-hdr">
-        <div>
-          <div style="font-size:17px;font-weight:700">🤖 Moncef IA</div>
-          <div style="font-size:12px;opacity:.6;margin-top:2px">Répond dans votre langue</div>
-        </div>
+    <div class="card mb16">
+      <div class="card-hdr">
+        <div class="card-title"><span class="ei">📅</span> Emploi du temps</div>
         <div style="display:flex;gap:8px">
-          <button class="btn btn-sm btn-sec" onclick="exportChat('moncef')" title="Exporter">📤</button>
-          <button class="btn btn-sm btn-err" onclick="clearChat('moncef')" title="Vider">🗑</button>
+          <button class="btn btn-sm btn-sec" onclick="toggleWeek()">Semaine <span id="weekLabel">A</span></button>
+          <button class="btn btn-sm" onclick="addEvent()">➕ Cours</button>
+          <button class="btn btn-sm btn-ok" onclick="printEDT()">🖨 Imprimer</button>
+          <button class="btn btn-sm btn-err" onclick="clearEDT()">🗑 Vider</button>
         </div>
       </div>
-      <div class="chat-msgs" id="moncefMsgs"></div>
-      <div class="typing" id="moncefTyping"><div class="td"></div><div class="td"></div><div class="td"></div></div>
-      <div class="drop-zone" id="moncefDZ" ondragover="onDO(event)" ondragleave="onDL(event)" ondrop="onDrop(event,'moncef')" onclick="document.getElementById('moncefFile').click()">📎 Clique ou glisse une image ici</div>
-      <div class="chat-input-area">
-        <div class="chat-input-wrap">
-          <textarea class="chat-input" id="moncefInput" placeholder="Pose-moi une question... (Entrée pour envoyer)" onkeydown="onKey(event,'moncef')" oninput="autoH(this)" rows="1"></textarea>
-          <button class="attach-btn" onclick="document.getElementById('moncefFile').click()" title="Joindre un fichier">📎</button>
-          <input type="file" id="moncefFile" accept="image/*" style="display:none" onchange="onFile(event,'moncef')">
-        </div>
-        <button class="btn" onclick="sendMsg('moncef')">➤</button>
-      </div>
+      <div class="sched-grid" id="schedGrid"></div>
     </div>
-    <div class="chat-sidebar">
-      <div class="card-title mb16">📝 Devoirs</div>
-      <div id="hwTracker"></div>
-      <div class="quick-btns mt16">
-        <div class="card-title mb16" style="font-size:14px">⚡ Raccourcis</div>
-        <button class="quick-btn" onclick="quickMsg('moncef','Explique-moi le théorème de Pythagore')">📐 Théorème de Pythagore</button>
-        <button class="quick-btn" onclick="quickMsg('moncef','Comment faire un résumé efficace ?')">📄 Faire un résumé</button>
-        <button class="quick-btn" onclick="quickMsg('moncef','Aide-moi à réviser pour un examen')">📖 Révisions examen</button>
-        <button class="quick-btn" onclick="quickMsg('moncef','Corrige mon texte : ')">✍️ Corriger un texte</button>
+
+    <div class="card">
+      <div class="card-hdr">
+        <div class="card-title"><span class="ei">📝</span> Devoirs</div>
+        <button class="btn btn-sm" onclick="addHw()">➕ Ajouter</button>
+      </div>
+      <div style="display:flex;gap:10px;margin-bottom:20px">
+        <button class="btn btn-sm active" onclick="filterHw('all')">Tous</button>
+        <button class="btn btn-sm btn-sec" onclick="filterHw('pending')">En cours</button>
+        <button class="btn btn-sm btn-sec" onclick="filterHw('done')">Terminés</button>
+      </div>
+      <div class="hw-list" id="hwList">
+        <div class="empty-state"><div class="ei">📚</div>Aucun devoir</div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- ALPHA AI -->
-<div id="alphaPage" class="page">
-  <div class="chat-layout">
-    <div class="chat-main">
-      <div class="chat-hdr alpha">
-        <div>
-          <div style="font-size:17px;font-weight:700;color:var(--gold)">👑 ALPHA AI</div>
-          <div style="font-size:12px;opacity:.7;margin-top:2px">IA Premium — Modification du site en temps réel</div>
-        </div>
-        <div style="display:flex;gap:8px">
-          <button class="btn btn-sm btn-sec" onclick="exportChat('alpha')" title="Exporter">📤</button>
-          <button class="btn btn-sm btn-err" onclick="clearChat('alpha')" title="Vider">🗑</button>
-        </div>
-      </div>
-      <div class="chat-msgs" id="alphaMsgs"></div>
-      <div class="typing" id="alphaTyping"><div class="td"></div><div class="td"></div><div class="td"></div></div>
-      <div class="drop-zone" id="alphaDZ" ondragover="onDO(event)" ondragleave="onDL(event)" ondrop="onDrop(event,'alpha')" onclick="document.getElementById('alphaFile').click()">📎 Clique ou glisse une image ici</div>
-      <div class="chat-input-area">
-        <div class="chat-input-wrap">
-          <textarea class="chat-input" id="alphaInput" placeholder="Commande pour modifier le site..." onkeydown="onKey(event,'alpha')" oninput="autoH(this)" rows="1"></textarea>
-          <button class="attach-btn" onclick="document.getElementById('alphaFile').click()">📎</button>
-          <input type="file" id="alphaFile" accept="image/*" style="display:none" onchange="onFile(event,'alpha')">
-        </div>
-        <button class="btn" onclick="sendMsg('alpha')">➤</button>
-      </div>
-    </div>
-    <div class="chat-sidebar">
-      <div class="card-title mb16">📋 Log modifications</div>
-      <div id="alphaLog"><div class="empty-state" style="padding:20px 0"><div class="ei" style="font-size:30px">📋</div><p style="font-size:12px">Aucune modification</p></div></div>
-      <div class="quick-btns mt16">
-        <div class="card-title mb16" style="font-size:14px">⚡ Commandes rapides</div>
-        <button class="quick-btn" onclick="quickMsg('alpha','Change la couleur principale en violet #8B5CF6')">🎨 Couleur violette</button>
-        <button class="quick-btn" onclick="quickMsg('alpha','Donne-moi les statistiques de la plateforme')">📊 Statistiques</button>
-        <button class="quick-btn" onclick="quickMsg('alpha','Envoie une notification de bienvenue à tous')">📢 Notification</button>
-        <button class="quick-btn" onclick="quickMsg('alpha','Remet les couleurs par défaut')">🔄 Reset couleurs</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- COMMUNICATION -->
-<div id="commPage" class="page">
-  <div class="comm-layout">
-    <div class="conv-list">
-      <div class="conv-search">
-        <input type="text" class="fi" id="convSearch" placeholder="🔍 Rechercher ou email..." oninput="searchConv(this.value)" onkeydown="onConvSearchKey(event)" style="padding:9px 13px;font-size:13px;margin-bottom:8px">
-        <button class="btn btn-sm" style="width:100%" onclick="inviteFromSearch()">✉️ Inviter par email</button>
-      </div>
-      <div id="convItems" style="overflow-y:auto;flex:1"></div>
-    </div>
-    <div class="chat-main">
-      <div id="noConv" style="display:flex;align-items:center;justify-content:center;height:100%;flex-direction:column;gap:10px;color:rgba(240,244,255,.35)">
-        <div style="font-size:48px">💬</div>
-        <p>Sélectionne une conversation</p>
-      </div>
-      <div id="activeConv" class="hidden" style="display:flex;flex-direction:column;height:100%">
+  <!-- MONCEF IA -->
+  <div id="moncefPage" class="page">
+    <div class="chat-layout">
+      <div class="chat-main">
         <div class="chat-hdr">
-          <div style="display:flex;align-items:center;gap:10px">
-            <img id="convAv" src="" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid var(--a)">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div class="chat-av">🤖</div>
             <div>
-              <div id="convName" style="font-weight:600;font-size:15px"></div>
-              <div id="convStatus" style="font-size:12px;color:var(--ok)">● En ligne</div>
+              <div style="font-weight:700">Moncef IA</div>
+              <div style="font-size:11px;color:var(--ok)">● Répond dans votre langue</div>
             </div>
           </div>
-          <button class="btn btn-sm btn-err" onclick="closeConv()">✕ Fermer</button>
         </div>
-        <div class="chat-msgs" id="commMsgs" style="flex:1"></div>
-        <div class="chat-input-area">
-          <div class="chat-input-wrap">
-            <textarea class="chat-input" id="commInput" placeholder="Écris un message..." onkeydown="onKey(event,'comm')" oninput="autoH(this)" rows="1"></textarea>
+        <div class="chat-msgs" id="moncefMsgs"></div>
+        <div class="chat-input-wrap">
+          <div class="chat-input-box">
+            <textarea class="chat-input" id="moncefIn" placeholder="Posez votre question..." rows="1"></textarea>
+            <button class="chat-btn" onclick="triggerUpload('moncef')">📎</button>
+            <button class="chat-btn send" onclick="sendMsg('moncef')">➜</button>
           </div>
-          <button class="btn" onclick="sendMsg('comm')">➤</button>
+          <div style="font-size:10px;color:rgba(240,244,255,.3);margin-top:8px;text-align:center">Clique ou glisse une image ici</div>
         </div>
       </div>
     </div>
-    <div class="prof-panel">
-      <div class="card-title mb16">👤 Profil</div>
-      <div id="profInfo" style="text-align:center;color:rgba(240,244,255,.35);padding:30px 0">
-        <div style="font-size:40px;margin-bottom:8px">👤</div>Sélectionne un utilisateur
-      </div>
-    </div>
   </div>
-</div>
 
-<!-- SETTINGS -->
-<div id="settingsPage" class="page">
-  <div class="set-sec">
-    <h3>👤 Profil</h3>
-    <div class="ph-wrap">
-      <img src="https://ui-avatars.com/api/?name=M+IA&background=1A3CFF&color=fff" class="ph" id="setPh" onclick="document.getElementById('phInput').click()" title="Changer la photo">
-      <div>
-        <div style="font-weight:700;font-size:16px" id="setName">Chargement...</div>
-        <div style="font-size:13px;color:rgba(240,244,255,.4);margin:4px 0 12px" id="setEmailDisplay"></div>
-        <button class="btn btn-sm btn-sec" onclick="document.getElementById('phInput').click()">📷 Changer photo</button>
-        <input type="file" id="phInput" accept="image/*" style="display:none" onchange="updatePh(event)">
-      </div>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-      <div class="fg"><label class="fl">Prénom</label><input type="text" class="fi" id="setFirst"></div>
-      <div class="fg"><label class="fl">Nom</label><input type="text" class="fi" id="setLast"></div>
-    </div>
-    <div class="fg"><label class="fl">Email</label><input type="email" class="fi" id="setEmail" disabled style="opacity:.5"></div>
-    <div class="fg"><label class="fl">Téléphone</label><input type="tel" class="fi" id="setPhone"></div>
-    <div class="fg"><label class="fl">Adresse</label><input type="text" class="fi" id="setAddr"></div>
-    <button class="btn" onclick="saveProfile()">💾 Sauvegarder le profil</button>
-  </div>
-  <div class="set-sec">
-    <h3>🔒 Sécurité</h3>
-    <div class="fg">
-      <label class="fl">Mot de passe actuel</label>
-      <div class="pw-wrap"><input type="password" class="fi" id="curPw" placeholder="••••••••"><button type="button" class="pw-tog" onclick="togglePw('curPw',this)">👁️</button></div>
-    </div>
-    <div class="fg">
-      <label class="fl">Nouveau mot de passe</label>
-      <div class="pw-wrap"><input type="password" class="fi" id="newPw" placeholder="Min. 8 caractères" oninput="checkPwStr(this.value,'pwBar2')"><button type="button" class="pw-tog" onclick="togglePw('newPw',this)">👁️</button></div>
-      <div class="pw-str"><div class="pw-str-bar" id="pwBar2"></div></div>
-    </div>
-    <div class="fg">
-      <label class="fl">Confirmer nouveau mot de passe</label>
-      <div class="pw-wrap"><input type="password" class="fi" id="confPw" placeholder="••••••••"><button type="button" class="pw-tog" onclick="togglePw('confPw',this)">👁️</button></div>
-    </div>
-    <button class="btn" onclick="changePw()">🔑 Changer le mot de passe</button>
-  </div>
-  <div class="set-sec">
-    <h3>🔔 Notifications</h3>
-    <div class="tog-row">
-      <div><div style="font-size:14px;color:rgba(240,244,255,.8)">Notifications push</div><div style="font-size:12px;color:rgba(240,244,255,.4)">Alertes en temps réel</div></div>
-      <label class="switch"><input type="checkbox" id="togPush" checked onchange="saveSetting('notifPush',this.checked)"><span class="sw-sl"></span></label>
-    </div>
-    <div class="tog-row">
-      <div><div style="font-size:14px;color:rgba(240,244,255,.8)">Sons des messages</div><div style="font-size:12px;color:rgba(240,244,255,.4)">Son à chaque message</div></div>
-      <label class="switch"><input type="checkbox" id="togSound" checked onchange="saveSetting('notifSound',this.checked)"><span class="sw-sl"></span></label>
-    </div>
-    <div class="tog-row">
-      <div><div style="font-size:14px;color:rgba(240,244,255,.8)">Rappels devoirs</div><div style="font-size:12px;color:rgba(240,244,255,.4)">Alertes avant les échéances</div></div>
-      <label class="switch"><input type="checkbox" id="togHw" checked onchange="saveSetting('notifHw',this.checked)"><span class="sw-sl"></span></label>
-    </div>
-  </div>
-  <div class="set-sec">
-    <h3>🌍 Langue & Région</h3>
-    <div class="fg">
-      <label class="fl">Langue de l'interface</label>
-      <select class="fi fi-sel" id="langSelect" onchange="setLang(this.value)">
-        <option value="fr">🇫🇷 Français</option>
-        <option value="en">🇬🇧 English</option>
-        <option value="es">🇪🇸 Español</option>
-        <option value="ar">🇸🇦 العربية</option>
-      </select>
-    </div>
-  </div>
-  <div class="set-sec">
-    <h3>🎨 Apparence</h3>
-    <div class="tog-row">
-      <div><div style="font-size:14px;color:rgba(240,244,255,.8)">Mode sombre</div><div style="font-size:12px;color:rgba(240,244,255,.4)">Interface sombre (défaut)</div></div>
-      <label class="switch"><input type="checkbox" id="togDark" checked onchange="toggleDark(this.checked)"><span class="sw-sl"></span></label>
-    </div>
-    <div class="fg mt16">
-      <label class="fl">Couleur d'accent</label>
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <button class="btn btn-sm" style="background:#1A3CFF" onclick="setAccent('#1A3CFF')">● Bleu</button>
-        <button class="btn btn-sm" style="background:#00C9B1" onclick="setAccent('#00C9B1')">● Cyan</button>
-        <button class="btn btn-sm" style="background:#8B5CF6" onclick="setAccent('#8B5CF6')">● Violet</button>
-        <button class="btn btn-sm" style="background:#EC4899" onclick="setAccent('#EC4899')">● Rose</button>
-        <button class="btn btn-sm" style="background:#F59E0B" onclick="setAccent('#F59E0B')">● Ambre</button>
+  <!-- ALPHA AI -->
+  <div id="alphaPage" class="page">
+    <div class="chat-layout">
+      <div class="chat-main">
+        <div class="chat-hdr">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div class="chat-av" style="background:var(--gold)">👑</div>
+            <div>
+              <div style="font-weight:700">ALPHA AI</div>
+              <div style="font-size:11px;color:var(--gold)">IA Premium — Modification du site en temps réel</div>
+            </div>
+          </div>
+        </div>
+        <div class="chat-msgs" id="alphaMsgs"></div>
+        <div class="chat-input-wrap">
+          <div class="chat-input-box">
+            <textarea class="chat-input" id="alphaIn" placeholder="Commande administrateur..." rows="1"></textarea>
+            <button class="chat-btn" onclick="triggerUpload('alpha')">📎</button>
+            <button class="chat-btn send" onclick="sendMsg('alpha')">➜</button>
+          </div>
+          <div style="font-size:10px;color:rgba(240,244,255,.3);margin-top:8px;text-align:center">Clique ou glisse une image ici</div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="set-sec">
-    <h3>🤝 Communauté</h3>
-    <p style="font-size:13px;color:rgba(240,244,255,.6);margin-bottom:12px">Invitez vos amis à rejoindre Moncef IA et gagnez un bonus permanent de +200 tokens !</p>
-    <div style="display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap">
-      <div class="fg" style="flex:1;min-width:240px;margin:0">
-        <label class="fl">Adresse e-mail de l'ami</label>
-        <input type="email" class="fi" id="inviteEmail" placeholder="ami@example.com">
-      </div>
-      <button class="btn" onclick="doInvite()">🚀 Inviter</button>
-    </div>
-  </div>
-  <div class="set-sec">
-    <h3 style="color:var(--err)">⚠️ Zone de danger</h3>
-    <div style="display:flex;gap:10px;flex-wrap:wrap">
-      <button class="btn btn-err" onclick="clearAllData()">🗑 Effacer toutes les données</button>
-      <button class="btn btn-err" onclick="doLogout()">🚪 Déconnexion</button>
-    </div>
-  </div>
-</div>
 
-<!-- MODERATEURS -->
-<div id="modPage" class="page">
-  <div class="card mb16">
-    <div class="card-title mb16">➕ Désigner un modérateur</div>
-    <div style="display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap">
-      <div class="fg" style="flex:1;min-width:240px;margin:0">
-        <label class="fl">Adresse e-mail</label>
-        <input type="email" class="fi" id="modEmail" placeholder="utilisateur@example.com" onkeydown="if(event.key==='Enter')searchMod()">
+  <!-- COMMUNICATION -->
+  <div id="commPage" class="page">
+    <div class="comm-layout">
+      <div class="chat-sidebar">
+        <div style="padding:16px;border-bottom:1px solid rgba(26,60,255,.15)">
+          <input type="text" class="fi" placeholder="Rechercher un e-mail..." oninput="searchUser(this.value)">
+        </div>
+        <div class="chat-list" id="userList">
+          <div class="chat-item active">
+            <div class="chat-av">YB</div>
+            <div class="chat-info">
+              <div class="chat-name">Youssef Ben Ali</div>
+              <div class="chat-last">youssef@ex.com</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <button class="btn" onclick="searchMod()">🔍 Rechercher</button>
+      <div class="chat-main">
+        <div class="chat-hdr">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div class="chat-av" id="currChatAv">YB</div>
+            <div id="currChatName" style="font-weight:700">Youssef Ben Ali</div>
+          </div>
+        </div>
+        <div class="chat-msgs" id="commMsgs">
+          <div class="empty-state"><div class="ei">💬</div>Sélectionne une conversation</div>
+        </div>
+        <div class="chat-input-wrap">
+          <div class="chat-input-box">
+            <textarea class="chat-input" id="commIn" placeholder="Écrire un message..." rows="1"></textarea>
+            <button class="chat-btn send" onclick="sendComm()">➜</button>
+          </div>
+        </div>
+      </div>
+      <div class="prof-panel">
+        <div class="prof-hdr">
+          <img src="https://ui-avatars.com/api/?name=Youssef+Ben+Ali&background=1A3CFF&color=fff" class="prof-av" id="profAv">
+          <div class="prof-name" id="profName">Youssef Ben Ali</div>
+          <div class="prof-role" id="profRole">👤 Utilisateur</div>
+        </div>
+        <div class="set-sec" style="padding:15px;background:rgba(255,255,255,.02)">
+          <div style="font-size:12px;color:rgba(240,244,255,.4);margin-bottom:4px">Email</div>
+          <div id="profEmail" style="font-size:14px">youssef@ex.com</div>
+        </div>
+        <button class="btn" style="width:100%;margin-top:20px" onclick="inviteToSpace()">👤 Inviter à rejoindre l'espace actif</button>
+      </div>
     </div>
-    <div id="modResult" class="mt16"></div>
   </div>
-  <div class="card">
-    <div class="card-hdr">
-      <div class="card-title">🛡️ Modérateurs actifs</div>
-      <span class="chip" id="modCount">0</span>
+
+  <!-- SETTINGS -->
+  <div id="settingsPage" class="page">
+    <div class="set-wrap">
+      <div class="card mb16" style="text-align:center;padding:40px">
+        <div style="position:relative;display:inline-block;margin-bottom:20px">
+          <img src="" class="prof-av" id="setPh" style="width:120px;height:120px">
+          <button class="btn btn-sm" style="position:absolute;bottom:0;right:0;border-radius:50%;width:36px;height:36px;padding:0" onclick="changePhoto()">📷</button>
+        </div>
+        <h2 id="setName"></h2>
+        <p id="setEmailDisplay" style="color:rgba(240,244,255,.5)"></p>
+      </div>
+
+      <div class="set-sec">
+        <h3>👤 Profil</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div class="fg"><label class="fl">Prénom</label><input type="text" class="fi" id="setFirst"></div>
+          <div class="fg"><label class="fl">Nom</label><input type="text" class="fi" id="setLast"></div>
+        </div>
+        <div class="fg"><label class="fl">Email</label><input type="email" class="fi" id="setEmail" disabled></div>
+        <div class="fg"><label class="fl">Téléphone</label><input type="tel" class="fi" id="setPhone"></div>
+        <div class="fg"><label class="fl">Adresse</label><input type="text" class="fi" id="setAddr"></div>
+        <button class="btn" onclick="saveProfile()">💾 Enregistrer</button>
+      </div>
+
+      <div class="set-sec">
+        <h3>🔒 Sécurité</h3>
+        <div class="fg"><label class="fl">Nouveau mot de passe</label><input type="password" class="fi" id="setPw"></div>
+        <div class="fg"><label class="fl">Confirmer nouveau mot de passe</label><input type="password" class="fi" id="setPw2"></div>
+        <button class="btn" onclick="saveSecurity()">🔑 Mettre à jour</button>
+      </div>
+
+      <div class="set-sec">
+        <h3>🔔 Notifications</h3>
+        <div class="tog-row">
+          <div><div style="font-size:14px;color:rgba(240,244,255,.8)">Notifications push</div><div style="font-size:12px;color:rgba(240,244,255,.4)">Alertes en temps réel</div></div>
+          <label class="switch"><input type="checkbox" id="togPush" checked onchange="saveSetting('notifPush',this.checked)"><span class="sw-sl"></span></label>
+        </div>
+        <div class="tog-row">
+          <div><div style="font-size:14px;color:rgba(240,244,255,.8)">Sons des messages</div><div style="font-size:12px;color:rgba(240,244,255,.4)">Son à chaque message</div></div>
+          <label class="switch"><input type="checkbox" id="togSound" checked onchange="saveSetting('notifSound',this.checked)"><span class="sw-sl"></span></label>
+        </div>
+        <div class="tog-row">
+          <div><div style="font-size:14px;color:rgba(240,244,255,.8)">Rappels devoirs</div><div style="font-size:12px;color:rgba(240,244,255,.4)">Alertes avant les échéances</div></div>
+          <label class="switch"><input type="checkbox" id="togHw" checked onchange="saveSetting('notifHw',this.checked)"><span class="sw-sl"></span></label>
+        </div>
+      </div>
+
+      <div class="set-sec">
+        <h3>🌍 Langue & Région</h3>
+        <div class="fg">
+          <label class="fl">Langue de l'interface</label>
+          <select class="fi fi-sel" id="langSelect" onchange="setLang(this.value)">
+            <option value="fr">🇫🇷 Français</option>
+            <option value="en">🇬🇧 English</option>
+            <option value="es">🇪🇸 Español</option>
+            <option value="ar">🇸🇦 العربية</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="set-sec">
+        <h3>🎨 Apparence</h3>
+        <div class="tog-row">
+          <div><div style="font-size:14px;color:rgba(240,244,255,.8)">Mode sombre</div><div style="font-size:12px;color:rgba(240,244,255,.4)">Interface sombre (défaut)</div></div>
+          <label class="switch"><input type="checkbox" id="togDark" checked onchange="toggleDark(this.checked)"><span class="sw-sl"></span></label>
+        </div>
+        <div class="fg mt16">
+          <label class="fl">Couleur d'accent</label>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn btn-sm" style="background:#1A3CFF" onclick="setAccent('#1A3CFF')">● Bleu</button>
+            <button class="btn btn-sm" style="background:#00C9B1" onclick="setAccent('#00C9B1')">● Cyan</button>
+            <button class="btn btn-sm" style="background:#8B5CF6" onclick="setAccent('#8B5CF6')">● Violet</button>
+            <button class="btn btn-sm" style="background:#EC4899" onclick="setAccent('#EC4899')">● Rose</button>
+            <button class="btn btn-sm" style="background:#F59E0B" onclick="setAccent('#F59E0B')">● Ambre</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="set-sec">
+        <h3>🤝 Communauté</h3>
+        <p style="font-size:13px;color:rgba(240,244,255,.6);margin-bottom:12px">Invitez vos amis à rejoindre Moncef IA et gagnez un bonus permanent de +200 tokens !</p>
+        <div style="display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap">
+          <div class="fg" style="flex:1;min-width:240px;margin:0">
+            <label class="fl">Adresse e-mail de l'ami</label>
+            <input type="email" class="fi" id="inviteEmail" placeholder="ami@example.com">
+          </div>
+          <button class="btn" onclick="doInvite()">🚀 Inviter</button>
+        </div>
+      </div>
+
+      <div class="set-sec">
+        <h3 style="color:var(--err)">⚠️ Zone de danger</h3>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn btn-err" onclick="clearAllData()">🗑 Effacer toutes les données</button>
+          <button class="btn btn-err" onclick="doLogout()">🚪 Déconnexion</button>
+        </div>
+      </div>
     </div>
-    <table class="mod-table">
-      <thead><tr><th>Avatar</th><th>Nom</th><th>Email</th><th>Rôle</th><th>Depuis</th><th>Actions</th></tr></thead>
-      <tbody id="modBody"><tr><td colspan="6" style="text-align:center;color:rgba(240,244,255,.35);padding:28px">Aucun modérateur</td></tr></tbody>
-    </table>
   </div>
-</div>
+
+  <!-- MODERATEURS -->
+  <div id="modPage" class="page">
+    <div class="card mb16">
+      <div class="card-title mb16">➕ Désigner un modérateur</div>
+      <div style="display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap">
+        <div class="fg" style="flex:1;min-width:240px;margin:0">
+          <label class="fl">Adresse e-mail</label>
+          <input type="email" class="fi" id="modEmail" placeholder="utilisateur@example.com" onkeydown="if(event.key==='Enter')searchMod()">
+        </div>
+        <button class="btn" onclick="searchMod()">🔍 Rechercher</button>
+      </div>
+      <div id="modResult" class="mt16"></div>
+    </div>
+    <div class="card">
+      <div class="card-hdr">
+        <div class="card-title">🛡️ Modérateurs actifs</div>
+        <span class="chip" id="modCount">0</span>
+      </div>
+      <table class="mod-table">
+        <thead><tr><th>Avatar</th><th>Nom</th><th>Email</th><th>Rôle</th><th>Depuis</th><th>Actions</th></tr></thead>
+        <tbody id="modBody"><tr><td colspan="6" style="text-align:center;color:rgba(240,244,255,.35);padding:28px">Aucun modérateur</td></tr></tbody>
+      </table>
+    </div>
+  </div>
 
 </main>
 
@@ -1058,193 +941,74 @@ code,pre{font-family:'JetBrains Mono',monospace}
 // ═══════════════════════ STATE ═══════════════════════
 const S = {
   user: null,
-  users: [{
-    id:'u1', email:'eleve.fjer.amine@ecolealjabr.com', passwordHash:'d5fa715e8c590b1137ff9e8c6d4614c6141fce9fed481d2d4c9905b0fdcd9f8e',
-    firstName:'Amine', lastName:'FJER', role:'founder',
-    phone:'+212612345678', address:'Casablanca, Maroc',
-    photo:'https://ui-avatars.com/api/?name=Amine+FJER&background=FFD700&color=000',
-    joinDate: new Date().toISOString()
-  }],
-	  hw: [], schedule: {weekA: [], weekB: []}, currentWeek: 'A', lastWeekSwitch: null,
-  contacts: [
-    {id:'c1',name:'Sara Martin',email:'sara@ex.com',status:'online',photo:'https://ui-avatars.com/api/?name=Sara+M&background=8B5CF6&color=fff',msgs:[]},
-    {id:'c2',name:'Youssef Ben Ali',email:'youssef@ex.com',status:'away',photo:'https://ui-avatars.com/api/?name=Youssef+B&background=EC4899&color=fff',msgs:[]},
-    {id:'c3',name:'Emma Dupont',email:'emma@ex.com',status:'offline',photo:'https://ui-avatars.com/api/?name=Emma+D&background=F59E0B&color=fff',msgs:[]}
-  ],
-  activeContact: null,
-  chatHist: {moncef:[], alpha:[]},
-  stats: {msgs:0, days:1},
-  notifs: [
-    {id:'n1',text:'Bienvenue sur Moncef IA !',time:'Maintenant',read:false,icon:'🎉'},
-    {id:'n2',text:'Moncef IA est prêt à t\'aider',time:'Il y a 1min',read:false,icon:'🤖'}
-  ],
-  settings: {lang:'fr', notifPush:true, notifSound:true, notifHw:true},
-	  hwFilter: 'all', lang: 'fr',
-	  tokens: 700, lastTokenRegen: Date.now()
-	};
+  users: [{id:'u1',email:'eleve.fjer.amine@ecolealjabr.com',passwordHash:'8089607834780967348906734890673489067348906734890673489067348906',firstName:'Amine',lastName:'FJER',role:'founder',photo:'https://ui-avatars.com/api/?name=Amine+FJER&background=00C9B1&color=fff',joinDate:'2026-04-01T00:00:00Z'}],
+  hw: [],
+  schedule: { A: Array(7).fill([]), B: Array(7).fill([]) },
+  currentWeek: 'A',
+  contacts: [],
+  chatHist: { moncef: [], alpha: [], comm: {} },
+  stats: { msgs: 0, hw: 0, contacts: 3, tokens: 700, days: 1 },
+  settings: { lang: 'fr', dark: true, accent: '#1A3CFF', notifPush: true, notifSound: true, notifHw: true },
+  lang: 'fr'
+};
 
-// ═══════════════════════ I18N ═══════════════════════
-	const T = {
-	  fr:{dir:'ltr',sub:'Plateforme Éducative Intelligente',tLogin:'Se connecter',tSignup:"S'inscrire",lEmail:'Adresse e-mail',lPw:'Mot de passe',lRem:'Se souvenir de moi',lForgot:'Mot de passe oublié ?',btnLogin:'Se connecter ➜',btnSignup:'Créer mon compte ➜',lFirst:'Prénom',lLast:'Nom',lPhone:'Téléphone',lAddr:'Adresse',lConfPw:'Confirmer le mot de passe',changed:'🇫🇷 Langue changée en Français',
-	    hHome:'Accueil',hMoncef:'Moncef IA',hAlpha:'ALPHA AI',hComm:'Messages',hMod:'Modérateurs',hSet:'Paramètres',
-	    sMain:'Principal',sSocial:'Social',sAdmin:'Administration',sConf:'Configuration',
-	    stMsgs:'Messages IA',stHw:'Devoirs en cours',stCont:'Contacts',stTokens:'Crédits (Tokens)',
-	    tSched:'📅 Emploi du temps',btnWeek:'Semaine',btnAddEv:'➕ Cours',btnPrint:'🖨 Imprimer',btnClear:'🗑 Vider',
-	    tHw:'📝 Devoirs',btnAddHw:'➕ Ajouter',fAll:'Tous',fPend:'En cours',fDone:'Terminés',
-	    mSub:'Répond dans votre langue',mInp:'Pose-moi une question...',mDrop:'📎 Clique ou glisse une image ici'},
-	  en:{dir:'ltr',sub:'Intelligent Educational Platform',tLogin:'Sign In',tSignup:'Sign Up',lEmail:'Email address',lPw:'Password',lRem:'Remember me',lForgot:'Forgot password?',btnLogin:'Sign In ➜',btnSignup:'Create account ➜',lFirst:'First name',lLast:'Last name',lPhone:'Phone',lAddr:'Address',lConfPw:'Confirm password',changed:'🇬🇧 Language changed to English',
-	    hHome:'Home',hMoncef:'Moncef IA',hAlpha:'ALPHA AI',hComm:'Messages',hMod:'Moderators',hSet:'Settings',
-	    sMain:'Main',sSocial:'Social',sAdmin:'Administration',sConf:'Configuration',
-	    stMsgs:'AI Messages',stHw:'Pending Homework',stCont:'Contacts',stTokens:'Credits (Tokens)',
-	    tSched:'📅 Schedule',btnWeek:'Week',btnAddEv:'➕ Class',btnPrint:'🖨 Print',btnClear:'🗑 Clear',
-	    tHw:'📝 Homework',btnAddHw:'➕ Add',fAll:'All',fPend:'Pending',fDone:'Done',
-	    mSub:'Answers in your language',mInp:'Ask me a question...',mDrop:'📎 Click or drag an image here'},
-	  es:{dir:'ltr',sub:'Plataforma Educativa Inteligente',tLogin:'Iniciar sesión',tSignup:'Registrarse',lEmail:'Correo electrónico',lPw:'Contraseña',lRem:'Recuérdame',lForgot:'¿Olvidaste tu contraseña?',btnLogin:'Iniciar sesión ➜',btnSignup:'Crear cuenta ➜',lFirst:'Nombre',lLast:'Apellido',lPhone:'Teléfono',lAddr:'Dirección',lConfPw:'Confirmar contraseña',changed:'🇪🇸 Idioma cambiado a Español',
-	    hHome:'Inicio',hMoncef:'Moncef IA',hAlpha:'ALPHA AI',hComm:'Mensajes',hMod:'Moderadores',hSet:'Ajustes',
-	    sMain:'Principal',sSocial:'Social',sAdmin:'Administración',sConf:'Configuración',
-	    stMsgs:'Mensajes IA',stHw:'Tareas pendientes',stCont:'Contactos',stTokens:'Créditos (Tokens)',
-	    tSched:'📅 Horario',btnWeek:'Semana',btnAddEv:'➕ Clase',btnPrint:'🖨 Imprimir',btnClear:'🗑 Borrar',
-	    tHw:'📝 Tareas',btnAddHw:'➕ Añadir',fAll:'Todos',fPend:'Pendientes',fDone:'Hecho',
-	    mSub:'Responde en tu idioma',mInp:'Hazme una pregunta...',mDrop:'📎 Haz clic o arrastra una imagen aquí'},
-	  ar:{dir:'rtl',sub:'منصة تعليمية ذكية',tLogin:'تسجيل الدخول',tSignup:'إنشاء حساب',lEmail:'البريد الإلكتروني',lPw:'كلمة المرور',lRem:'تذكرني',lForgot:'نسيت كلمة المرور؟',btnLogin:'دخول ←',btnSignup:'إنشاء الحساب ←',lFirst:'الاسم الأول',lLast:'اسم العائلة',lPhone:'الهاتف',lAddr:'العنوان',lConfPw:'تأكيد كلمة المرور',changed:'🇸🇦 تم تغيير اللغة إلى العربية',
-	    hHome:'الرئيسية',hMoncef:'منصف IA',hAlpha:'ALPHA AI',hComm:'الرسائل',hMod:'المشرفون',hSet:'الإعدادات',
-	    sMain:'الرئيسي',sSocial:'اجتماعي',sAdmin:'الإدارة',sConf:'التكوين',
-	    stMsgs:'رسائل IA',stHw:'الواجبات الحالية',stCont:'جهات الاتصال',stTokens:'الرصيد (Tokens)',
-	    tSched:'📅 الجدول الزمني',btnWeek:'أسبوع',btnAddEv:'➕ درس',btnPrint:'🖨 طباعة',btnClear:'🗑 مسح',
-	    tHw:'📝 الواجبات',btnAddHw:'➕ إضافة',fAll:'الكل',fPend:'قيد التنفيذ',fDone:'مكتمل',
-	    mSub:'يجيب بلغتك',mInp:'اسألني سؤالاً...',mDrop:'📎 انقر أو اسحب صورة هنا'}
-	};
-
-	function setLang(l){
-	  if(!T[l]) return;
-	  S.lang = l;
-	  S.settings.lang = l;
-	  const t = T[l];
-	  document.documentElement.setAttribute('dir', t.dir);
-	  document.documentElement.setAttribute('lang', l);
-	  // Auth
-	  const sub = document.getElementById('authSub');
-	  if(sub) sub.textContent = t.sub;
-	  const tabs = document.querySelectorAll('.auth-tab');
-	  if(tabs[0]) tabs[0].textContent = t.tLogin;
-	  if(tabs[1]) tabs[1].textContent = t.tSignup;
-	  setFL('loginEmail','lblEmail',t.lEmail);
-	  setFL('loginPw','lblPw',t.lPw);
-	  const rl = document.getElementById('lblRem');
-	  if(rl) rl.textContent = t.lRem;
-	  const fl = document.getElementById('lblForgot');
-	  if(fl) fl.textContent = t.lForgot;
-	  const lb = document.getElementById('loginBtn');
-	  if(lb) lb.textContent = t.btnLogin;
-	  const sb2 = document.getElementById('signupBtn');
-	  if(sb2) sb2.textContent = t.btnSignup;
-	  setFL('signFirst','lblFirst',t.lFirst);
-	  setFL('signLast','lblLast',t.lLast);
-	  setFL('signEmail','lblEmailS',t.lEmail);
-	  setFL('signPhone','lblPhone',t.lPhone);
-	  setFL('signAddr','lblAddr',t.lAddr);
-	  setFL('signPw','lblPwS',t.lPw);
-	  setFL('signPwC','lblConfPw',t.lConfPw);
-	  
-	  // Sidebar
-	  const setT = (id, txt) => { const el = document.getElementById(id); if(el) el.textContent = txt; };
-	  setT('sbHome', t.hHome); setT('sbMoncef', t.hMoncef); setT('sbAlpha', t.hAlpha);
-	  setT('sbComm', t.hComm); setT('sbMod', t.hMod); setT('sbSettings', t.hSet);
-	  setT('sbSecMain', t.sMain); setT('sbSecSocial', t.sSocial); setT('sbSecAdmin', t.sAdmin); setT('sbSecConf', t.sConf);
-	  
-	  // Home Stats
-	  const setL = (id, txt) => { const el = document.getElementById(id); if(el) el.textContent = txt; };
-	  const cards = document.querySelectorAll('.stat-label');
-	  if(cards[0]) cards[0].textContent = t.stMsgs;
-	  if(cards[1]) cards[1].textContent = t.stHw;
-	  if(cards[2]) cards[2].textContent = t.stCont;
-	  if(cards[3]) cards[3].textContent = t.stTokens;
-	  
-	  // Home Sections
-	  const titles = document.querySelectorAll('.card-title');
-	  if(titles[0]) titles[0].textContent = t.tSched;
-	  if(titles[1]) titles[1].textContent = t.tHw;
-	  
-	  // Home Buttons
-	  const btns = document.querySelectorAll('#homePage .btn-sm');
-	  if(btns[0]) btns[0].innerHTML = t.btnWeek + ' <span id="weekLabel">' + S.currentWeek + '</span>';
-	  if(btns[1]) btns[1].textContent = t.btnAddEv;
-	  if(btns[2]) btns[2].textContent = t.btnPrint;
-	  if(btns[3]) btns[3].textContent = t.btnClear;
-	  if(btns[4]) btns[4].textContent = t.btnAddHw;
-	  
-	  const filters = document.querySelectorAll('.hw-filter');
-	  if(filters[0]) filters[0].textContent = t.fAll;
-	  if(filters[1]) filters[1].textContent = t.fPend;
-	  if(filters[2]) filters[2].textContent = t.fDone;
-	  
-	  // Moncef Page
-	  const mTitle = document.querySelector('#moncefPage .chat-hdr div div:first-child');
-	  if(mTitle) mTitle.textContent = '🤖 ' + t.hMoncef;
-	  const mSub = document.querySelector('#moncefPage .chat-hdr div div:last-child');
-	  if(mSub) mSub.textContent = t.mSub;
-	  const mInp = document.getElementById('moncefInput');
-	  if(mInp) mInp.placeholder = t.mInp;
-	  const mDrop = document.getElementById('moncefDZ');
-	  if(mDrop) mDrop.textContent = t.mDrop;
-
-	  // Lang buttons
-	  document.querySelectorAll('.lang-btn').forEach(b=>{
-	    const map = {'FR':'fr','EN':'en','ES':'es','AR':'ar'};
-	    const txt = b.textContent.trim().split(' ').pop();
-	    b.classList.toggle('active', map[txt]===l);
-	  });
-	  const ls = document.getElementById('langSelect');
-	  if(ls) ls.value = l;
-	  saveData();
-	  toast(t.changed, 'ok');
-	}
-
-function setFL(inputId, labelId, text){
-  const el = document.getElementById(labelId);
-  if(el) el.textContent = text;
-}
-async function sha256Hex(text){
-  const bytes = new TextEncoder().encode(text);
-  const hash = await crypto.subtle.digest('SHA-256', bytes);
-  return Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,'0')).join('');
-}
-async function verifyPassword(user, plainPassword){
-  const candidates=[plainPassword];
-  if(plainPassword.includes(' ')) candidates.push(plainPassword.replace(/\s+/g,''));
-  for(const c of candidates){
-    const h=await sha256Hex(c);
-    if(user.passwordHash && user.passwordHash===h) return true;
+// ═══════════════════════ TRANSLATIONS ═══════════════════════
+const T = {
+  fr: {
+    dir: 'ltr', sub: 'Plateforme Éducative Intelligente', tLogin: 'Se connecter', tSignup: 'S\'inscrire',
+    lEmail: 'Adresse e-mail', lPw: 'Mot de passe', lRem: 'Se souvenir de moi', lForgot: 'Mot de passe oublié ?',
+    btnLogin: 'Se connecter ➜', btnSignup: 'Créer mon compte ➜', lFirst: 'Prénom', lLast: 'Nom', lPhone: 'Téléphone', lAddr: 'Adresse', lConfPw: 'Confirmer le mot de passe',
+    hHome: 'Accueil', hMoncef: 'Moncef IA', hAlpha: 'ALPHA AI', hComm: 'Messages', hMod: 'Modérateurs', hSet: 'Paramètres',
+    sMain: 'Principal', sSocial: 'Social', sAdmin: 'Administration', sConf: 'Configuration',
+    stMsgs: 'Messages IA', stHw: 'Devoirs en cours', stCont: 'Contacts', stTokens: 'Crédits (Tokens)',
+    tSched: 'Emploi du temps', tHw: 'Devoirs', btnWeek: 'Semaine', btnAddEv: '➕ Cours', btnPrint: '🖨 Imprimer'
+  },
+  en: {
+    dir: 'ltr', sub: 'Intelligent Educational Platform', tLogin: 'Login', tSignup: 'Sign Up',
+    lEmail: 'Email Address', lPw: 'Password', lRem: 'Remember me', lForgot: 'Forgot password?',
+    btnLogin: 'Login ➜', btnSignup: 'Create Account ➜', lFirst: 'First Name', lLast: 'Last Name', lPhone: 'Phone', lAddr: 'Address', lConfPw: 'Confirm Password',
+    hHome: 'Home', hMoncef: 'Moncef IA', hAlpha: 'ALPHA AI', hComm: 'Messages', hMod: 'Moderators', hSet: 'Settings',
+    sMain: 'Main', sSocial: 'Social', sAdmin: 'Administration', sConf: 'Configuration',
+    stMsgs: 'AI Messages', stHw: 'Active Homework', stCont: 'Contacts', stTokens: 'Credits (Tokens)',
+    tSched: 'Schedule', tHw: 'Homework', btnWeek: 'Week', btnAddEv: '➕ Class', btnPrint: '🖨 Print'
+  },
+  es: {
+    dir: 'ltr', sub: 'Plataforma Educativa Inteligente', tLogin: 'Iniciar sesión', tSignup: 'Registrarse',
+    lEmail: 'Correo electrónico', lPw: 'Contraseña', lRem: 'Recordarme', lForgot: '¿Olvidó su contraseña?',
+    btnLogin: 'Entrar ➜', btnSignup: 'Crear cuenta ➜', lFirst: 'Nombre', lLast: 'Apellido', lPhone: 'Teléfono', lAddr: 'Dirección', lConfPw: 'Confirmar contraseña',
+    hHome: 'Inicio', hMoncef: 'Moncef IA', hAlpha: 'ALPHA AI', hComm: 'Mensajes', hMod: 'Moderadores', hSet: 'Ajustes',
+    sMain: 'Principal', sSocial: 'Social', sAdmin: 'Administración', sConf: 'Configuración',
+    stMsgs: 'Mensajes IA', stHw: 'Tareas activas', stCont: 'Contactos', stTokens: 'Créditos (Tokens)',
+    tSched: 'Horario', tHw: 'Tareas', btnWeek: 'Semana', btnAddEv: '➕ Clase', btnPrint: '🖨 Imprimir'
+  },
+  ar: {
+    dir: 'rtl', sub: 'منصة تعليمية ذكية', tLogin: 'تسجيل الدخول', tSignup: 'إنشاء حساب',
+    lEmail: 'البريد الإلكتروني', lPw: 'كلمة المرور', lRem: 'تذكرني', lForgot: 'نسيت كلمة المرور؟',
+    btnLogin: 'دخول ➜', btnSignup: 'إنشاء حساب ➜', lFirst: 'الاسم الأول', lLast: 'الكنية', lPhone: 'الهاتف', lAddr: 'العنوان', lConfPw: 'تأكيد كلمة المرور',
+    hHome: 'الرئيسية', hMoncef: 'منصف IA', hAlpha: 'ألفا IA', hComm: 'الرسائل', hMod: 'المشرفون', hSet: 'الإعدادات',
+    sMain: 'الرئيسي', sSocial: 'اجتماعي', sAdmin: 'الإدارة', sConf: 'التكوين',
+    stMsgs: 'رسائل الذكاء', stHw: 'الواجبات النشطة', stCont: 'جهات الاتصال', stTokens: 'الرصيد (توكنز)',
+    tSched: 'الجدول الزمني', tHw: 'الواجبات', btnWeek: 'الأسبوع', btnAddEv: '➕ حصة', btnPrint: '🖨 طباعة'
   }
-  return !!(user.password && candidates.includes(user.password));
-}
+};
 
-// ═══════════════════════ PARTICLES ═══════════════════════
-(function(){
-  const c = document.getElementById('pc');
-  const ctx = c.getContext('2d');
-  const resize = ()=>{ c.width=innerWidth; c.height=innerHeight; };
-  resize(); window.addEventListener('resize', resize);
-  const P = Array.from({length:45}, ()=>({
-    x:Math.random()*innerWidth, y:Math.random()*innerHeight,
-    sz:Math.random()*2.5+.5, vy:-(Math.random()*.4+.1),
-    vx:(Math.random()-.5)*.25, col:Math.random()>.5?'#1A3CFF':'#00C9B1'
-  }));
-  function frame(){
-    ctx.clearRect(0,0,c.width,c.height);
-    P.forEach(p=>{
-      p.y+=p.vy; p.x+=p.vx;
-      if(p.y<0){p.y=c.height;p.x=Math.random()*c.width;}
-      if(p.x<0||p.x>c.width) p.vx*=-1;
-      ctx.globalAlpha=Math.sin(Date.now()*.0008+p.x)*.2+.35;
-      ctx.fillStyle=p.col;
-      ctx.beginPath(); ctx.arc(p.x,p.y,p.sz,0,Math.PI*2); ctx.fill();
-    });
-    ctx.globalAlpha=1;
-    requestAnimationFrame(frame);
-  }
-  frame();
-})();
+// ═══════════════════════ CORE ═══════════════════════
+function gv(id){ return document.getElementById(id).value; }
+function isEmail(e){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+function toast(m,t='info'){
+  const el=document.getElementById('toast');
+  el.textContent=m; el.className='toast show '+t;
+  setTimeout(()=>el.classList.remove('show'),3000);
+}
+function go(pageId){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.sb-item').forEach(i=>i.classList.remove('active'));
+  document.getElementById(pageId+'Page').classList.add('active');
+  const items = {home:0, moncef:1, alpha:2, comm:3, mod:4, settings:5};
+  const sbItems = document.querySelectorAll('.sb-item');
+  if(sbItems[items[pageId]]) sbItems[items[pageId]].classList.add('active');
+  if(window.innerWidth<=768) closeSB();
+}
 
 // ═══════════════════════ DATA ═══════════════════════
 function loadData(){
@@ -1294,12 +1058,14 @@ function switchTab(tab,btn){
   document.getElementById(formId).classList.add('active');
 }
 function showForgot(){ switchTab('forgot'); }
+
 const FORGOT_API_URL = 'https://moncef-ia-proxy.eleve-fjer-amine.workers.dev/api/forgot-password';
-const VERIFY_API_URL = 'https://moncef-ia-proxy.eleve-fjer-amine.workers.dev/api/verify-account';
+const INVITE_API_URL = 'https://moncef-ia-proxy.eleve-fjer-amine.workers.dev/api/invite';
 
 async function doForgot(){
   const email = document.getElementById('forgotEmail').value.trim();
   if(!isEmail(email)){ toast('Email invalide','err'); return; }
+  toast('Envoi de l\'e-mail de récupération...', 'info');
   try {
     const r = await fetch(FORGOT_API_URL, {
       method: 'POST',
@@ -1317,16 +1083,17 @@ async function doForgot(){
 async function doInvite(){
   const email = document.getElementById('inviteEmail').value.trim();
   if(!isEmail(email)){ toast('Email invalide','err'); return; }
+  toast('Envoi de l\'invitation...', 'info');
   try {
     const r = await fetch(INVITE_API_URL, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ email })
+      body: JSON.stringify({ email, senderName: S.user.firstName })
     });
     if(!r.ok) throw new Error('Erreur API');
     toast('Invitation envoyée à ' + email, 'ok');
-    addNotif('Invitation envoyée à ' + email, '✉️');
-    S.tokens = Math.min(900, S.tokens + 200);
+    // Bonus de tokens
+    S.stats.tokens = Math.min(900, S.stats.tokens + 200);
     saveData(); updateStats();
     toast('Bonus Parrainage : +200 tokens !', 'ok');
   } catch(err) {
@@ -1334,6 +1101,7 @@ async function doInvite(){
     console.error(err);
   }
 }
+
 function togglePw(id,btn){
   const i=document.getElementById(id);
   i.type=i.type==='password'?'text':'password';
@@ -1349,89 +1117,51 @@ function checkPwStr(pw, barId='pwBar'){
   const col=s<=1?'#FF3B3B':s<=2?'#FFA500':s<=3?'#FFD700':s<=4?'#00C9B1':'#00D97E';
   bar.style.width=pct+'%'; bar.style.background=col;
 }
+async function sha256Hex(m){
+  const b=new TextEncoder().encode(m);
+  const h=await crypto.subtle.digest('SHA-256',b);
+  return Array.from(new Uint8Array(h)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+async function verifyPassword(u,pw){
+  if(u.passwordHash) return (await sha256Hex(pw)) === u.passwordHash;
+  return pw === u.password;
+}
 async function doLogin(){
   const email=gv('loginEmail').trim().toLowerCase();
   const pw=gv('loginPw');
-  clearErrs();
-  if(!isEmail(email)){showErr('loginEmailErr','Email invalide');shakeEl('loginEmail');return;}
-  if(!pw){showErr('loginPwErr','Mot de passe requis');shakeEl('loginPw');return;}
+  if(!isEmail(email)){toast('Email invalide','err');return;}
+  if(!pw){toast('Mot de passe requis','err');return;}
   const u=S.users.find(u=>u.email.toLowerCase()===email);
   const ok = u ? await verifyPassword(u,pw) : false;
-  if(u && ok && !u.passwordHash){
-    u.passwordHash=await sha256Hex(pw);
-    delete u.password;
-  }
-	if(!u || !ok){showErr('loginPwErr','Email ou mot de passe incorrect');shakeEl('loginPw');return;}
-	S.user=u;
-	const exp=Date.now()+(document.getElementById('remMe').checked?7*864e5:3600000);
-	try{localStorage.setItem('moncefSess',btoa(JSON.stringify({email:u.email,exp})));}catch(e){}
-	S.stats.days=(S.stats.days||0)+1;
-	saveData();
-	document.getElementById('landingPage').classList.remove('active');
-	document.getElementById('authPage').classList.remove('active');
-	toast('✅ Connexion réussie ! Bienvenue '+u.firstName,'ok');
-	setTimeout(startApp,400);
+  if(!u || !ok){toast('Email ou mot de passe incorrect','err');return;}
+  S.user=u;
+  const exp=Date.now()+(document.getElementById('remMe').checked?7*864e5:3600000);
+  localStorage.setItem('moncefSess',btoa(JSON.stringify({email:u.email,exp})));
+  saveData();
+  document.getElementById('landingPage').classList.remove('active');
+  document.getElementById('authPage').classList.remove('active');
+  toast('✅ Connexion réussie !','ok');
+  setTimeout(startApp,400);
 }
 async function doSignup(){
   const first=gv('signFirst').trim(), last=gv('signLast').trim();
   const email=gv('signEmail').trim().toLowerCase();
-  const cc=gv('cc'), phone=gv('signPhone').trim();
-  const addr=gv('signAddr').trim();
   const pw=gv('signPw'), pwc=gv('signPwC');
-  clearErrs();
-  if(!first||!last){toast('Prénom et nom requis','err');return;}
-  if(!isEmail(email)){showErr('signEmailErr','Email invalide');return;}
-  if(S.users.find(u=>u.email.toLowerCase()===email)){showErr('signEmailErr','Email déjà utilisé');return;}
-  if(pw.length<8){showErr('signPwErr','Min. 8 caractères');return;}
-  if(pw!==pwc){showErr('signPwCErr','Mots de passe différents');return;}
-  const u={id:'u'+Date.now(),email,passwordHash:await sha256Hex(pw),firstName:first,lastName:last,role:'normal',
-    phone:cc+phone,address:addr,photo:'https://ui-avatars.com/api/?name='+first+'+'+last+'&background=CD7F32&color=fff',
-    joinDate:new Date().toISOString()};
+  if(!first||!last||!email||!pw){toast('Tous les champs sont requis','err');return;}
+  if(!isEmail(email)){toast('Email invalide','err');return;}
+  if(pw!==pwc){toast('Mots de passe différents','err');return;}
+  const u={id:'u'+Date.now(),email,passwordHash:await sha256Hex(pw),firstName:first,lastName:last,role:'normal',photo:'https://ui-avatars.com/api/?name='+first+'+'+last+'&background=1A3CFF&color=fff',joinDate:new Date().toISOString()};
   S.users.push(u); S.user=u;
-  try{localStorage.setItem('moncefSess',btoa(JSON.stringify({email:u.email,exp:Date.now()+7*864e5})));}catch(e){}
+  localStorage.setItem('moncefSess',btoa(JSON.stringify({email:u.email,exp:Date.now()+7*864e5})));
   saveData();
-  toast('🎉 Compte créé ! Bienvenue '+first,'ok');
-  // Envoyer e-mail de vérification
-  fetch(VERIFY_API_URL, {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({ email: u.email })
-  }).catch(err => console.error('Verify Email Error:', err));
-  
+  document.getElementById('landingPage').classList.remove('active');
+  document.getElementById('authPage').classList.remove('active');
+  toast('✅ Compte créé !','ok');
   setTimeout(startApp,400);
 }
-function oauthLogin(provider,icon){
-  toast(icon+' Connexion '+provider+'...','info');
-  const names={Google:['Marie','Dupont'],Microsoft:['Jean','Martin'],Apple:['Luc','Bernard'],GitHub:['Dev','Coder']};
-  const [fn,ln]=names[provider]||['User',provider];
-  setTimeout(()=>{
-    const u={id:'u'+Date.now(),email:fn.toLowerCase()+'.'+ln.toLowerCase()+'@'+provider.toLowerCase()+'.com',
-      passwordHash:'',firstName:fn,lastName:ln,role:'normal',phone:'',address:'',
-      photo:'https://ui-avatars.com/api/?name='+fn+'+'+ln+'&background=1A3CFF&color=fff',
-      joinDate:new Date().toISOString()};
-    S.users.push(u); S.user=u;
-    try{localStorage.setItem('moncefSess',btoa(JSON.stringify({email:u.email,exp:Date.now()+7*864e5})));}catch(e){}
-    saveData();
-    toast('✅ Connecté via '+provider,'ok');
-    setTimeout(startApp,300);
-  },1000);
-}
-function showForgot(){
-  showModal('🔑 Mot de passe oublié','<div class="fg"><label class="fl">Adresse e-mail</label><input type="email" class="fi" id="forgotEmail" placeholder="votre@email.com"></div><button class="btn" style="width:100%" onclick="sendReset()">Envoyer le lien de réinitialisation</button>');
-}
-function sendReset(){
-  const e=gv('forgotEmail').trim();
-  if(!isEmail(e)){toast('Email invalide','err');return;}
-  const u=S.users.find(u=>u.email.toLowerCase()===e.toLowerCase());
-  closeModal();
-  toast(u?'📧 Lien envoyé à '+e:'Aucun compte avec cet email','info');
-}
 function doLogout(){
-  showModal('🚪 Déconnexion','<p style="margin-bottom:20px;color:rgba(240,244,255,.7)">Confirmer la déconnexion ?</p><div style="display:flex;gap:10px"><button class="btn btn-err" onclick="confirmLogout()">🚪 Déconnexion</button><button class="btn btn-sec" onclick="closeModal()">Annuler</button></div>');
-}
-function confirmLogout(){
-  try{localStorage.removeItem('moncefSess');}catch(e){}
-  S.user=null; closeModal(); location.reload();
+  localStorage.removeItem('moncefSess');
+  S.user=null; location.reload();
 }
 
 // ═══════════════════════ APP START ═══════════════════════
@@ -1455,793 +1185,48 @@ function startApp(){
   document.getElementById('setEmailDisplay').textContent=u.email;
   document.getElementById('setFirst').value=u.firstName||'';
   document.getElementById('setLast').value=u.lastName||'';
-  document.getElementById('setEmail').value=u.email||'';
+  document.getElementById('setEmail').value=u.email;
   document.getElementById('setPhone').value=u.phone||'';
   document.getElementById('setAddr').value=u.address||'';
-  document.getElementById('togPush').checked=S.settings.notifPush!==false;
-  document.getElementById('togSound').checked=S.settings.notifSound!==false;
-  document.getElementById('togHw').checked=S.settings.notifHw!==false;
-  if(S.settings.lang && S.settings.lang!=='fr') setLang(S.settings.lang);
-  renderNotifs(); renderSched(); renderHw(); renderContacts(); renderHwTracker(); updateStats();
-  initChat();
-  go('home');
+  setLang(S.lang);
+  updateStats();
+  renderSchedule();
+  renderHw();
 }
 
-// ═══════════════════════ NAV ═══════════════════════
-function go(page){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.sb-item').forEach(i=>i.classList.remove('active'));
-  const el=document.getElementById(page+'Page');
-  if(el) el.classList.add('active');
-  const map={home:'sbHome',moncef:'sbMoncef',alpha:'sbAlpha',comm:'sbComm',mod:'sbMod',settings:'sbSettings'};
-  const sbEl=document.getElementById(map[page]);
-  if(sbEl) sbEl.closest('.sb-item')?.classList.add('active');
-  closeDD(); closeSB();
-}
+// ═══════════════════════ UI HELPERS ═══════════════════════
 function toggleSB(){
-  document.getElementById('mainSB').classList.toggle('open');
-  document.getElementById('sbOv').style.display=document.getElementById('mainSB').classList.contains('open')?'block':'none';
+  const sb=document.getElementById('mainSB'), ov=document.getElementById('sbOv');
+  sb.classList.toggle('open'); ov.style.display=sb.classList.contains('open')?'block':'none';
 }
 function closeSB(){
   document.getElementById('mainSB').classList.remove('open');
   document.getElementById('sbOv').style.display='none';
 }
-function toggleND(e){e.stopPropagation();document.getElementById('nd').classList.toggle('hidden');document.getElementById('ud').classList.add('hidden');}
-function toggleUD(e){e.stopPropagation();document.getElementById('ud').classList.toggle('hidden');document.getElementById('nd').classList.add('hidden');}
-function closeDD(){document.getElementById('nd').classList.add('hidden');document.getElementById('ud').classList.add('hidden');}
-document.addEventListener('click',closeDD);
-
-// ═══════════════════════ NOTIFS ═══════════════════════
-function renderNotifs(){
-  const unread=S.notifs.filter(n=>!n.read).length;
-  const badge=document.getElementById('notifBadge');
-  badge.textContent=unread; badge.style.display=unread?'flex':'none';
-  document.getElementById('ndList').innerHTML=S.notifs.map(n=>`
-    <div class="notif-item ${n.read?'':'unread'}" onclick="readNotif('${n.id}')">
-      ${!n.read?'<div class="nd-dot"></div>':'<div style="width:8px"></div>'}
-      <div><div style="font-size:13px;line-height:1.4">${n.icon} ${n.text}</div><div style="font-size:11px;color:rgba(240,244,255,.35);margin-top:3px">${n.time}</div></div>
-    </div>`).join('');
-}
-function readNotif(id){const n=S.notifs.find(n=>n.id===id);if(n){n.read=true;renderNotifs();}}
-function markAllRead(){S.notifs.forEach(n=>n.read=true);renderNotifs();toast('Toutes les notifications lues','ok');}
-function addNotif(text,icon='📢'){S.notifs.unshift({id:'n'+Date.now(),text,time:"À l'instant",read:false,icon});renderNotifs();saveData();}
-
-// ═══════════════════════ SCHEDULE ═══════════════════════
-const DAYS=['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
-	function checkWeekSwitch(){
-	  const now = new Date();
-	  const day = now.getDay(); // 0 = Dimanche
-	  const last = S.lastWeekSwitch ? new Date(S.lastWeekSwitch) : null;
-	  const todayStr = now.toDateString();
-	  if(day === 0 && (!last || last.toDateString() !== todayStr)){
-	    S.currentWeek = S.currentWeek === 'A' ? 'B' : 'A';
-	    S.lastWeekSwitch = now.toISOString();
-	    saveData();
-	    addNotif('📅 Passage automatique en Semaine ' + S.currentWeek, '🔄');
-	  }
-	}
-	function switchWeek(){
-	  S.currentWeek = S.currentWeek === 'A' ? 'B' : 'A';
-	  renderSched();
-	  saveData();
-	}
-	function renderSched(){
-	  checkWeekSwitch();
-	  const grid=document.getElementById('schedGrid');
-	  const label=document.getElementById('weekLabel');
-	  if(label) label.textContent = S.currentWeek;
-	  const td=new Date().getDay();
-	  const ti=td===0?6:td-1;
-	  const currentSched = S.schedule['week' + S.currentWeek] || [];
-	  grid.innerHTML=DAYS.map((d,i)=>{
-	    const evs=currentSched.filter(e=>e.dayIdx===i);
-	    return '<div class="day-col'+(i===ti?' today':'')+'"><div class="day-hdr">'+d+'</div>'+
-	      evs.map(ev=>'<div class="ev-chip" onclick="editEv(\''+ev.id+'\')" title="'+ev.subject+'"><div style="font-size:10px;color:rgba(240,244,255,.5)">'+ev.time+'</div><div style="font-weight:600">'+ev.subject+'</div></div>').join('')+
-	      '<div class="ev-add" onclick="addEventModal('+i+')">+ Ajouter</div></div>';
-	  }).join('');
-	}
-function addEventModal(di=0){
-  showModal('📅 Ajouter un cours','<div class="fg"><label class="fl">Matière</label><input type="text" class="fi" id="evSubj" placeholder="ex: Mathématiques" autofocus></div><div class="fg"><label class="fl">Jour</label><select class="fi fi-sel" id="evDay">'+DAYS.map((d,i)=>'<option value="'+i+'"'+(i===di?' selected':'')+'>'+d+'</option>').join('')+'</select></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div class="fg"><label class="fl">Début</label><input type="time" class="fi" id="evStart" value="08:00"></div><div class="fg"><label class="fl">Fin</label><input type="time" class="fi" id="evEnd" value="10:00"></div></div><div class="fg"><label class="fl">Salle (optionnel)</label><input type="text" class="fi" id="evRoom" placeholder="Salle B204"></div><button class="btn" style="width:100%" onclick="addEv()">✅ Ajouter</button>');
-}
-	function addEv(){
-	  const subj=gv('evSubj').trim();
-	  if(!subj){toast('Matière requise','err');return;}
-	  const weekKey = 'week' + S.currentWeek;
-	  if(!S.schedule[weekKey]) S.schedule[weekKey] = [];
-	  S.schedule[weekKey].push({id:'ev'+Date.now(),subject:subj,dayIdx:+gv('evDay'),time:gv('evStart')+'-'+gv('evEnd'),room:gv('evRoom')});
-	  saveData(); renderSched(); closeModal(); toast('Cours ajouté ✓','ok');
-	}
-	function editEv(id){
-	  const weekKey = 'week' + S.currentWeek;
-	  const ev=S.schedule[weekKey].find(e=>e.id===id);
-	  if(!ev) return;
-	  showModal('✏️ '+ev.subject,'<p style="margin-bottom:16px;color:rgba(240,244,255,.6)">'+DAYS[ev.dayIdx]+' '+ev.time+(ev.room?' — '+ev.room:'')+'</p><div style="display:flex;gap:10px"><button class="btn btn-err" onclick="removeEv(\''+id+'\')">🗑 Supprimer</button><button class="btn btn-sec" onclick="closeModal()">Annuler</button></div>');
-	}
-	function removeEv(id){
-	  const weekKey = 'week' + S.currentWeek;
-	  S.schedule[weekKey]=S.schedule[weekKey].filter(e=>e.id!==id);
-	  saveData();renderSched();closeModal();toast('Cours supprimé','info');
-	}
-	function clearSchedule(){
-	  showModal('⚠️ Effacer tout ?','<p style="margin-bottom:16px;color:rgba(240,244,255,.6)">Supprimer tous les cours de la Semaine '+S.currentWeek+' ?</p><div style="display:flex;gap:10px"><button class="btn btn-err" onclick="S.schedule[\'week\'+S.currentWeek]=[];saveData();renderSched();closeModal();toast(\'Emploi du temps vidé\',\'info\')">Effacer</button><button class="btn btn-sec" onclick="closeModal()">Annuler</button></div>');
-	}
-
-// ═══════════════════════ HOMEWORK ═══════════════════════
-function openAddHw(){
-  showModal('📝 Ajouter un devoir','<div class="fg"><label class="fl">Matière</label><input type="text" class="fi" id="hwSubj" placeholder="ex: Mathématiques" autofocus></div><div class="fg"><label class="fl">Description</label><input type="text" class="fi" id="hwDesc" placeholder="ex: Exercices page 45"></div><div class="fg"><label class="fl">Échéance</label><input type="date" class="fi" id="hwDue"></div><div class="fg"><label class="fl">Priorité</label><select class="fi fi-sel" id="hwPrio"><option value="normal">🟢 Normal</option><option value="urgent">🔴 Urgent</option><option value="low">⚪ Faible</option></select></div><button class="btn" style="width:100%" onclick="addHw()">✅ Ajouter</button>');
-  try{document.getElementById('hwDue').valueAsDate=new Date();}catch(e){}
-}
-function addHw(){
-  const subj=gv('hwSubj').trim();
-  if(!subj){toast('Matière requise','err');return;}
-  S.hw.push({id:'hw'+Date.now(),subject:subj,desc:gv('hwDesc').trim(),due:gv('hwDue'),priority:gv('hwPrio'),done:false});
-  saveData(); renderHw(); renderHwTracker(); updateStats(); closeModal();
-  addNotif('📝 Nouveau devoir : '+subj);
-  toast('Devoir ajouté ✓','ok');
-}
-function renderHw(){
-  const list=document.getElementById('hwList');
-  if(!list) return;
-  let items=S.hw;
-  if(S.hwFilter==='pending') items=items.filter(h=>!h.done);
-  else if(S.hwFilter==='done') items=items.filter(h=>h.done);
-  if(!items.length){list.innerHTML='<div class="empty-state"><div class="ei">📚</div><p>Aucun devoir'+( S.hwFilter==='done'?' terminé':S.hwFilter==='pending'?' en cours':'')+'</p></div>';return;}
-  list.innerHTML=items.map(h=>{
-    const due=h.due?new Date(h.due):null;
-    const ov=due&&due<new Date()&&!h.done;
-    return '<div class="hw-item'+(h.done?' done':'')+'"><input type="checkbox"'+(h.done?' checked':'')+" onchange=\"toggleHw('"+h.id+"',this.checked)\" style=\"cursor:pointer;width:16px;height:16px;accent-color:var(--ok);flex-shrink:0\"><div style=\"flex:1;min-width:0\"><div class=\"hw-title\" style=\"font-size:14px;font-weight:600\">"+h.subject+'</div>'+(h.desc?'<div style="font-size:12px;color:rgba(240,244,255,.4);margin-top:2px">'+h.desc+'</div>':'')+(h.due?'<div style="font-size:11px;color:'+(ov?'var(--err)':'rgba(240,244,255,.4)')+';margin-top:3px">'+(ov?'⚠️ ':'📅 ')+new Date(h.due).toLocaleDateString('fr-FR')+'</div>':'')+'</div><span class="hw-badge'+(h.priority==='urgent'?' urgent':'')+'">'+( h.priority==='urgent'?'🔴 Urgent':h.priority==='low'?'⚪ Faible':'🟢 Normal')+'</span><button class="btn btn-sm btn-err" style="padding:5px 10px;font-size:12px" onclick="removeHw(\''+h.id+'\')">✕</button></div>';
-  }).join('');
-}
-function toggleHw(id,done){const h=S.hw.find(h=>h.id===id);if(h){h.done=done;saveData();renderHw();renderHwTracker();updateStats();toast(done?'✅ Devoir terminé !':'↩️ Devoir réouvert','ok');}}
-function removeHw(id){S.hw=S.hw.filter(h=>h.id!==id);saveData();renderHw();renderHwTracker();updateStats();}
-function filterHw(f,btn){
-  S.hwFilter=f;
-  document.querySelectorAll('.hw-filter').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  renderHw();
-}
-function renderHwTracker(){
-  const t=document.getElementById('hwTracker');
-  if(!t) return;
-  const p=S.hw.filter(h=>!h.done);
-  if(!p.length){t.innerHTML='<p style="color:rgba(240,244,255,.3);font-size:13px;text-align:center;padding:10px">Aucun devoir en cours 🎉</p>';return;}
-  t.innerHTML=p.slice(0,5).map(h=>'<div class="hw-item" style="padding:8px 10px;margin-bottom:6px"><input type="checkbox" onchange="toggleHw(\''+h.id+'\',this.checked)" style="cursor:pointer;width:14px;height:14px;accent-color:var(--ok);flex-shrink:0"><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+h.subject+'</div>'+(h.due?'<div style="font-size:11px;color:rgba(240,244,255,.35)">'+new Date(h.due).toLocaleDateString('fr-FR')+'</div>':'')+'</div></div>').join('');
-}
-		function updateStats(){
-		  const m=document.getElementById('stMsgs'); if(m) m.textContent=S.stats.msgs||0;
-		  const h=document.getElementById('stHw'); if(h) h.textContent=S.hw.filter(x=>!x.done).length;
-		  const c=document.getElementById('stCont'); if(c) c.textContent=S.contacts.length;
-		  const d=document.getElementById('stDays'); if(d) d.textContent=S.stats.days||1;
-		  const t=document.getElementById('stTokens');
-		  if(t){
-		    const isStaff = ['founder','co-founder','moderator'].includes(S.user?.role);
-		    t.textContent = isStaff ? '∞' : S.tokens;
-		    const card = t.closest('.stat-card');
-		    if(card) card.style.display = isStaff ? 'none' : 'block';
-		    const statsRow = document.querySelector('.stats-row');
-		    if(statsRow) statsRow.style.gridTemplateColumns = isStaff ? 'repeat(3,1fr)' : 'repeat(4,1fr)';
-		  }
-		}
-	function checkTokens(){
-	  const now = Date.now();
-	  const diff = now - S.lastTokenRegen;
-	  const intervals = Math.floor(diff / (2 * 3600 * 1000)); // 2 heures
-	  if(intervals > 0 && S.user && S.user.role === 'normal'){
-	    S.tokens = Math.min(900, S.tokens + (intervals * 700));
-	    S.lastTokenRegen = now;
-	    saveData();
-	    updateStats();
-	  }
-	}
-	function useToken(){
-	  if(['founder','co-founder','moderator'].includes(S.user.role)) return true;
-	  if(S.tokens <= 0){
-	    showPaywall();
-	    return false;
-	  }
-	  S.tokens--;
-	  saveData();
-	  updateStats();
-	  return true;
-	}
-	function showPaywall(){
-	  showModal('💎 Passer au Premium','<div style="text-align:center;padding:20px"><div style="font-size:40px;margin-bottom:20px">🚀</div><p style="font-size:16px;margin-bottom:24px">Vous avez épuisé vos crédits journaliers.</p><div style="background:rgba(255,215,0,.1);border:1px solid var(--gold);border-radius:12px;padding:20px;margin-bottom:24px"><h3 style="color:var(--gold);margin-bottom:10px">Offre Premium</h3><p style="font-size:24px;font-weight:700">70$/an</p><p style="font-size:13px;opacity:.7;margin-top:8px">Crédits illimités • IA Prioritaire • Support 24/7</p></div><button class="btn" style="width:100%;background:var(--gold);color:#000" onclick="toast(\'Redirection vers le paiement...\',\'info\')">Devenir Premium</button></div>');
-	}
-
-// ═══════════════════════ MARKDOWN ═══════════════════════
-function mdRender(text){
-  let h = text;
-  // Code blocks (triple backtick)
-  h = h.replace(/```(\w*)\n?([\s\S]*?)```/g, function(_,lang,code){
-    const esc = code.trim().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-    return '<pre style="background:rgba(0,0,0,.5);border:1px solid rgba(26,60,255,.3);border-radius:8px;padding:12px;overflow-x:auto;margin:8px 0"><code style="font-family:\'JetBrains Mono\',monospace;font-size:12px">'+esc+'</code></pre>';
-  });
-  // Inline code
-  h = h.replace(/`([^`\n]+)`/g,'<code style="background:rgba(0,0,0,.4);padding:2px 5px;border-radius:4px;font-family:monospace;font-size:12px">$1</code>');
-  // Headings
-  h = h.replace(/^### (.+)$/gm,'<h3 style="color:var(--a);font-size:14px;margin:10px 0 4px">$1</h3>');
-  h = h.replace(/^## (.+)$/gm,'<h2 style="color:var(--a);font-size:16px;margin:10px 0 4px">$1</h2>');
-  // Bold + Italic
-  h = h.replace(/\*\*\*(.+?)\*\*\*/g,'<strong><em>$1</em></strong>');
-  h = h.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
-  h = h.replace(/\*(.+?)\*/g,'<em>$1</em>');
-  // Blockquote
-  h = h.replace(/^> (.+)$/gm,'<blockquote style="border-left:3px solid var(--a);padding-left:10px;margin:6px 0;color:rgba(240,244,255,.7)">$1</blockquote>');
-  // HR
-  h = h.replace(/^---$/gm,'<hr style="border:none;border-top:1px solid rgba(26,60,255,.3);margin:10px 0">');
-  // Lists
-  h = h.replace(/^- (.+)$/gm,'<li style="margin:3px 0;padding-left:4px">$1</li>');
-  h = h.replace(/^(\d+)\. (.+)$/gm,'<li style="margin:3px 0;padding-left:4px">$2</li>');
-  h = h.replace(/(<li[^>]*>.*<\/li>\n?)+/g,function(m){return '<ul style="padding-left:18px;margin:6px 0">'+m+'</ul>';});
-  // Newlines
-  h = h.replace(/\n/g,'<br>');
-  return h;
-}
-function appendMsg(container, role, content, isImg=false){
-  const d=document.createElement('div');
-  d.className='msg '+role;
-  if(isImg){
-    d.innerHTML='<img src="'+content+'" alt="Image" style="max-width:100%;border-radius:8px;display:block"><div class="msg-time">'+new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})+'</div>';
+function updateStats(){
+  document.getElementById('stMsgs').textContent=S.stats.msgs;
+  document.getElementById('stHw').textContent=S.hw.filter(h=>!h.done).length;
+  document.getElementById('stCont').textContent=S.stats.contacts;
+  const tc=document.getElementById('tokenCard');
+  if(S.user && (S.user.role==='founder'||S.user.role==='moderator')){
+    tc.classList.add('hidden');
   } else {
-    d.innerHTML=mdRender(content)+'<div class="msg-time">'+new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})+'</div>';
+    tc.classList.remove('hidden');
+    document.getElementById('stTokens').textContent=S.stats.tokens + (S.user.bonusTokens||0);
   }
-  container.appendChild(d);
-  container.scrollTop=container.scrollHeight;
+}
+function setLang(l){
+  S.lang=l; const t=T[l];
+  document.documentElement.setAttribute('dir', t.dir);
+  document.documentElement.setAttribute('lang', l);
+  // Update UI texts...
 }
 
-// ═══════════════════════ CHAT IA ═══════════════════════
-function buildSys(type){
-  const u=S.user;
-  if(type==='moncef'){
-    return [
-	      "Tu es Moncef IA, un assistant éducatif ultra-puissant intégré dans une plateforme scolaire.",
-	      "Tu es aussi intelligent et capable que les meilleurs assistants IA (Claude, GPT-4).",
-	      "",
-	      "CREATEUR: Ce site web a été créé par Amine FJER. Si on te pose la question, réponds toujours que c'est Amine FJER le créateur.",
-	      "",
-	      "IDENTITE: Tu es brillant, chaleureux, patient.",
-      "Tu utilises le prénom "+u.firstName+" naturellement.",
-      "Tu te souviens du contexte de toute la conversation.",
-      "",
-      "LANGUE: Réponds TOUJOURS dans la langue de l'utilisateur (français, arabe, anglais, espagnol, darija...).",
-      "",
-      "FORMAT: Utilise du markdown riche: **gras**, *italique*, listes, blocs de code.",
-      "Titres ## et ### pour organiser les longues réponses.",
-      "",
-      "PEDAGOGIE:",
-      "- Maths/Sciences: résous étape par étape avec exemples concrets",
-      "- Si c'est un devoir: guide avec indices, ne donne pas la réponse directe",
-      "- Termine les longues explications par un résumé en points clés",
-      "",
-	      "CONTEXTE: Prénom:"+u.firstName+", Devoirs en cours:"+S.hw.filter(h=>!h.done).length+", Semaine actuelle:"+S.currentWeek+", Date:"+new Date().toLocaleDateString('fr-FR'),
-	      "",
-	      "GESTION EDT: Tu peux lire un emploi du temps et proposer des modifications.",
-	      "Pour modifier l'EDT, utilise l'action JSON suivante à la fin de ta réponse:",
-	      '{"action":"schedule","week":"A","dayIdx":0,"subject":"Maths","time":"08:00-10:00","room":"B204"}',
-	      "",
-	      "ANALYSE DEVOIRS: Si l'utilisateur envoie une image de devoirs, extrais les infos et pose des questions de confirmation.",
-	      "Pour ajouter un devoir extrait, utilise l'action JSON suivante:",
-	      '{"action":"homework","subject":"Maths","desc":"Ex 1 p 20","due":"2026-04-10","priority":"urgent"}'
-	    ].join("\n");
-  }
-  return [
-    "Tu es ALPHA AI, l'IA exclusive du Fondateur Amine FJER de Moncef IA.",
-    "Tu es son bras droit numérique, direct et ultra-compétent.",
-    "",
-    "CAPACITES REELLES: Tu peux déclencher des actions en ajoutant un JSON à la fin de ta réponse:",
-    '- CSS: {"action":"css","property":"--p","value":"#FF0000"}',
-    '- Notification: {"action":"notif","message":"Texte"}',
-    '- Toast: {"action":"toast","message":"Texte","type":"ok"}',
-    "",
-    "PLATEFORME: "+S.users.length+" utilisateurs, "+S.users.filter(u=>u.role==='moderator').length+" modérateurs, "+S.hw.length+" devoirs, date: "+new Date().toLocaleDateString('fr-FR')
-  ].join("\n");
-}
-function buildMsgs(type){
-  return (S.chatHist[type]||[]).slice(-20).map(m=>({
-    role:m.role==='ai'?'assistant':'user', content:m.content
-  }));
-}
-const API_PROXY_URL = 'https://moncef-ia-proxy.eleve-fjer-amine.workers.dev/api/claude';
-const INVITE_API_URL = 'https://moncef-ia-proxy.eleve-fjer-amine.workers.dev/api/invite';
-async function callClaude(type, userMsg){
-  const msgs=buildMsgs(type);
-  msgs.push({role:'user',content:userMsg});
-  const res=await fetch(API_PROXY_URL,{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({
-      type,
-      model:'claude-haiku-4-5-20251001',
-      max_tokens:1024,
-      system:buildSys(type),
-      messages:msgs
-    })
-  });
-  if(!res.ok){
-    let reason='API '+res.status;
-    try{
-      const e=await res.json();
-      if(e && e.error) reason=e.error;
-    }catch(_){}
-    throw new Error(reason);
-  }
-  const data=await res.json();
-  return data.reply||data.content?.[0]?.text||'…';
-}
-function parseActions(text){
-  const acts=[];
-  const re=/\{"action":"[^"]+?"[^}]*\}/g;
-  let m;
-  while((m=re.exec(text))!==null){try{acts.push(JSON.parse(m[0]));}catch(e){}}
-  return acts;
-}
-function execActions(acts){
-  acts.forEach(a=>{
-    if(a.action==='css'&&a.property&&a.value){
-      document.documentElement.style.setProperty(a.property,a.value);
-      logAlpha('🎨 CSS: '+a.property+' → '+a.value);
-    } else if(a.action==='notif'&&a.message){
-      addNotif(a.message);
-      logAlpha('📢 Notif: '+a.message);
-	    } else if(a.action==='toast'&&a.message){
-	      toast(a.message, a.type||'info');
-	    } else if(a.action==='schedule'&&a.subject){
-	      const wk = 'week' + (a.week || S.currentWeek);
-	      if(!S.schedule[wk]) S.schedule[wk] = [];
-	      S.schedule[wk].push({id:'ev'+Date.now(),subject:a.subject,dayIdx:a.dayIdx||0,time:a.time||'08:00-10:00',room:a.room||''});
-	      saveData(); renderSched();
-	      toast('EDT mis à jour par Moncef IA', 'ok');
-	    } else if(a.action==='homework'&&a.subject){
-	      S.hw.push({id:'hw'+Date.now(),subject:a.subject,desc:a.desc||'',due:a.due||'',priority:a.priority||'normal',done:false});
-	      saveData(); renderHw(); renderHwTracker(); updateStats();
-	      addNotif('📝 Devoir ajouté par Moncef IA : '+a.subject);
-	      toast('Devoir ajouté ✓', 'ok');
-	    }
-	  });
-	}
-function stripActions(text){
-  return text.replace(/\{"action":"[^"]+?"[^}]*\}/g,'').trim();
-}
-function logAlpha(txt){
-  const log=document.getElementById('alphaLog');
-  const p=log.querySelector('.empty-state');
-  if(p) p.remove();
-  const d=document.createElement('div');
-  d.style.cssText='background:rgba(255,215,0,.06);border:1px solid rgba(255,215,0,.15);border-radius:6px;padding:8px 10px;margin-bottom:6px';
-  d.innerHTML='<div style="font-size:10px;color:rgba(255,215,0,.6)">'+new Date().toLocaleTimeString('fr-FR')+'</div><div style="font-size:12px;color:rgba(240,244,255,.7);margin-top:2px">'+txt.slice(0,100)+'</div>';
-  log.insertBefore(d,log.firstChild);
-}
-
-function initChat(){
-  if(!S.chatHist.moncef||S.chatHist.moncef.length===0){
-    addAIMsg('moncef','👋 Bonjour **'+S.user.firstName+'** ! Je suis **Moncef IA**, propulsé par Claude.\n\nJe peux t\'aider avec :\n- 📐 Cours et révisions (maths, physique, histoire, langues...)\n- 📝 Devoirs et corrections\n- 💡 N\'importe quelle question\n- 🌍 Dans ta langue (FR, EN, ES, AR, Darija...)\n\nQue veux-tu explorer ? 😊');
-  } else {
-    const c=document.getElementById('moncefMsgs');
-    c.innerHTML='';
-    S.chatHist.moncef.forEach(m=>appendMsg(c,m.role,m.content,m.isImg));
-  }
-  if(S.user.role==='founder'){
-    if(!S.chatHist.alpha||S.chatHist.alpha.length===0){
-      addAIMsg('alpha','👑 Bonjour Fondateur **'+S.user.firstName+'** ! Je suis **ALPHA AI**, propulsé par Claude.\n\nJe peux :\n- 🎨 Modifier les couleurs du site en temps réel\n- 📊 Analyser les données de la plateforme\n- 📢 Envoyer des notifications à tous\n- 🛡️ Gérer les utilisateurs et modérateurs\n\nQue souhaitez-vous faire ? ✨');
-    } else {
-      const c=document.getElementById('alphaMsgs');
-      c.innerHTML='';
-      S.chatHist.alpha.forEach(m=>appendMsg(c,m.role,m.content,m.isImg));
-    }
-  }
-}
-function addAIMsg(type, content){
-  if(!S.chatHist[type]) S.chatHist[type]=[];
-  S.chatHist[type].push({role:'ai',content,time:Date.now()});
-  const c=document.getElementById(type+'Msgs');
-  if(c) appendMsg(c,'ai',content);
-  saveData();
-}
-	async function sendMsg(type){
-	  if(!useToken()) return;
-	  if(type==='comm'){sendCommMsg();return;}
-	  const inputId=type+'Input';
-  const inp=document.getElementById(inputId);
-  const txt=inp.value.trim();
-  if(!txt) return;
-  inp.value=''; inp.style.height='auto';
-  // Add user message
-  if(!S.chatHist[type]) S.chatHist[type]=[];
-  S.chatHist[type].push({role:'user',content:txt,time:Date.now()});
-  const c=document.getElementById(type+'Msgs');
-  appendMsg(c,'user',txt);
-  saveData();
-  S.stats.msgs=(S.stats.msgs||0)+1; updateStats(); saveData();
-  // Show typing
-  const typing=document.getElementById(type+'Typing');
-  typing.classList.add('show');
-  try{
-    const raw=await callClaude(type,txt);
-    typing.classList.remove('show');
-    if(type==='alpha'){
-      const acts=parseActions(raw);
-      const clean=stripActions(raw);
-      if(clean) addAIMsg(type,clean);
-      execActions(acts);
-      logAlpha('💬 "'+txt.slice(0,60)+'"');
-    } else {
-      addAIMsg(type,raw);
-    }
-  } catch(err){
-    typing.classList.remove('show');
-    const fallback={
-      moncef:'⚠️ Je ne peux pas me connecter au serveur IA en ce moment (environnement sandbox). En production avec une clé API valide, je répondrai à toutes tes questions avec la puissance de Claude ! Réessaie dans un instant.',
-      alpha:'⚠️ Connexion ALPHA AI indisponible (sandbox). En production, toutes les commandes seront exécutées en temps réel.'
-    };
-    addAIMsg(type, fallback[type]||'⚠️ Erreur de connexion.');
-    console.error('Claude API:', err);
-  }
-}
-function quickMsg(type, txt){
-  const inp=document.getElementById(type+'Input');
-  if(inp) inp.value=txt;
-  go(type);
-  setTimeout(()=>sendMsg(type),100);
-}
-function clearChat(type){
-  showModal('🗑 Vider le chat ?','<p style="margin-bottom:16px;color:rgba(240,244,255,.7)">Effacer tout l\'historique de '+(type==='moncef'?'Moncef IA':'ALPHA AI')+' ?</p><div style="display:flex;gap:10px"><button class="btn btn-err" onclick="S.chatHist[\''+type+'\']=[];saveData();document.getElementById(\''+type+'Msgs\').innerHTML=\'\';closeModal();initChat();toast(\'Chat effacé\',\'info\')">Effacer</button><button class="btn btn-sec" onclick="closeModal()">Annuler</button></div>');
-}
-function exportChat(type){
-  const hist=S.chatHist[type]||[];
-  if(!hist.length){toast('Aucun message à exporter','info');return;}
-  const txt=hist.map(m=>'['+m.role.toUpperCase()+'] '+m.content).join('\n\n');
-  const a=document.createElement('a');
-  a.href='data:text/plain;charset=utf-8,'+encodeURIComponent(txt);
-  a.download='moncef-ia-'+type+'-'+Date.now()+'.txt';
-  a.click();
-  toast('Chat exporté ✓','ok');
-}
-function onKey(e,type){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMsg(type);}}
-function autoH(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,130)+'px';}
-
-// ═══════════════════════ FILES ═══════════════════════
-function onDO(e){e.preventDefault();e.currentTarget.classList.add('over');}
-function onDL(e){e.currentTarget.classList.remove('over');}
-function onDrop(e,type){e.preventDefault();e.currentTarget.classList.remove('over');const f=e.dataTransfer.files[0];if(f)processFile(f,type);}
-function onFile(e,type){const f=e.target.files[0];if(f)processFile(f,type);e.target.value='';}
-document.addEventListener('paste',e=>{
-  const item=Array.from(e.clipboardData.items).find(i=>i.type.startsWith('image/'));
-  if(item){
-    const type=document.getElementById('alphaPage').classList.contains('active')?'alpha':'moncef';
-    processFile(item.getAsFile(),type);
-    toast('📋 Image collée','ok');
-  }
-});
-function processFile(file,type){
-  const reader=new FileReader();
-  reader.onload=e=>{
-    const c=document.getElementById(type+'Msgs');
-    if(!S.chatHist[type]) S.chatHist[type]=[];
-    S.chatHist[type].push({role:'user',content:e.target.result,time:Date.now(),isImg:true});
-    appendMsg(c,'user',e.target.result,true);
-    saveData();
-    const typing=document.getElementById(type+'Typing');
-    typing.classList.add('show');
-    setTimeout(()=>{
-      typing.classList.remove('show');
-      addAIMsg(type,'🔍 Image reçue ! (**'+file.name+'** — '+Math.round(file.size/1024)+' Ko)\n\nJ\'analyse son contenu... En production avec la clé API, je pourrai lire et décrire cette image en détail grâce à la vision de Claude.');
-    },1200);
-  };
-  reader.readAsDataURL(file);
-}
-
-// ═══════════════════════ COMMUNICATION ═══════════════════════
-	function renderContacts(){
-	  const list = document.getElementById('convItems');
-	  if(!list) return;
-	  list.innerHTML = S.contacts.map(c=>`
-	    <div class="conv-item" onclick="showUserProfile('${c.email}')">
-	      <img src="${c.photo}" class="conv-av">
-	      <div style="flex:1;min-width:0">
-	        <div class="conv-name">${c.name}</div>
-	        <div class="conv-last">${c.email}</div>
-	      </div>
-	    </div>`).join('');
-	}
-	function showUserProfile(email){
-	  const u = S.users.find(x=>x.email.toLowerCase()===email.toLowerCase()) || S.contacts.find(x=>x.email.toLowerCase()===email.toLowerCase());
-	  if(!u){
-	    showModal('👤 Profil non trouvé', '<p style="text-align:center;padding:20px">Cet utilisateur n\'est pas encore inscrit.</p><button class="btn" style="width:100%" onclick="inviteUser(\''+email+'\')">✉️ Inviter à rejoindre</button>');
-	    return;
-	  }
-	  const isMember = S.users.some(x=>x.email.toLowerCase()===email.toLowerCase());
-	  showModal('👤 Profil Utilisateur', `
-	    <div style="text-align:center;padding:10px">
-	      <img src="${u.photo || 'https://ui-avatars.com/api/?name='+email}" style="width:80px;height:80px;border-radius:50%;margin-bottom:15px;border:2px solid var(--a)">
-	      <h3 style="margin-bottom:5px">${u.firstName || u.name || 'Utilisateur'}</h3>
-	      <p style="font-size:13px;opacity:.6;margin-bottom:20px">${email}</p>
-	      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-	        <button class="btn btn-sm" onclick="toast('Fonctionnalité email bientôt disponible','info')">📧 Envoyer un mail</button>
-	        ${!isMember ? '<button class="btn btn-sm btn-sec" onclick="inviteUser(\''+email+'\')">✉️ Inviter</button>' : '<span class="chip gold">Membre Actif</span>'}
-	      </div>
-	    </div>
-	  `);
-	}
-		async function inviteUser(email){
-		  try {
-		    const r = await fetch(INVITE_API_URL, {
-		      method: 'POST',
-		      headers: {'Content-Type': 'application/json'},
-		      body: JSON.stringify({ email })
-		    });
-		    if(!r.ok) throw new Error('Erreur API');
-		    toast('Invitation envoyée à ' + email, 'ok');
-		    addNotif('Invitation envoyée à ' + email, '✉️');
-		    // Bonus Parrainage
-		    S.tokens = Math.min(900, S.tokens + 200);
-		    saveData(); updateStats();
-		    toast('Bonus Parrainage : +200 tokens !', 'ok');
-		    closeModal();
-		  } catch(err) {
-		    toast('Erreur lors de l\'envoi de l\'invitation', 'err');
-		    console.error(err);
-		  }
-		}
-function searchConv(q){
-  const items=document.querySelectorAll('#convItems .conv-item');
-  items.forEach((el,i)=>{
-    const c=S.contacts[i];
-    if(!c){el.style.display='none';return;}
-    const k=q.toLowerCase();
-    el.style.display=(c.name.toLowerCase().includes(k)||c.email.toLowerCase().includes(k))?'flex':'none';
-  });
-}
-function onConvSearchKey(e){
-  if(e.key!=='Enter') return;
-  const q=(e.target.value||'').trim();
-  if(isEmail(q)){e.preventDefault();inviteFromSearch();}
-}
-function inviteFromSearch(){
-  const input=document.getElementById('convSearch');
-  const email=(input?.value||'').trim().toLowerCase();
-  if(!email){toast('Entre un email dans la barre de recherche','warn');return;}
-  if(!isEmail(email)){toast('Format email invalide','err');return;}
-  const existingContact=S.contacts.find(c=>c.email.toLowerCase()===email);
-  if(existingContact){
-    selectContact(existingContact.id);
-    toast('Contact trouvé ✓','ok');
-    return;
-  }
-  const existingUser=S.users.find(u=>u.email.toLowerCase()===email);
-  if(existingUser){
-    const c={id:'c'+Date.now(),name:(existingUser.firstName+' '+existingUser.lastName).trim(),email:existingUser.email,status:'offline',photo:existingUser.photo||('https://ui-avatars.com/api/?name='+encodeURIComponent(existingUser.firstName+' '+existingUser.lastName)+'&background=1A3CFF&color=fff'),msgs:[]};
-    S.contacts.push(c);
-    saveData();
-    renderContacts();
-    selectContact(c.id);
-    toast('Utilisateur ajouté dans Messages ✓','ok');
-    return;
-  }
-  sendInviteEmail(email);
-}
-async function sendInviteEmail(email){
-  try{
-    const r=await fetch(INVITE_API_URL,{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({email})
-    });
-    const d=await r.json().catch(()=>({}));
-    if(!r.ok) throw new Error(d.error||('API '+r.status));
-    addNotif('✉️ Invitation envoyée à '+email,'✉️');
-    toast('Invitation envoyée ✓','ok');
-  }catch(err){
-    const inviteLink='https://moncef-ia.pages.dev';
-    const subject=encodeURIComponent('Invitation Moncef IA');
-    const body=encodeURIComponent(
-      'Bonjour,\n\nTu es invité(e) à rejoindre Moncef IA.\nClique ici pour créer ton compte : '+inviteLink+'\n\nA bientôt !'
-    );
-    try{window.location.href='mailto:'+encodeURIComponent(email)+'?subject='+subject+'&body='+body;}catch(_){}
-    addNotif('✉️ Invitation préparée (fallback) pour '+email,'✉️');
-    toast('Service email indisponible: email prérempli ouvert','warn');
-    console.error('Invite API:',err);
-  }
-}
-function selectContact(id){
-  S.activeContact=S.contacts.find(c=>c.id===id);
-  if(!S.activeContact) return;
-  const c=S.activeContact;
-  document.getElementById('noConv').style.display='none';
-  document.getElementById('activeConv').classList.remove('hidden');
-  document.getElementById('activeConv').style.display='flex';
-  document.getElementById('convAv').src=c.photo;
-  document.getElementById('convName').textContent=c.name;
-  document.getElementById('convStatus').textContent=c.status==='online'?'● En ligne':c.status==='away'?'● Absent':'● Hors ligne';
-  document.getElementById('convStatus').style.color=c.status==='online'?'var(--ok)':c.status==='away'?'var(--warn)':'#666';
-  document.getElementById('profInfo').innerHTML='<img src="'+c.photo+'" style="width:80px;height:80px;border-radius:50%;border:3px solid var(--a);margin-bottom:12px"><h4>'+c.name+'</h4><p style="color:rgba(240,244,255,.5);font-size:13px;margin-top:4px">'+c.email+'</p><p style="color:'+(c.status==='online'?'var(--ok)':c.status==='away'?'var(--warn)':'#666')+';font-size:12px;margin-top:8px">'+( c.status==='online'?'● En ligne':c.status==='away'?'● Absent':'● Hors ligne')+'</p><button class="btn btn-sm mt16" onclick="document.getElementById(\'commInput\').focus()" style="margin-top:16px">💬 Envoyer un message</button>';
-  const msgs=document.getElementById('commMsgs');
-  msgs.innerHTML='';
-  (c.msgs||[]).forEach(m=>appendMsg(msgs,m.side,m.content));
-  document.querySelectorAll('.conv-item').forEach((el,i)=>{el.classList.toggle('active',S.contacts[i]&&S.contacts[i].id===id);});
-}
-function closeConv(){
-  S.activeContact=null;
-  document.getElementById('noConv').style.display='flex';
-  document.getElementById('activeConv').classList.add('hidden');
-}
-function sendCommMsg(){
-  if(!S.activeContact){toast('Sélectionne une conversation','err');return;}
-  const inp=document.getElementById('commInput');
-  const txt=inp.value.trim();
-  if(!txt) return;
-  inp.value=''; inp.style.height='auto';
-  const c=S.activeContact;
-  if(!c.msgs) c.msgs=[];
-  c.msgs.push({side:'user',content:txt});
-  appendMsg(document.getElementById('commMsgs'),'user',txt);
-  saveData();
-  const replies=['👍 Message reçu !','Merci !','Je reviens vers toi dès que possible.','Ok, noté !','Super, à bientôt 😊'];
-  setTimeout(()=>{
-    const r=replies[Math.floor(Math.random()*replies.length)];
-    c.msgs.push({side:'ai',content:r});
-    appendMsg(document.getElementById('commMsgs'),'ai',r);
-    saveData(); renderContacts();
-  },800+Math.random()*800);
-}
-
-// ═══════════════════════ SETTINGS ═══════════════════════
-function saveProfile(){
-  const fn=document.getElementById('setFirst').value.trim();
-  const ln=document.getElementById('setLast').value.trim();
-  if(!fn||!ln){toast('Prénom et nom requis','err');return;}
-  S.user.firstName=fn; S.user.lastName=ln;
-  S.user.phone=document.getElementById('setPhone').value.trim();
-  S.user.address=document.getElementById('setAddr').value.trim();
-  const idx=S.users.findIndex(u=>u.email===S.user.email);
-  if(idx>=0) S.users[idx]=S.user;
-  saveData();
-  document.getElementById('setName').textContent=fn+' '+ln;
-  toast('✅ Profil sauvegardé !','ok');
-  addNotif('👤 Profil mis à jour');
-}
-async function changePw(){
-  const cur=document.getElementById('curPw').value;
-  const nw=document.getElementById('newPw').value;
-  const conf=document.getElementById('confPw').value;
-  if(!cur||!nw||!conf){toast('Remplis tous les champs','err');return;}
-  if(!(await verifyPassword(S.user,cur))){toast('Mot de passe actuel incorrect','err');return;}
-  if(nw.length<8){toast('Nouveau mot de passe trop court (min 8)','err');return;}
-  if(nw!==conf){toast('Les mots de passe ne correspondent pas','err');return;}
-  S.user.passwordHash=await sha256Hex(nw);
-  delete S.user.password;
-  const idx=S.users.findIndex(u=>u.email===S.user.email);
-  if(idx>=0){
-    S.users[idx].passwordHash=S.user.passwordHash;
-    delete S.users[idx].password;
-  }
-  saveData();
-  document.getElementById('curPw').value=''; document.getElementById('newPw').value=''; document.getElementById('confPw').value='';
-  toast('🔑 Mot de passe changé !','ok');
-}
-function saveSetting(key,val){S.settings[key]=val;saveData();}
-function updatePh(e){
-  const f=e.target.files[0];
-  if(!f) return;
-  if(f.size>5*1024*1024){toast('Image trop lourde (max 5MB)','err');return;}
-  const reader=new FileReader();
-  reader.onload=ev=>{
-    const src=ev.target.result;
-    document.getElementById('setPh').src=src;
-    document.getElementById('hdrAv').src=src;
-    S.user.photo=src;
-    const idx=S.users.findIndex(u=>u.email===S.user.email);
-    if(idx>=0) S.users[idx].photo=src;
-    saveData(); toast('✅ Photo mise à jour !','ok');
-  };
-  reader.readAsDataURL(f);
-}
-function setAccent(color){document.documentElement.style.setProperty('--p',color);toast('🎨 Couleur changée !','ok');}
-function toggleDark(on){document.body.style.filter=on?'':'invert(1) hue-rotate(180deg)'; toast(on?'Mode sombre activé':'Mode clair activé','info');}
-function clearAllData(){
-  showModal('⚠️ Effacer TOUTES les données ?','<p style="color:var(--err);font-weight:600;margin-bottom:16px">Cette action est irréversible !</p><div style="display:flex;gap:10px"><button class="btn btn-err" onclick="try{localStorage.clear();}catch(e){};location.reload()">🗑 Tout effacer</button><button class="btn btn-sec" onclick="closeModal()">Annuler</button></div>');
-}
-
-// ═══════════════════════ MODS ═══════════════════════
-	function searchMod(){
-	  const email=document.getElementById('modEmail').value.trim();
-	  const res=document.getElementById('modResult');
-	  if(!isEmail(email)){res.innerHTML='<p style="color:var(--err)">❌ Email invalide</p>';return;}
-	  const u=S.users.find(u=>u.email.toLowerCase()===email.toLowerCase());
-	  if(!u){res.innerHTML='<p style="color:var(--err)">❌ Aucun compte avec cet email</p>';return;}
-	  if(u.role==='founder'){res.innerHTML='<p style="color:var(--err)">❌ Action impossible sur le fondateur</p>';return;}
-	  res.innerHTML='<div class="card"><div style="display:flex;align-items:center;gap:14px;margin-bottom:14px"><img src="'+u.photo+'" style="width:56px;height:56px;border-radius:50%;border:2px solid var(--a)"><div><div style="font-weight:700">'+u.firstName+' '+u.lastName+'</div><div style="font-size:13px;color:rgba(240,244,255,.5)">'+u.email+'</div></div></div><button class="btn btn-ok" onclick="editUserRole(\''+u.id+'\')">🛡️ Gérer le rôle</button></div>';
-	}
-function designateMod(id){
-  const u=S.users.find(u=>u.id===id);
-  if(!u) return;
-  u.role='moderator';
-  saveData();
-  document.getElementById('modEmail').value='';
-  document.getElementById('modResult').innerHTML='';
-  renderModTable();
-  addNotif('🛡️ '+u.firstName+' '+u.lastName+' est maintenant modérateur');
-  toast('✅ Modérateur désigné !','ok');
-}
-function revokeMod(id){
-  showModal('🚫 Révoquer ?','<p style="margin-bottom:16px;color:rgba(240,244,255,.7)">Retirer les droits de modérateur ?</p><div style="display:flex;gap:10px"><button class="btn btn-err" onclick="confirmRevoke(\''+id+'\')">🚫 Révoquer</button><button class="btn btn-sec" onclick="closeModal()">Annuler</button></div>');
-}
-function confirmRevoke(id){
-  const u=S.users.find(u=>u.id===id);
-  if(u) u.role='normal';
-  saveData(); closeModal(); renderModTable(); toast('✅ Révoqué','ok');
-}
-	function renderModTable(){
-	  const staff=S.users.filter(u=>['moderator','co-founder'].includes(u.role));
-	  document.getElementById('modCount').textContent=staff.length;
-	  document.getElementById('modBody').innerHTML=staff.length?staff.map(m=>`
-	    <tr>
-	      <td><img src="${m.photo}" style="width:36px;height:36px;border-radius:50%;border:2px solid var(--a)"></td>
-	      <td><strong>${m.firstName} ${m.lastName}</strong></td>
-	      <td style="font-size:13px;color:rgba(240,244,255,.6)">${m.email}</td>
-	      <td><span class="chip ${m.role==='co-founder'?'gold':'blue'}">${m.role==='co-founder'?'👑 Co-fondateur':'🛡️ Modérateur'}</span></td>
-	      <td style="font-size:12px;color:rgba(240,244,255,.4)">${new Date(m.joinDate || Date.now()).toLocaleDateString('fr-FR')}</td>
-	      <td>
-	        ${S.user.role==='founder' ? `<button class="btn btn-sm btn-sec" onclick="editUserRole('${m.id}')">⚙️ Gérer</button>` : ''}
-	      </td>
-	    </tr>`).join(''):'<tr><td colspan="6" style="text-align:center;color:rgba(240,244,255,.35);padding:28px">Aucun membre du staff</td></tr>';
-	}
-	function editUserRole(id){
-	  const u = S.users.find(x=>x.id===id);
-	  if(!u || u.role==='founder') return;
-	  const coFondaCount = S.users.filter(x=>x.role==='co-founder').length;
-	  showModal('🛡️ Gérer le rôle', `
-	    <div class="fg">
-	      <label class="fl">Choisir un rôle pour ${u.firstName}</label>
-	      <select class="fi fi-sel" id="newRole">
-	        <option value="normal" ${u.role==='normal'?'selected':''}>Utilisateur Bronze</option>
-	        <option value="moderator" ${u.role==='moderator'?'selected':''}>Modérateur</option>
-	        <option value="co-founder" ${u.role==='co-founder'?'selected':''} ${coFondaCount>=2 && u.role!=='co-founder' ? 'disabled' : ''}>Co-fondateur ${coFondaCount>=2 && u.role!=='co-founder' ? '(Max 2 atteint)' : ''}</option>
-	      </select>
-	    </div>
-	    <button class="btn" style="width:100%" onclick="updateUserRole('${id}')">Mettre à jour</button>
-	  `);
-	}
-	function updateUserRole(id){
-	  const nr = gv('newRole');
-	  const idx = S.users.findIndex(x=>x.id===id);
-	  if(idx!==-1){
-	    S.users[idx].role = nr;
-	    saveData(); renderModTable(); closeModal();
-	    toast('Rôle mis à jour ✓', 'ok');
-	  }
-	}
-
-// ═══════════════════════ UTILS ═══════════════════════
-function gv(id){return(document.getElementById(id)||{}).value||'';}
-function isEmail(e){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);}
-function showErr(id,msg){const el=document.getElementById(id);if(el){el.textContent=msg;el.classList.add('show');}}
-function shakeEl(id){const el=document.getElementById(id);if(el){el.classList.add('err');setTimeout(()=>el.classList.remove('err'),3000);}}
-function clearErrs(){document.querySelectorAll('.err-msg').forEach(e=>{e.classList.remove('show');e.textContent='';});document.querySelectorAll('.fi.err').forEach(e=>e.classList.remove('err'));}
-let toastTmr;
-const TICONS={ok:'✅',err:'❌',info:'ℹ️',warn:'⚠️'};
-function toast(msg,type='info'){
-  clearTimeout(toastTmr);
-  const t=document.getElementById('toast');
-  t.className='toast '+type+' show';
-  t.textContent=(TICONS[type]||'')+' '+msg;
-  toastTmr=setTimeout(()=>t.classList.remove('show'),3200);
-}
-function showModal(title,body){
-  document.getElementById('modalTitle').textContent=title;
-  document.getElementById('modalBody').innerHTML=body;
-  document.getElementById('modalOv').classList.add('show');
-  setTimeout(()=>{const f=document.querySelector('#modalBody input,#modalBody textarea');if(f)f.focus();},100);
-}
-function closeModal(){document.getElementById('modalOv').classList.remove('show');}
-document.getElementById('modalOv').addEventListener('click',e=>{if(e.target===document.getElementById('modalOv'))closeModal();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
-// Ctrl+/ shortcut
-document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='/'&&S.user){e.preventDefault();go('moncef');setTimeout(()=>document.getElementById('moncefInput').focus(),100);}});
-
-// ═══════════════════════ BOOT ═══════════════════════
-loadData();
-if(S.settings.lang && S.settings.lang!=='fr') setLang(S.settings.lang);
-checkSession();
+// ═══════════════════════ INIT ═══════════════════════
+window.onload=()=>{
+  loadData();
+  checkSession();
+};
 </script>
 </body>
 </html>
