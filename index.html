@@ -1106,11 +1106,12 @@ async function doForgot(){
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ email })
     });
-    if(!r.ok) throw new Error('Erreur API');
+    const data = await r.json();
+    if(!r.ok) throw new Error(data.error || 'Erreur API');
     toast('E-mail de récupération envoyé à ' + email, 'ok');
     switchTab('login');
   } catch(err) {
-    toast('Erreur lors de l\'envoi de l\'e-mail', 'err');
+    toast(err.message || 'Erreur lors de l\'envoi de l\'e-mail', 'err');
     console.error(err);
   }
 }
@@ -1124,14 +1125,15 @@ async function doInvite(){
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ email, senderName: S.user.firstName })
     });
-    if(!r.ok) throw new Error('Erreur API');
+    const data = await r.json();
+    if(!r.ok) throw new Error(data.error || 'Erreur API');
     toast('Invitation envoyée à ' + email, 'ok');
     // Bonus de tokens
     S.stats.tokens = Math.min(900, S.stats.tokens + 200);
     saveData(); updateStats();
     toast('Bonus Parrainage : +200 tokens !', 'ok');
   } catch(err) {
-    toast('Erreur lors de l\'envoi de l\'invitation', 'err');
+    toast(err.message || 'Erreur lors de l\'envoi de l\'invitation', 'err');
     console.error(err);
   }
 }
@@ -1277,6 +1279,7 @@ async function doSignup(){
   if(!first||!last||!email||!pw){toast('Tous les champs sont requis','err');return;}
   if(!isEmail(email)){toast('Email invalide','err');return;}
   if(pw!==pwc){toast('Mots de passe différents','err');return;}
+  if(S.users.some(u=>u.email.toLowerCase()===email)){toast('Cet e-mail est déjà utilisé','err');return;}
   const u={id:'u'+Date.now(),email,passwordHash:await sha256Hex(pw),firstName:first,lastName:last,role:'normal',photo:'https://ui-avatars.com/api/?name='+first+'+'+last+'&background=1A3CFF&color=fff',joinDate:new Date().toISOString()};
   S.users.push(u); S.user=u;
   localStorage.setItem('moncefSess',btoa(JSON.stringify({email:u.email,exp:Date.now()+7*864e5})));
@@ -1346,7 +1349,50 @@ function setLang(l){
   S.lang=l; const t=T[l];
   document.documentElement.setAttribute('dir', t.dir);
   document.documentElement.setAttribute('lang', l);
-  // Update UI texts...
+  
+  // Auth
+  const authSub = document.getElementById('authSub'); if(authSub) authSub.textContent = t.sub;
+  const tabLogin = document.getElementById('tabLogin'); if(tabLogin) tabLogin.textContent = t.tLogin;
+  const tabSignup = document.getElementById('tabSignup'); if(tabSignup) tabSignup.textContent = t.tSignup;
+  const lblEmail = document.getElementById('lblEmail'); if(lblEmail) lblEmail.textContent = t.lEmail;
+  const lblPw = document.getElementById('lblPw'); if(lblPw) lblPw.textContent = t.lPw;
+  const lblRem = document.getElementById('lblRem'); if(lblRem) lblRem.textContent = t.lRem;
+  const lblForgot = document.getElementById('lblForgot'); if(lblForgot) lblForgot.textContent = t.lForgot;
+  const loginBtn = document.getElementById('loginBtn'); if(loginBtn) loginBtn.textContent = t.btnLogin;
+  const signupBtn = document.getElementById('signupBtn'); if(signupBtn) signupBtn.textContent = t.btnSignup;
+  const lblFirst = document.getElementById('lblFirst'); if(lblFirst) lblFirst.textContent = t.lFirst;
+  const lblLast = document.getElementById('lblLast'); if(lblLast) lblLast.textContent = t.lLast;
+  const lblEmailS = document.getElementById('lblEmailS'); if(lblEmailS) lblEmailS.textContent = t.lEmail;
+  const lblPhone = document.getElementById('lblPhone'); if(lblPhone) lblPhone.textContent = t.lPhone;
+  const lblAddr = document.getElementById('lblAddr'); if(lblAddr) lblAddr.textContent = t.lAddr;
+  const lblPwS = document.getElementById('lblPwS'); if(lblPwS) lblPwS.textContent = t.lPw;
+  const lblConfPw = document.getElementById('lblConfPw'); if(lblConfPw) lblConfPw.textContent = t.lConfPw;
+
+  // Sidebar
+  const sbHome = document.getElementById('sbHome'); if(sbHome) sbHome.innerHTML = `<span class="sb-icon">🏠</span> ${t.hHome}`;
+  const sbMoncef = document.getElementById('sbMoncef'); if(sbMoncef) sbMoncef.innerHTML = `<span class="sb-icon">🤖</span> ${t.hMoncef}`;
+  const sbAlpha = document.getElementById('sbAlphaItem'); if(sbAlpha) sbAlpha.innerHTML = `<span class="sb-icon">👑</span> ${t.hAlpha} <span class="chip gold" style="margin-left:5px">PRO</span>`;
+  const sbComm = document.getElementById('sbComm'); if(sbComm) sbComm.innerHTML = `<span class="sb-icon">💬</span> ${t.hComm}`;
+  const sbMod = document.getElementById('sbModItem'); if(sbMod) sbMod.innerHTML = `<span class="sb-icon">🛡️</span> ${t.hMod}`;
+  const sbSettings = document.getElementById('sbSettings'); if(sbSettings) sbSettings.innerHTML = `<span class="sb-icon">⚙️</span> ${t.hSet}`;
+  
+  const sbSecMain = document.getElementById('sbSecMain'); if(sbSecMain) sbSecMain.textContent = t.sMain;
+  const sbSecSocial = document.getElementById('sbSecSocial'); if(sbSecSocial) sbSecSocial.textContent = t.sSocial;
+  const sbSecAdmin = document.getElementById('sbSecAdmin'); if(sbSecAdmin) sbSecAdmin.textContent = t.sAdmin;
+  const sbSecConf = document.getElementById('sbSecConf'); if(sbSecConf) sbSecConf.textContent = t.sConf;
+
+  // Home Stats
+  const stMsgsLabel = document.querySelector('#homePage .stat-card:nth-child(1) .stat-label'); if(stMsgsLabel) stMsgsLabel.textContent = t.stMsgs;
+  const stHwLabel = document.querySelector('#homePage .stat-card:nth-child(2) .stat-label'); if(stHwLabel) stHwLabel.textContent = t.stHw;
+  const stContLabel = document.querySelector('#homePage .stat-card:nth-child(3) .stat-label'); if(stContLabel) stContLabel.textContent = t.stCont;
+  const stTokensLabel = document.querySelector('#homePage .stat-card:nth-child(4) .stat-label'); if(stTokensLabel) stTokensLabel.textContent = t.stTokens;
+
+  // Home Sections
+  const tSched = document.querySelector('#homePage .card:nth-child(2) .card-title'); if(tSched) tSched.innerHTML = `<span class="ei">📅</span> ${t.tSched}`;
+  const tHw = document.querySelector('#homePage .card:nth-child(3) .card-title'); if(tHw) tHw.innerHTML = `<span class="ei">📝</span> ${t.tHw}`;
+  const btnWeek = document.querySelector('button[onclick="toggleWeek()"]'); if(btnWeek) btnWeek.innerHTML = `${t.btnWeek} <span id="weekLabel">${S.currentWeek}</span>`;
+  const btnAddEv = document.querySelector('button[onclick="addEvent()"]'); if(btnAddEv) btnAddEv.textContent = t.btnAddEv;
+  const btnPrint = document.querySelector('button[onclick="printEDT()"]'); if(btnPrint) btnPrint.textContent = t.btnPrint;
 }
 
 // ═══════════════════════ INIT ═══════════════════════
