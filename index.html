@@ -1116,7 +1116,13 @@ function editEv(id){
   showModal('✏️ '+ev.subject,'<p style="margin-bottom:16px;color:rgba(240,244,255,.6)">'+DAYS[ev.dayIdx]+' '+ev.time+(ev.room?' — '+ev.room:'')+'</p><div style="display:flex;gap:10px"><button class="btn btn-err" onclick="removeEv(\''+id+'\')">🗑 Supprimer</button><button class="btn btn-sec" onclick="closeModal()">Annuler</button></div>');
 }
 function removeEv(id){S.schedule=S.schedule.filter(e=>e.id!==id);saveData();renderSched();closeModal();toast('Cours supprimé','info');}
-function clearSchedule(){
+function clearSchedule(silent = false){
+  if (silent) {
+    S.schedule = [];
+    saveData();
+    renderSched();
+    return;
+  }
   showModal('⚠️ Effacer tout ?','<p style="margin-bottom:16px;color:rgba(240,244,255,.6)">Supprimer tous les cours ?</p><div style="display:flex;gap:10px"><button class="btn btn-err" onclick="S.schedule=[];saveData();renderSched();closeModal();toast(\'Emploi du temps vidé\',\'info\')">Effacer</button><button class="btn btn-sec" onclick="closeModal()">Annuler</button></div>');
 }
 
@@ -1231,7 +1237,9 @@ function buildSys(type){
       "- Si c'est un devoir: guide avec indices, ne donne pas la réponse directe",
       "- Termine les longues explications par un résumé en points clés",
       "",
-      "CONTEXTE: Prénom:"+u.firstName+", Devoirs en cours:"+S.hw.filter(h=>!h.done).length+", Date:"+new Date().toLocaleDateString('fr-FR')
+      "CONTEXTE: Prénom:"+u.firstName+", Devoirs en cours:"+S.hw.filter(h=>!h.done).length+", Date:"+new Date().toLocaleDateString('fr-FR'),
+      "",
+      "POUVOIR D'ACTION: Tu as le pouvoir de supprimer ou vider tout l'emploi du temps (EDT, planning, calendrier) de l'utilisateur sur sa demande. Si c'est le cas, confirme-lui chaleureusement que c'est fait et ajoute impérativement la commande exacte [ACTION: CLEAR_SCHEDULE] à la toute fin de ta réponse."
     ].join("\n");
   }
   return [
@@ -1363,7 +1371,17 @@ async function sendMsg(type){
       execActions(acts);
       logAlpha('💬 "'+txt.slice(0,60)+'"');
     } else {
-      addAIMsg(type,raw);
+      let replyText = raw;
+      let clearTriggered = false;
+      if(replyText.includes('[ACTION: CLEAR_SCHEDULE]')){
+        replyText = replyText.replace('[ACTION: CLEAR_SCHEDULE]', '').trim();
+        clearTriggered = true;
+      }
+      addAIMsg(type,replyText);
+      if(clearTriggered){
+        clearSchedule(true);
+        toast('🗑️ Emploi du temps vidé par Moncef IA !', 'ok');
+      }
     }
   } catch(err){
     typing.classList.remove('show');
